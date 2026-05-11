@@ -31,6 +31,7 @@ export default function Navbar() {
   // We'll use standard /#hash paths because React Router handles them natively from Home, and from details it will redirect back.
   const navLinks = [
     { name: 'About', href: '/#about' },
+    { name: 'Services', href: '/#services' },
     { name: 'Experience', href: '/#experience' },
     { name: 'Skills', href: '/#skills' },
     { name: 'Projects', href: '/#projects' },
@@ -53,8 +54,8 @@ export default function Navbar() {
       >
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2 group">
-            <span className="text-2xl font-black text-gradient tracking-tighter group-hover:scale-105 transition-transform duration-300">
-              KC.
+            <span className="text-2xl font-black text-[#5c00e6] tracking-tighter group-hover:scale-105 transition-transform duration-300">
+              Krunal
             </span>
           </Link>
 

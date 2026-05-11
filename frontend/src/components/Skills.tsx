@@ -8,6 +8,18 @@ interface SkillItem {
   level: number;
 }
 
+const techTools = [
+  { name: "JIRA", domain: "atlassian.com", slug: "jira" },
+  { name: "FIGMA", domain: "figma.com", slug: "figma" },
+  { name: "GOOGLE SHEETS", domain: "google.com", slug: "googlesheets" },
+  { name: "TRELLO", domain: "trello.com", slug: "trello" },
+  { name: "POSTMAN", domain: "postman.com", slug: "postman" },
+  { name: "JMETER", domain: "apache.org", slug: "apachejmeter" },
+  { name: "CLICKUP", domain: "clickup.com", slug: "clickup" },
+  { name: "SENTRY", domain: "sentry.io", slug: "sentry" },
+  { name: "BITBUCKET", domain: "bitbucket.org", slug: "bitbucket" },
+];
+
 export default function Skills() {
   const [skills, setSkills] = useState<SkillItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -45,23 +57,54 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="mb-16"
+          className="mb-24 text-center"
         >
-          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-800 dark:text-slate-50 mb-4">
-            Technical <span className="text-brand-purple">Arsenal</span>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-800 dark:text-slate-50 mb-4 uppercase tracking-tighter">
+            Technologies <span className="text-brand-purple">I Use</span>
           </h2>
-          <p className="text-slate-600 dark:text-slate-400 text-lg max-w-2xl">
+          <div className="flex justify-center mb-12">
+            <svg width="120" height="12" viewBox="0 0 100 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-brand-purple/50">
+              <path d="M0 5C20 0 30 10 50 5C70 0 80 10 100 5" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
+            </svg>
+          </div>
+          
+          {/* High-End Tech Ticker - Small & Sophisticated */}
+          <div className="relative w-full overflow-hidden py-8 mb-16">
+            <motion.div 
+              className="flex whitespace-nowrap gap-36 items-center w-max"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ 
+                duration: 70, 
+                repeat: Infinity, 
+                ease: "linear" 
+              }}
+            >
+              {[...techTools, ...techTools].map((tool, index) => (
+                <div key={index} className="flex flex-col items-center gap-4 px-2 group">
+                   <div className="w-12 h-12 flex items-center justify-center transition-all duration-500 group-hover:scale-110">
+                      <img 
+                        src={`https://logo.clearbit.com/${tool.domain}?size=128`} 
+                        alt={tool.name} 
+                        className="w-full h-full object-contain"
+                        onError={(e) => { e.currentTarget.src = `https://cdn.simpleicons.org/${tool.slug}` }}
+                      />
+                   </div>
+                   <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 tracking-[0.2em] uppercase transition-all duration-300 group-hover:text-brand-cyan">
+                     {tool.name}
+                   </span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          <p className="text-slate-600 dark:text-slate-400 text-lg max-w-2xl mx-auto">
             A comprehensive list of automated frameworks, testing methodologies, and analytical tools I leverage to validate high-stakes systems.
           </p>
         </motion.div>
 
         <AnimatePresence mode="wait">
           {loading ? (
-             <motion.div
-               key="skeleton"
-               exit={{ opacity: 0 }}
-               className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
-             >
+             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {[1, 2, 3, 4].map((n) => (
                   <motion.div 
                     key={n}
@@ -70,7 +113,7 @@ export default function Skills() {
                     className="glass h-48 bg-slate-200 dark:bg-slate-800/40 rounded-2xl p-6"
                   />
                 ))}
-             </motion.div>
+             </div>
           ) : (
             <motion.div 
               key="content"

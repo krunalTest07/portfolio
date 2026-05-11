@@ -28,6 +28,7 @@ Note: The variables are still safely named "cyan" and "purple" in the CSS code j
 1
 
 
+
 */
 /* ========================================================
    🎨 THEME CONFIGURATION
@@ -92,6 +93,22 @@ Note: The variables are still safely named "cyan" and "purple" in the CSS code j
 
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-cyan to-brand-purple;
+  }
+
+  .section-title {
+    @apply text-center mb-16;
+  }
+
+  .section-title h2 {
+    @apply text-center relative inline-block;
+  }
+
+  .title-shape {
+    @apply w-24 h-1 bg-[#5c00e6]/20 mx-auto mt-2 relative overflow-hidden rounded-full;
+  }
+
+  .title-shape svg {
+    @apply text-[#5c00e6] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48;
   }
 }
 

@@ -1,17 +1,47 @@
 import { motion } from 'framer-motion';
-import { Bug, Mail, Globe, Info, MessageSquare, ExternalLink, SearchCode, Zap } from 'lucide-react';
+import { Bug } from 'lucide-react';
+import { useEffect, useState } from 'react';
+
+const StatCounter = ({ end, label, delay = 0 }: { end: number; label: string; delay?: number }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const duration = 2000;
+    const increment = end / (duration / 16);
+    
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        setCount(end);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 16);
+
+    return () => clearInterval(timer);
+  }, [end]);
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay }}
+      className="flex flex-col items-center md:items-start"
+    >
+      <span className="text-3xl md:text-4xl font-bold text-slate-800 dark:text-slate-50 leading-none">
+        {count}+
+      </span>
+      <span className="text-sm font-medium text-slate-500 dark:text-slate-400 mt-2 uppercase tracking-wider">
+        {label}
+      </span>
+    </motion.div>
+  );
+};
 
 export default function Hero() {
-  const socialLinks = [
-    { icon: SearchCode, color: 'bg-[#333]', link: '#' },
-    { icon: Zap, color: 'bg-[#0077b5]', link: '#' },
-    { icon: Globe, color: 'bg-[#ea4335]', link: '#' },
-    { icon: Mail, color: 'bg-[#c71610]', link: '#' },
-    { icon: MessageSquare, color: 'bg-[#1da1f2]', link: '#' },
-    { icon: ExternalLink, color: 'bg-[#3b5998]', link: '#' },
-    { icon: Info, color: 'bg-[#e4405f]', link: '#' },
-  ];
-
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center pt-32 overflow-hidden">
       {/* Abstract Background Elements */}
@@ -28,41 +58,34 @@ export default function Hero() {
             Hi all, I'm Krunal <span className="inline-block animate-wave">👋</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-lg leading-relaxed">
+          <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-lg leading-relaxed">
             A passionate QA Automation Engineer 🚀 having an experience of building robust testing suites with modern tools like Playwright and Selenium.
           </p>
-
-          {/* Social Links */}
-          <div className="flex flex-wrap gap-2 mb-8">
-            {socialLinks.map((social, index) => (
-              <motion.a
-                key={index}
-                href={social.link}
-                whileHover={{ y: -5 }}
-                className={`w-10 h-10 rounded-full ${social.color} text-white flex items-center justify-center transition-transform shadow-md`}
-              >
-                <social.icon size={20} />
-              </motion.a>
-            ))}
-          </div>
           
           <div className="flex flex-wrap gap-4 mt-8">
             <motion.a
-              whileHover={{ scale: 1.05, backgroundColor: '#5c2d91' }}
-              whileTap={{ scale: 0.95 }}
-              href="/#contact"
-              className="px-8 py-3.5 rounded bg-[#6f42c1] text-white font-semibold transition-colors flex items-center gap-2 shadow-lg uppercase tracking-wider"
-            >
-              Contact Me
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.05, backgroundColor: '#5c2d91' }}
+              whileHover={{ scale: 1.05, translateY: -2 }}
               whileTap={{ scale: 0.95 }}
               href="#"
-              className="px-8 py-3.5 rounded bg-[#6f42c1] text-white font-semibold transition-colors shadow-lg uppercase tracking-wider"
+              className="px-10 py-4 rounded-2xl bg-[#5c00e6] text-white font-bold transition-all flex items-center gap-2 shadow-lg shadow-purple-500/20"
             >
-              See My Resume
+              Download CV
             </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.05, translateY: -2 }}
+              whileTap={{ scale: 0.95 }}
+              href="/#projects"
+              className="px-10 py-4 rounded-2xl border-2 border-brand-purple/30 text-brand-purple font-bold transition-all shadow-md"
+            >
+              Projects
+            </motion.a>
+          </div>
+
+          {/* Stats Section */}
+          <div className="grid grid-cols-3 gap-8 mt-12 pt-10 border-t border-slate-200 dark:border-slate-800">
+            <StatCounter end={2} label="Years Experience" delay={0.2} />
+            <StatCounter end={8} label="Projects Completed" delay={0.3} />
+            <StatCounter end={6} label="Happy Clients" delay={0.4} />
           </div>
         </motion.div>
 
@@ -78,7 +101,6 @@ export default function Hero() {
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             className="w-full aspect-square flex items-center justify-center relative"
           >
-             {/* Using a simpler animation to match the "Illustration" feel */}
              <div className="relative w-full h-full flex items-center justify-center">
                 <div className="absolute inset-0 bg-gradient-to-tr from-brand-cyan/10 to-brand-purple/10 rounded-full blur-3xl" />
                 <Bug className="text-brand-purple/40 relative z-10 animate-float" size={300} />

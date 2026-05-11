@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Full-Stack TypeScript Portfolio Project
 
 This is a foundational full-stack typed project using React (Vite) and Node.js (Express).
@@ -23,3 +24,6 @@ This is a foundational full-stack typed project using React (Vite) and Node.js (
    - The frontend runs on `http://localhost:5173`
 
 You can now start building out the REST API endpoints in the backend and the portfolio user interface in the React frontend!
+=======
+# portfolio
+>>>>>>> 33bc4cfffcb0aa4cd59e9c5213ae38cf94610d9a

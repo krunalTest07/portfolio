@@ -96,7 +96,7 @@ export default function ChatBot() {
                   <Bot size={24} />
                 </div>
                 <div>
-                  <h3 className="font-bold flex items-center text-[15px] shrink-0">KC Portfolio Bot</h3>
+                  <h3 className="font-bold flex items-center text-[15px] shrink-0">Portfolio Bot</h3>
                   <p className="text-xs text-white/90 flex items-center gap-1.5 mt-0.5">
                     <span className="w-2 h-2 rounded-full bg-green-400 block animate-pulse"></span>
                     Online
