@@ -91,19 +91,17 @@ export default function About() {
             viewport={{ once: true, margin: "-100px" }}
             variants={containerVariants}
           >
-            <motion.span variants={itemVariants} className="text-brand-purple font-bold text-xs uppercase tracking-[0.2em] block mb-2">About Me</motion.span>
+            <motion.span variants={itemVariants} className="text-brand-purple font-bold text-xs uppercase tracking-[0.2em] block mb-2">Professional Profile</motion.span>
             <motion.h3 variants={itemVariants} className="text-2xl md:text-3xl font-black text-slate-800 dark:text-white mb-5 tracking-tighter leading-tight">
-              QA Automation <span className="text-brand-cyan"> Engineer</span>
+              QA Automation <span className="text-brand-cyan"> Specialist</span>
             </motion.h3>
-            <motion.p variants={itemVariants} className="text-slate-600 dark:text-slate-400 leading-relaxed mb-4 text-base font-medium italic">
-              Hi all, I'm Krunal 👋
+            <motion.p variants={itemVariants} className="text-slate-600 dark:text-slate-400 leading-relaxed mb-5 text-base font-medium">
+              I am a dedicated <span className="text-slate-800 dark:text-slate-200">QA Automation Professional</span> with a deep passion for building high-integrity testing architectures. By integrating modern solutions like <span className="text-brand-cyan">Playwright</span> and <span className="text-brand-purple">Selenium</span>, I provide the technical depth required to deliver flawless digital experiences.
             </motion.p>
-            <motion.p variants={itemVariants} className="text-slate-600 dark:text-slate-400 leading-relaxed mb-4 text-base font-medium">
-              I am a passionate <span className="text-slate-800 dark:text-slate-200">QA Automation Engineer</span> 🚀 dedicated to building robust testing suites. By leveraging modern tools like <span className="text-brand-cyan">Playwright</span> and <span className="text-brand-purple">Selenium</span>, I transform manual testing into high-impact, automated pipelines that ensure excellence in every release.
+            <motion.p variants={itemVariants} className="text-slate-600 dark:text-slate-400 leading-relaxed mb-8 text-sm opacity-80">
+              My mission is to transform complex quality requirements into scalable automation strategies that power modern development lifecycles with precision and reliability.
             </motion.p>
-            <motion.p variants={itemVariants} className="text-slate-600 dark:text-slate-400 leading-relaxed mb-6 text-sm opacity-80">
-              Focusing on precision, efficiency, and the delivery of flawlessly stable software solutions across modern development lifecycles.
-            </motion.p>
+
 
 
             {/* Personal Info Grid Card - Refined Staggered Entrance */}
@@ -128,12 +126,13 @@ export default function About() {
               </div>
             </motion.div>
 
-            <motion.div variants={itemVariants} className="mt-6 flex items-center gap-6">
+            <motion.div variants={itemVariants} className="mt-8 flex items-center gap-6">
               <div>
-                <span className="text-lg font-black text-[#5c00e6] uppercase tracking-tighter">Krunal Chaudhari</span>
-                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">Quality Assurance Engineer</div>
+                <span className="text-xl font-black text-[#5c00e6] uppercase tracking-tighter">Your Vision, My Expertise</span>
+                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Ensuring Quality from Concept to Perfection</div>
               </div>
             </motion.div>
+
           </motion.div>
         </div>
       </div>

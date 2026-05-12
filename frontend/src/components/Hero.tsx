@@ -54,12 +54,15 @@ export default function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-5xl md:text-7xl font-bold text-slate-800 dark:text-slate-50 leading-tight mb-4">
-            Hi all, I'm Krunal <span className="inline-block animate-wave">👋</span>
+          <h1 className="text-4xl md:text-6xl font-bold text-slate-800 dark:text-slate-50 leading-tight mb-2 tracking-tight">
+            Precision in <span className="text-brand-purple">Quality</span>
           </h1>
+          <h2 className="text-lg md:text-xl font-bold text-[#5c00e6]/70 mb-8 uppercase tracking-[0.2em]">
+            Excellence in Engineering
+          </h2>
           
           <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-lg leading-relaxed">
-            A passionate QA Automation Engineer 🚀 having an experience of building robust testing suites with modern tools like Playwright and Selenium.
+            Specializing in architecting robust testing frameworks with Playwright and Selenium. I ensure software excellence through precision-driven automated validation.
           </p>
           
           <div className="flex flex-wrap gap-4 mt-8">

@@ -12,6 +12,7 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import ProjectDetail from './components/ProjectDetail';
 import ChatBot from './components/ChatBot';
+import ScrollToTop from './components/ScrollToTop';
 
 // We wrap animations in an inner component so we can use useLocation
 function AnimatedRoutes() {
@@ -131,6 +132,7 @@ export default function App() {
             </footer>
 
             <ChatBot />
+            <ScrollToTop />
           </motion.div>
         )}
       </div>
