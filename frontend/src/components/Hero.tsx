@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Bug } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-const StatCounter = ({ end, label, delay = 0 }: { end: number; label: string; delay?: number }) => {
+const StatCounter = ({ end, label, delay = 0, suffix = "+" }: { end: number; label: string; delay?: number, suffix?: string }) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -29,14 +29,14 @@ const StatCounter = ({ end, label, delay = 0 }: { end: number; label: string; de
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
-      className="flex flex-col items-center md:items-start"
+      className="relative pl-6 before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-8 before:bg-brand-purple/30 before:rounded-full"
     >
-      <span className="text-3xl md:text-4xl font-bold text-slate-800 dark:text-slate-50 leading-none">
-        {count}+
-      </span>
-      <span className="text-sm font-medium text-slate-500 dark:text-slate-400 mt-2 uppercase tracking-wider">
+      <div className="text-3xl md:text-4xl font-black text-slate-800 dark:text-slate-50 tracking-tight">
+        {count}{suffix}
+      </div>
+      <div className="text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 mt-1 uppercase tracking-[0.2em] leading-tight">
         {label}
-      </span>
+      </div>
     </motion.div>
   );
 };
@@ -65,32 +65,38 @@ export default function Hero() {
             Specializing in architecting robust testing frameworks with Playwright and Selenium. I ensure software excellence through precision-driven automated validation.
           </p>
 
-          <div className="flex flex-wrap gap-4 mt-8">
+          <div className="flex flex-wrap gap-5 mt-10">
             <motion.a
-              whileHover={{ scale: 1.05, translateY: -2 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.02, translateY: -2 }}
+              whileTap={{ scale: 0.98 }}
               href="https://www.google.com/?zx=1778657335079"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-10 py-4 rounded-2xl bg-[#5c00e6] text-white font-bold transition-all flex items-center gap-2 shadow-lg shadow-purple-500/20"
+              className="group px-8 py-4 rounded-xl bg-gradient-to-r from-[#5c00e6] to-[#7c22ff] text-white font-bold transition-all flex items-center gap-3 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40"
             >
-              Download CV
+              <span className="relative z-10">Download CV</span>
+              <svg 
+                className="w-5 h-5 group-hover:translate-y-0.5 transition-transform duration-300" 
+                fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
             </motion.a>
+            
             <motion.a
-              whileHover={{ scale: 1.05, translateY: -2 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.02, translateY: -2 }}
+              whileTap={{ scale: 0.98 }}
               href="/#projects"
-              className="px-10 py-4 rounded-2xl border-2 border-brand-purple/30 text-brand-purple font-bold transition-all shadow-md"
+              className="px-8 py-4 rounded-xl glass-nav border border-slate-200 dark:border-white/10 text-slate-800 dark:text-white font-bold shadow-sm hover:shadow-md transition-all flex items-center gap-2"
             >
-              Projects
+              View Projects
             </motion.a>
           </div>
 
           {/* Stats Section */}
-          <div className="grid grid-cols-3 gap-8 mt-12 pt-10 border-t border-slate-200 dark:border-slate-800">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-10 mt-14 pt-10 border-t border-slate-200/60 dark:border-slate-800/60">
             <StatCounter end={2} label="Years Experience" delay={0.2} />
-            <StatCounter end={8} label="Projects Completed" delay={0.3} />
-            <StatCounter end={6} label="Happy Clients" delay={0.4} />
+            <StatCounter end={20} label="Projects Completed" delay={0.3} />
           </div>
         </motion.div>
 

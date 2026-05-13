@@ -6,13 +6,13 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Services from './components/Services';
-import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import ProjectDetail from './components/ProjectDetail';
 import ChatBot from './components/ChatBot';
 import ScrollToTop from './components/ScrollToTop';
+import Resume from './components/Resume';
 
 // We wrap animations in an inner component so we can use useLocation
 function AnimatedRoutes() {
@@ -26,7 +26,7 @@ function AnimatedRoutes() {
              <Hero />
              <About />
              <Services />
-             <Experience />
+             <Resume />
              <Skills />
              <Projects />
              <Contact />
