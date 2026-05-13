@@ -59,7 +59,7 @@ export default function About() {
             </svg>
           </motion.div>
           <motion.p variants={itemVariants} className="mt-4 text-slate-600 dark:text-slate-400 text-base max-w-2xl mx-auto font-medium">
-            I build the digital bridges of tomorrow — ensuring quality, stability, and speed in every software release.
+            I build the digital bridges of tomorrow - ensuring quality, stability, and speed in every software release.
           </motion.p>
         </motion.div>
 

@@ -5,38 +5,50 @@ const services = [
   {
     title: "Functional Testing",
     description: "Verifying software functionality as per requirements and ensuring it works as expected.",
-    icon: <ClipboardCheck className="w-8 h-8 text-brand-purple" />,
-    color: "from-purple-500/10 to-brand-purple/10"
+    icon: <ClipboardCheck className="w-8 h-8 transition-transform duration-500 group-hover:scale-110" />,
+    color: "from-purple-500/20 to-brand-purple/20",
+    accent: "text-brand-purple",
+    hoverBg: "group-hover:bg-brand-purple/10"
   },
   {
     title: "UI/UX Testing",
     description: "Ensuring the application's interface is user-friendly, responsive, and consistent across devices and browsers.",
-    icon: <Layout className="w-8 h-8 text-blue-500" />,
-    color: "from-blue-500/10 to-cyan-500/10"
+    icon: <Layout className="w-8 h-8 transition-transform duration-500 group-hover:rotate-12" />,
+    color: "from-blue-500/20 to-cyan-500/20",
+    accent: "text-blue-500",
+    hoverBg: "group-hover:bg-blue-500/10"
   },
   {
     title: "Test Case Design",
     description: "Creating clear, comprehensive, and reusable test cases and test scenarios based on requirements.",
-    icon: <FileEdit className="w-8 h-8 text-emerald-500" />,
-    color: "from-emerald-500/10 to-teal-500/10"
+    icon: <FileEdit className="w-8 h-8 transition-transform duration-500 group-hover:-translate-y-1" />,
+    color: "from-emerald-500/20 to-teal-500/20",
+    accent: "text-emerald-500",
+    hoverBg: "group-hover:bg-emerald-500/10"
   },
   {
     title: "Bug Reporting",
     description: "Identifying, documenting, and tracking bugs with detailed steps, screenshots, and reproduction steps.",
-    icon: <Bug className="w-8 h-8 text-rose-500" />,
-    color: "from-rose-500/10 to-orange-500/10"
+    icon: <Bug className="w-8 h-8 transition-transform duration-500 group-hover:scale-125" />,
+    color: "from-rose-500/20 to-orange-500/20",
+    accent: "text-rose-500",
+    hoverBg: "group-hover:bg-rose-500/10"
   },
   {
     title: "Regression Testing",
     description: "Ensuring that new changes or updates do not affect existing functionality and everything works as expected.",
-    icon: <RefreshCcw className="w-8 h-8 text-amber-500" />,
-    color: "from-amber-500/10 to-yellow-500/10"
+    icon: <RefreshCcw className="w-8 h-8 transition-transform duration-700 group-hover:rotate-180" />,
+    color: "from-amber-500/20 to-yellow-500/20",
+    accent: "text-amber-500",
+    hoverBg: "group-hover:bg-amber-500/10"
   },
   {
     title: "Cross Browser & Device Testing",
     description: "Testing applications across various browsers and devices to ensure compatibility and seamless performance.",
-    icon: <Smartphone className="w-8 h-8 text-indigo-500" />,
-    color: "from-indigo-500/10 to-blue-500/10"
+    icon: <Smartphone className="w-8 h-8 transition-transform duration-500 group-hover:scale-125" />,
+    color: "from-indigo-500/20 to-blue-500/20",
+    accent: "text-indigo-500",
+    hoverBg: "group-hover:bg-indigo-500/10"
   }
 ];
 
@@ -56,11 +68,11 @@ export default function Services() {
           </h2>
           <div className="flex justify-center my-6">
             <svg width="100" height="10" viewBox="0 0 100 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-[#5c00e6]/40">
-              <path d="M0 5C20 0 30 10 50 5C70 0 80 10 100 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M0 5C20 0 30 10 50 5C70 0 80 10 100 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </div>
           <p className="text-slate-600 dark:text-slate-400 text-lg max-w-3xl mx-auto leading-relaxed">
-            Providing high-quality Manual QA Testing services to ensure reliable, bug-free, and user-friendly software.
+            Focused on delivering secure, stable, and user-friendly digital experiences through expert QA practices.
           </p>
         </motion.div>
 
@@ -71,28 +83,31 @@ export default function Services() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true }}
-              whileHover={{ y: -10 }}
+              whileHover={{
+                y: -15,
+                transition: { duration: 0.3 }
+              }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group glass-card p-10 relative overflow-hidden"
+              className={`group glass-card p-10 relative overflow-hidden transition-all duration-500 ${service.hoverBg}`}
             >
               {/* Decorative Gradient Background */}
-              <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${service.color} blur-[50px] -z-10 group-hover:scale-150 transition-transform duration-700 opacity-50`}></div>
-              
-              <div className="mb-8 p-4 bg-white dark:bg-slate-800 rounded-2xl w-fit shadow-sm border border-slate-100 dark:border-slate-700 group-hover:border-brand-cyan/40 transition-colors">
+              <div className={`absolute top-0 right-0 w-48 h-48 bg-gradient-to-br ${service.color} blur-[60px] -z-10 group-hover:scale-150 transition-transform duration-700 opacity-0 group-hover:opacity-70`}></div>
+
+              <div className={`mb-8 p-4 bg-white dark:bg-slate-800 rounded-2xl w-fit shadow-sm border border-slate-100 dark:border-slate-700 group-hover:border-transparent group-hover:shadow-xl transition-all duration-300 ${service.accent}`}>
                 {service.icon}
               </div>
-              
-              <h3 className="text-xl font-black text-slate-800 dark:text-white mb-4 uppercase tracking-tight">
+
+              <h3 className="text-xl font-black text-slate-800 dark:text-white mb-4 uppercase tracking-tight group-hover:translate-x-1 transition-transform duration-300">
                 {service.title}
               </h3>
-              
-              <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-base font-medium">
+
+              <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-base font-medium group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">
                 {service.description}
               </p>
-              
-              <div className="mt-8 flex items-center gap-2 text-brand-purple font-bold text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-300">
-                Learn more <span>→</span>
-              </div>
+
+              {/* <div className={`mt-8 flex items-center gap-2 font-bold text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 group-hover:translate-x-0 -translate-x-4 transition-all duration-500 ${service.accent}`}>
+                Explore Details <span>→</span>
+              </div> */}
             </motion.div>
           ))}
         </div>

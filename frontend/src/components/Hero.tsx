@@ -9,7 +9,7 @@ const StatCounter = ({ end, label, delay = 0 }: { end: number; label: string; de
     let start = 0;
     const duration = 2000;
     const increment = end / (duration / 16);
-    
+
     const timer = setInterval(() => {
       start += increment;
       if (start >= end) {
@@ -24,7 +24,7 @@ const StatCounter = ({ end, label, delay = 0 }: { end: number; label: string; de
   }, [end]);
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -47,7 +47,7 @@ export default function Hero() {
       {/* Abstract Background Elements */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-cyan/20 rounded-full blur-[120px] -z-10" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-purple/20 rounded-full blur-[120px] -z-10" />
-      
+
       <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -60,16 +60,18 @@ export default function Hero() {
           <h2 className="text-lg md:text-xl font-bold text-[#5c00e6]/70 mb-8 uppercase tracking-[0.2em]">
             Excellence in Engineering
           </h2>
-          
+
           <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-lg leading-relaxed">
             Specializing in architecting robust testing frameworks with Playwright and Selenium. I ensure software excellence through precision-driven automated validation.
           </p>
-          
+
           <div className="flex flex-wrap gap-4 mt-8">
             <motion.a
               whileHover={{ scale: 1.05, translateY: -2 }}
               whileTap={{ scale: 0.95 }}
-              href="#"
+              href="https://www.google.com/?zx=1778657335079"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-10 py-4 rounded-2xl bg-[#5c00e6] text-white font-bold transition-all flex items-center gap-2 shadow-lg shadow-purple-500/20"
             >
               Download CV
@@ -99,18 +101,18 @@ export default function Hero() {
           className="relative hidden md:block"
         >
           {/* Illustration Container */}
-          <motion.div 
+          <motion.div
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             className="w-full aspect-square flex items-center justify-center relative"
           >
-             <div className="relative w-full h-full flex items-center justify-center">
-                <div className="absolute inset-0 bg-gradient-to-tr from-brand-cyan/10 to-brand-purple/10 rounded-full blur-3xl" />
-                <Bug className="text-brand-purple/40 relative z-10 animate-float" size={300} />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-20">
-                  <h2 className="text-3xl font-black text-slate-800/80 dark:text-slate-100/80 tracking-widest uppercase">Quality<br/>Assurance</h2>
-                </div>
-             </div>
+            <div className="relative w-full h-full flex items-center justify-center">
+              <div className="absolute inset-0 bg-gradient-to-tr from-brand-cyan/10 to-brand-purple/10 rounded-full blur-3xl" />
+              <Bug className="text-brand-purple/40 relative z-10 animate-float" size={300} />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-20">
+                <h2 className="text-3xl font-black text-slate-800/80 dark:text-slate-100/80 tracking-widest uppercase">Quality<br />Assurance</h2>
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </div>
