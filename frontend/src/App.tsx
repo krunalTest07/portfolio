@@ -13,6 +13,8 @@ import ProjectDetail from './components/ProjectDetail';
 import ChatBot from './components/ChatBot';
 import ScrollToTop from './components/ScrollToTop';
 import Resume from './components/Resume';
+import Footer from './components/Footer';
+
 
 // We wrap animations in an inner component so we can use useLocation
 function AnimatedRoutes() {
@@ -25,10 +27,10 @@ function AnimatedRoutes() {
            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
              <Hero />
              <About />
-             <Services />
              <Resume />
              <Skills />
              <Projects />
+             <Services />
              <Contact />
            </motion.div>
         } />
@@ -127,9 +129,8 @@ export default function App() {
               <AnimatedRoutes />
             </main>
             
-            <footer className="py-8 text-center border-t border-slate-200 dark:border-slate-800 mt-12 text-slate-500 text-sm glass">
-              <p>&copy; {new Date().getFullYear()} Krunal Chaudhari. QA Automation Portfolio.</p>
-            </footer>
+            <Footer />
+
 
             <ChatBot />
             <ScrollToTop />
