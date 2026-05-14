@@ -37,21 +37,15 @@ const socialLinks = [
   },
   {
     icon: LinkedinIcon,
-    href: 'https://linkedin.com/in/krunalchaudhari',
+    href: 'https://www.linkedin.com/in/chaudharikrunal?utm_source=share_via&utm_content=profile&utm_medium=member_android',
     label: 'LinkedIn',
     color: 'hover:text-[#0A66C2]',
   },
   {
     icon: InstagramIcon,
-    href: 'https://instagram.com/krunalchaudhari',
+    href: 'https://www.instagram.com/invites/contact/?utm_source=ig_contact_invite&utm_medium=copy_link&utm_content=yykwwq',
     label: 'Instagram',
     color: 'hover:text-[#E1306C]',
-  },
-  {
-    icon: ({ size }: { size?: number }) => <Mail size={size} />,
-    href: 'mailto:krunalchaudhari@email.com',
-    label: 'Email',
-    color: 'hover:text-brand-cyan',
   },
 ];
 
@@ -94,7 +88,7 @@ export default function Footer() {
               </div>
               <div>
                 <p className="text-white font-bold text-lg leading-none">{name}</p>
-                <p className="text-brand-cyan text-xs font-mono tracking-widest uppercase mt-0.5">QA Automation Engineer</p>
+                <p className="text-brand-cyan text-xs font-mono tracking-widest uppercase mt-0.5">QA Analyst</p>
               </div>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
@@ -128,10 +122,11 @@ export default function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-slate-400 hover:text-brand-cyan text-sm transition-colors duration-200 flex items-center gap-2 group"
+                    className="text-slate-400 hover:text-brand-cyan text-sm transition-all duration-300 w-full inline-block group"
                   >
-                    <span className="w-4 h-px bg-slate-700 group-hover:bg-brand-cyan group-hover:w-6 transition-all duration-300" />
-                    {link.label}
+                    <span className="inline-block transition-transform duration-300 group-hover:translate-x-2">
+                      {link.label}
+                    </span>
                   </a>
                 </li>
               ))}
@@ -143,13 +138,13 @@ export default function Footer() {
             <p className="text-white font-semibold text-sm uppercase tracking-widest">Get In Touch</p>
             <div className="space-y-3">
               <a
-                href="mailto:krunalchaudhari@email.com"
+                href="mailto:krunalchaudhari1008@gmail.com"
                 className="flex items-center gap-3 text-slate-400 hover:text-brand-cyan text-sm transition-colors duration-200 group"
               >
                 <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center group-hover:border-brand-cyan/50 transition-colors">
                   <Mail size={14} />
                 </div>
-                krunalchaudhari@email.com
+                krunalchaudhari1008@gmail.com
               </a>
 
               {/* Availability badge */}
@@ -193,15 +188,15 @@ export default function Footer() {
             <span>· All rights reserved.</span>
           </p>
           <p className="flex items-center gap-1.5">
-            Designed & Developed with
+            Crafted by
+            <span className="text-brand-purple font-semibold uppercase tracking-wider">{name}</span>
             <motion.span
               animate={{ scale: [1, 1.3, 1] }}
               transition={{ duration: 1.5, repeat: Infinity }}
             >
               <Heart size={13} className="text-red-500 fill-red-500" />
             </motion.span>
-            by
-            <span className="text-brand-purple font-semibold uppercase tracking-wider">{name}</span>
+
           </p>
         </motion.div>
       </div>

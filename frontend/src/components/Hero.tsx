@@ -62,7 +62,7 @@ export default function Hero() {
           </h2>
 
           <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-lg leading-relaxed">
-            Specializing in architecting robust testing frameworks with Playwright and Selenium. I ensure software excellence through precision-driven automated validation.
+            Focused on delivering reliable software quality through detailed testing, smooth user experiences, and precision-driven validation across modern applications.
           </p>
 
           <div className="flex flex-wrap gap-5 mt-10">
@@ -75,14 +75,14 @@ export default function Hero() {
               className="group px-8 py-4 rounded-xl bg-gradient-to-r from-[#5c00e6] to-[#7c22ff] text-white font-bold transition-all flex items-center gap-3 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40"
             >
               <span className="relative z-10">Download CV</span>
-              <svg 
-                className="w-5 h-5 group-hover:translate-y-0.5 transition-transform duration-300" 
+              <svg
+                className="w-5 h-5 group-hover:translate-y-0.5 transition-transform duration-300"
                 fill="none" viewBox="0 0 24 24" stroke="currentColor"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
               </svg>
             </motion.a>
-            
+
             <motion.a
               whileHover={{ scale: 1.02, translateY: -2 }}
               whileTap={{ scale: 0.98 }}

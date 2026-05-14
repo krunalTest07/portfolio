@@ -5,7 +5,7 @@ export default function About() {
     { label: "Name", value: "Krunal" },
     { label: "Phone", value: "+91 8000456527" },
     { label: "Age", value: "25 Years" },
-    { label: "Email", value: "krunalchaudhari@gmail.com" },
+    { label: "Email", value: "krunalchaudhari1008@gmail.com" },
     { label: "Occupation", value: "QA Analyst" },
     { label: "Nationality", value: "India" },
   ];
@@ -95,9 +95,14 @@ export default function About() {
             <motion.h3 variants={itemVariants} className="text-2xl md:text-3xl font-black text-slate-800 dark:text-white mb-5 tracking-tighter leading-tight">
               QA Automation <span className="text-brand-cyan"> Specialist</span>
             </motion.h3>
+
             <motion.p variants={itemVariants} className="text-slate-600 dark:text-slate-400 leading-relaxed mb-5 text-base font-medium">
-              I am a dedicated <span className="text-slate-800 dark:text-slate-200">QA Automation Professional</span> with a deep passion for building high-integrity testing architectures. By integrating modern solutions like <span className="text-brand-cyan">Playwright</span> and <span className="text-brand-purple">Selenium</span>, I provide the technical depth required to deliver flawless digital experiences.
+              I am a dedicated<span className="text-slate-800 dark:text-slate-200">Quality Assurance professional</span> with a deep passion for delivering reliable and high-quality digital experiences. By combining structured testing approaches with <span className="text-brand-cyan">modern quality practices</span>, I help ensure applications perform <span className="text-brand-purple">seamlessly</span> across every stage of development.
             </motion.p>
+
+            {/* <motion.p variants={itemVariants} className="text-slate-600 dark:text-slate-400 leading-relaxed mb-5 text-base font-medium">
+              I am a dedicated <span className="text-slate-800 dark:text-slate-200">QA Automation Professional</span> with a deep passion for building high-integrity testing architectures. By integrating modern solutions like <span className="text-brand-cyan">Playwright</span> and <span className="text-brand-purple">Selenium</span>, I provide the technical depth required to deliver flawless digital experiences.
+            </motion.p> */}
             <motion.p variants={itemVariants} className="text-slate-600 dark:text-slate-400 leading-relaxed mb-8 text-sm opacity-80">
               My mission is to transform complex quality requirements into scalable automation strategies that power modern development lifecycles with precision and reliability.
             </motion.p>
