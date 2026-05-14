@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { GraduationCap, Calendar, MapPin } from 'lucide-react';
+import { GraduationCap, MapPin } from 'lucide-react';
 
 const educationData = [
   {
@@ -56,27 +56,23 @@ export default function Education() {
               {/* Timeline Point */}
               <div className="absolute w-5 h-5 bg-white dark:bg-slate-900 border-4 border-brand-purple rounded-full -left-[41px] md:-left-[49px] top-1.5 z-10 shadow-lg shadow-brand-purple/20" />
               
-              <div className="glass-card p-8 md:p-10 hover:border-brand-purple/40 transition-all duration-500 group">
-                <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8">
+              <div className="glass-card p-6 md:p-8 hover:border-brand-purple/50 bg-white/50 dark:bg-transparent transition-colors duration-300 group">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6">
                   <div>
-                    <div className="flex items-center gap-2 mb-3">
-                      <GraduationCap className="text-brand-purple w-6 h-6" />
-                      <h3 className="text-2xl md:text-3xl font-black text-slate-800 dark:text-white tracking-tight group-hover:text-brand-purple transition-colors">
-                        {edu.degree}
-                      </h3>
-                    </div>
-                    <p className="text-xl font-bold text-brand-cyan mb-2">{edu.institution}</p>
-                    <div className="flex items-center gap-4 text-slate-500 dark:text-slate-400 text-sm font-semibold uppercase tracking-wider">
-                      <span className="flex items-center gap-1.5">
-                        <Calendar size={14} />
-                        {edu.duration}
-                      </span>
-                      <span className="flex items-center gap-1.5 text-slate-400 dark:text-slate-500">
+                    <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-1 tracking-tight group-hover:text-brand-purple transition-colors flex items-center gap-2">
+                       <GraduationCap className="text-brand-purple w-5 h-5 inline-block" /> {edu.degree}
+                    </h3>
+                    <p className="text-brand-cyan font-bold text-lg inline-flex items-center gap-2">
+                      {edu.institution}
+                      <span className="flex items-center gap-1.5 text-slate-400 dark:text-slate-500 font-normal text-sm ml-1 before:content-['|'] before:mr-1 before:text-slate-300 dark:before:text-slate-700">
                         <MapPin size={14} />
                         {edu.location}
                       </span>
-                    </div>
+                    </p>
                   </div>
+                  <span className="inline-block mt-2 md:mt-0 px-4 py-1.5 bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-full text-sm font-semibold text-slate-700 dark:text-slate-300 whitespace-nowrap">
+                    {edu.duration}
+                  </span>
                 </div>
                 
                 <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed font-medium">

@@ -57,7 +57,7 @@ export default function ChatBot() {
     setIsOpen(!isOpen);
     if (!hasOpened) setHasOpened(true);
     setShowWelcomePopup(false);
-    if (!isOpen) { 
+    if (!isOpen) {
       setIsMinimized(false);
     }
   };
@@ -121,16 +121,15 @@ export default function ChatBot() {
                   animate={{ opacity: 1, y: 0 }}
                   className={`flex max-w-[88%] ${msg.sender === 'user' ? 'ml-auto justify-end' : 'mr-auto justify-start'}`}
                 >
-                  <div className={`p-3 rounded-2xl text-[14px] leading-relaxed shadow-sm ${
-                    msg.sender === 'user'
+                  <div className={`p-3 rounded-2xl text-[14px] leading-relaxed shadow-sm ${msg.sender === 'user'
                       ? 'bg-gradient-to-r from-brand-cyan to-brand-purple text-white rounded-tr-[4px]'
                       : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-tl-[4px] border border-slate-100 dark:border-slate-700/50'
-                  }`}>
+                    }`}>
                     {msg.text}
                   </div>
                 </motion.div>
               ))}
-              
+
               {isTyping && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex max-w-[85%] mr-auto justify-start">
                   <div className="py-4 px-5 rounded-2xl bg-white dark:bg-slate-800 rounded-tl-[4px] border border-slate-100 dark:border-slate-700/50 shadow-sm flex gap-1.5 items-center">
@@ -140,24 +139,23 @@ export default function ChatBot() {
                   </div>
                 </motion.div>
               )}
-              <div ref={messagesEndRef} />
-            </div>
-
-            {/* Input / Quick Replies Area */}
-            <div className="p-3 bg-white dark:bg-[#0B1121] border-t border-slate-200 dark:border-slate-800 shrink-0">
-              <p className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 mb-2.5 px-1 tracking-wider uppercase">Ask me about:</p>
-              <div className="flex flex-wrap gap-2">
-                {CHAT_FAQS.map((faq) => (
-                  <button
-                    key={faq.id}
-                    onClick={() => handleOptionClick(faq)}
-                    disabled={isTyping}
-                    className="text-xs px-3 py-1.5 rounded-full border border-brand-cyan/20 text-brand-cyan hover:bg-brand-cyan hover:text-white dark:border-brand-cyan/40 dark:hover:bg-brand-cyan dark:hover:text-white dark:text-brand-cyan transition-all disabled:opacity-50 disabled:hover:bg-transparent disabled:cursor-not-allowed bg-brand-cyan/5"
-                  >
-                    {faq.text}
-                  </button>
-                ))}
-              </div>
+              {/* Chat Options (Link Tree style) */}
+              {!isTyping && messages[messages.length - 1]?.sender === 'bot' && (
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col gap-2 max-w-[85%] mr-auto justify-start mt-2">
+                  <div className="flex flex-col gap-2 w-full">
+                    {CHAT_FAQS.map((faq) => (
+                      <button
+                        key={faq.id}
+                        onClick={() => handleOptionClick(faq)}
+                        className="text-[13px] text-left px-4 py-2.5 rounded-2xl bg-white dark:bg-slate-800 border border-brand-cyan/20 text-brand-cyan hover:bg-brand-cyan/10 transition-colors font-semibold shadow-sm flex items-center justify-between w-full"
+                      >
+                         {faq.text}
+                      </button>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+              <div ref={messagesEndRef} className="h-4" />
             </div>
           </motion.div>
         )}
@@ -173,7 +171,7 @@ export default function ChatBot() {
             className="absolute right-[4.5rem] bottom-2 bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-800/90 text-slate-800 dark:text-slate-100 px-4 py-2.5 rounded-2xl shadow-xl shadow-brand-cyan/10 border border-brand-cyan/20 dark:border-brand-cyan/30 whitespace-nowrap text-sm font-medium z-50 flex items-center gap-2 cursor-pointer"
             onClick={toggleChat}
           >
-             <span className="text-xl">👋</span> May I help you?
+            <span className="text-xl">👋</span> May I help you?
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -198,11 +196,10 @@ export default function ChatBot() {
           onClick={toggleChat}
           whileHover={{ scale: isMinimized && !isOpen ? 1 : 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className={`flex items-center justify-center text-white shadow-xl shadow-brand-cyan/20 transition-all duration-300 relative ${
-            isMinimized && !isOpen 
-              ? 'h-10 sm:h-14 w-8 sm:w-10 rounded-l-xl bg-gradient-to-r from-brand-cyan to-brand-purple hover:brightness-110 border border-r-0 border-white/20' 
+          className={`flex items-center justify-center text-white shadow-xl shadow-brand-cyan/20 transition-all duration-300 relative ${isMinimized && !isOpen
+              ? 'h-10 sm:h-14 w-8 sm:w-10 rounded-l-xl bg-gradient-to-r from-brand-cyan to-brand-purple hover:brightness-110 border border-r-0 border-white/20'
               : 'h-12 sm:h-14 w-12 sm:w-14 rounded-full bg-gradient-to-r from-brand-cyan to-brand-purple hover:shadow-brand-cyan/40'
-          }`}
+            }`}
           aria-label="Toggle chat"
         >
           <AnimatePresence mode="wait">
@@ -220,7 +217,7 @@ export default function ChatBot() {
               </motion.div>
             )}
           </AnimatePresence>
-          
+
           {/* Unread dot notification */}
           {!isOpen && !hasOpened && !isMinimized && (
             <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-white dark:border-slate-900 animate-pulse"></span>
