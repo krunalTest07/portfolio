@@ -120,6 +120,8 @@ export default function Projects() {
     }
   };
 
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
   return (
     <section id="projects" className="py-32 lg:py-40 relative">
       <div className="max-w-[90rem] mx-auto px-6 md:px-12 relative">
@@ -167,8 +169,8 @@ export default function Projects() {
           {MOCK_PROJECTS.map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, x: isMobile ? 0 : 50, y: isMobile ? 30 : 0 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="snap-start shrink-0 w-[85vw] md:w-[24rem] lg:w-[28rem] glass-card flex flex-col overflow-hidden shadow-lg cursor-pointer bg-white dark:bg-slate-900/40 relative group border border-slate-200 dark:border-slate-800 hover:border-brand-cyan/50 dark:hover:border-brand-cyan/50 transition-all duration-300 h-[28rem]"
@@ -243,10 +245,10 @@ export default function Projects() {
                 </button>
 
                 {/* Left side: Visuals */}
-                <div className="w-full md:w-[40%] bg-gradient-to-br from-brand-purple/20 to-brand-cyan/20 flex flex-col items-center justify-center p-12 relative overflow-hidden hidden md:flex">
+                <div className="w-full md:w-[40%] bg-gradient-to-br from-brand-purple/20 to-brand-cyan/20 flex flex-col items-center justify-center p-8 md:p-12 relative overflow-hidden h-48 md:h-auto shrink-0">
                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-                   <LayoutTemplate size={80} className="text-brand-purple dark:text-brand-cyan drop-shadow-xl z-10" />
-                   <div className="mt-8 text-center z-10">
+                   <LayoutTemplate className="w-16 h-16 md:w-20 md:h-20 text-brand-purple dark:text-brand-cyan drop-shadow-xl z-10" />
+                   <div className="mt-4 md:mt-8 text-center z-10 hidden md:block">
                       <div className="text-xl font-bold text-slate-800 dark:text-white uppercase tracking-widest opacity-80">
                          {selectedProject.title.split(' ')[0]}
                       </div>

@@ -98,7 +98,7 @@ export default function App() {
 
               <motion.div 
                  initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-                 className="mt-10 flex flex-col items-center gap-3 text-center"
+                 className="mt-4 md:mt-10 flex flex-col items-center gap-3 text-center"
               >
                 <p className="text-brand-cyan font-mono font-semibold tracking-[0.2em] uppercase text-xs md:text-sm animate-pulse">
                   Loading...

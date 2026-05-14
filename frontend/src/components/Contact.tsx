@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import { Mail, MapPin, Globe, Code, Send } from 'lucide-react';
 
 export default function Contact() {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Logic to handle form submission goes here.
@@ -31,8 +33,8 @@ export default function Contact() {
         <div className="grid md:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
           {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: isMobile ? 30 : 0, x: isMobile ? 0 : -50 }}
+            whileInView={{ opacity: 1, x: 0, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="flex flex-col gap-8"
@@ -67,8 +69,8 @@ export default function Contact() {
 
           {/* Contact Form */}
           <motion.form
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: isMobile ? 30 : 0, x: isMobile ? 0 : 50 }}
+            whileInView={{ opacity: 1, x: 0, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             onSubmit={handleSubmit}
