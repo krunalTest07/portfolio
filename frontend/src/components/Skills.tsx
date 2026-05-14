@@ -71,7 +71,7 @@ export default function Skills() {
           {/* High-End Tech Ticker - Small & Sophisticated */}
           <div className="relative w-full overflow-hidden py-8 mb-16">
             <motion.div 
-              className="flex whitespace-nowrap gap-36 items-center w-max"
+              className="flex whitespace-nowrap gap-16 md:gap-36 items-center w-max"
               animate={{ x: ["0%", "-50%"] }}
               transition={{ 
                 duration: 70, 

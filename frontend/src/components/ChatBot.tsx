@@ -79,7 +79,7 @@ export default function ChatBot() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[80] flex flex-col items-end">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[80] flex flex-col items-end">
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -198,25 +198,25 @@ export default function ChatBot() {
           onClick={toggleChat}
           whileHover={{ scale: isMinimized && !isOpen ? 1 : 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className={`h-14 flex items-center justify-center text-white shadow-xl shadow-brand-cyan/20 transition-all duration-300 relative ${
+          className={`flex items-center justify-center text-white shadow-xl shadow-brand-cyan/20 transition-all duration-300 relative ${
             isMinimized && !isOpen 
-              ? 'w-10 rounded-l-xl bg-gradient-to-r from-brand-cyan to-brand-purple hover:brightness-110 border border-r-0 border-white/20' 
-              : 'w-14 rounded-full bg-gradient-to-r from-brand-cyan to-brand-purple hover:shadow-brand-cyan/40'
+              ? 'h-10 sm:h-14 w-8 sm:w-10 rounded-l-xl bg-gradient-to-r from-brand-cyan to-brand-purple hover:brightness-110 border border-r-0 border-white/20' 
+              : 'h-12 sm:h-14 w-12 sm:w-14 rounded-full bg-gradient-to-r from-brand-cyan to-brand-purple hover:shadow-brand-cyan/40'
           }`}
           aria-label="Toggle chat"
         >
           <AnimatePresence mode="wait">
             {isMinimized && !isOpen ? (
               <motion.div key="minimized" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                <ChevronLeft size={24} />
+                <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
               </motion.div>
             ) : isOpen ? (
               <motion.div key="close" initial={{ opacity: 0, rotate: -90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: 90 }}>
-                <X size={26} />
+                <X className="w-5 h-5 sm:w-[26px] sm:h-[26px]" />
               </motion.div>
             ) : (
               <motion.div key="chat" initial={{ opacity: 0, rotate: -90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: 90 }}>
-                <MessageCircle size={26} />
+                <MessageCircle className="w-5 h-5 sm:w-[26px] sm:h-[26px]" />
               </motion.div>
             )}
           </AnimatePresence>
