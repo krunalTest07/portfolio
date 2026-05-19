@@ -39,18 +39,16 @@ export default function Navbar() {
   ];
 
   return (
-    <div className={`fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-500 pointer-events-none ${
-      isScrolled ? 'pt-4 px-4 sm:px-6' : 'pt-0 px-0'
-    }`}>
+    <div className={`fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-500 pointer-events-none ${isScrolled ? 'pt-4 px-4 sm:px-6' : 'pt-0 px-0'
+      }`}>
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`relative w-full transition-all duration-500 pointer-events-auto ${
-          isScrolled 
-            ? 'max-w-5xl glass-nav py-3 px-6 sm:px-8 shadow-2xl rounded-full translate-y-2' 
-            : 'max-w-7xl bg-transparent py-6 px-6 sm:px-12 border border-transparent rounded-none'
-        }`}
+        className={`relative w-full transition-all duration-500 pointer-events-auto ${isScrolled
+          ? 'max-w-5xl glass-nav py-3 px-6 sm:px-8 shadow-2xl rounded-full translate-y-2'
+          : 'max-w-7xl bg-transparent py-6 px-6 sm:px-12 border border-transparent rounded-none'
+          }`}
       >
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2 group">
@@ -71,7 +69,7 @@ export default function Navbar() {
                 <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-brand-cyan to-brand-purple group-hover:w-full transition-all duration-300 rounded-full"></span>
               </a>
             ))}
-            
+
             <div className="flex items-center gap-4 pl-6 ml-2 border-l border-slate-300 dark:border-slate-700">
               <motion.button
                 whileTap={{ scale: 0.9, rotate: 180 }}
@@ -126,9 +124,8 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className={`md:hidden absolute left-0 right-0 glass-nav p-4 flex flex-col gap-2 shadow-2xl ${
-                isScrolled ? 'top-[calc(100%+12px)] rounded-3xl' : 'top-full rounded-2xl mx-4 mt-2'
-              }`}
+              className={`md:hidden absolute left-0 right-0 glass-nav p-4 flex flex-col gap-2 shadow-2xl ${isScrolled ? 'top-[calc(100%+12px)] rounded-3xl' : 'top-full rounded-2xl mx-4 mt-2'
+                }`}
             >
               {navLinks.map((link) => (
                 <a
