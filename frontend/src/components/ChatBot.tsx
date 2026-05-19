@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, X, ChevronLeft, Bot } from 'lucide-react';
-import { CHAT_FAQS, DEFAULT_WELCOME_MESSAGE, getBotReply } from './chatData';
+import { MessageCircle, X, ChevronLeft, Bot, Send } from 'lucide-react';
+import { CHAT_FAQS, DEFAULT_WELCOME_MESSAGE, getBotReply, processUserMessage } from './chatData';
 
 interface Message {
   id: string;
@@ -22,6 +22,7 @@ export default function ChatBot() {
     },
   ]);
   const [isTyping, setIsTyping] = useState(false);
+  const [inputText, setInputText] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const lastScrollY = useRef(0);
 
@@ -70,6 +71,29 @@ export default function ChatBot() {
     setTimeout(() => {
       const botText = getBotReply(option.id, () => setIsOpen(false));
 
+      setMessages((prev) => [
+        ...prev,
+        { id: (Date.now() + 1).toString(), text: botText, sender: 'bot' },
+      ]);
+      setIsTyping(false);
+    }, 1200);
+  };
+
+  const handleSendMessage = (e?: React.FormEvent) => {
+    e?.preventDefault();
+    if (!inputText.trim()) return;
+
+    const userMsg: Message = { id: Date.now().toString(), text: inputText, sender: 'user' };
+    setMessages((prev) => [...prev, userMsg]);
+    setInputText('');
+    setIsTyping(true);
+
+    setTimeout(() => {
+      const botText = processUserMessage(
+        userMsg.text as string, 
+        () => setIsOpen(false),
+        handleOptionClick
+      );
       setMessages((prev) => [
         ...prev,
         { id: (Date.now() + 1).toString(), text: botText, sender: 'bot' },
@@ -139,15 +163,15 @@ export default function ChatBot() {
                   </div>
                 </motion.div>
               )}
-              {/* Chat Options (Link Tree style) */}
+              {/* Quick Replies (Wrapped) */}
               {!isTyping && messages[messages.length - 1]?.sender === 'bot' && (
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col gap-2 max-w-[85%] mr-auto justify-start mt-2">
-                  <div className="flex flex-col gap-2 w-full">
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-2 w-full max-w-[90%]">
+                  <div className="flex flex-wrap gap-2">
                     {CHAT_FAQS.map((faq) => (
                       <button
                         key={faq.id}
                         onClick={() => handleOptionClick(faq)}
-                        className="text-[13px] text-left px-4 py-2.5 rounded-2xl bg-white dark:bg-slate-800 border border-brand-cyan/20 text-brand-cyan hover:bg-brand-cyan/10 transition-colors font-semibold shadow-sm flex items-center justify-between w-full"
+                        className="text-[12px] px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-brand-cyan/30 text-brand-cyan hover:bg-brand-cyan/10 transition-colors font-semibold shadow-sm"
                       >
                          {faq.text}
                       </button>
@@ -157,6 +181,24 @@ export default function ChatBot() {
               )}
               <div ref={messagesEndRef} className="h-4" />
             </div>
+            
+            {/* Input Bar */}
+            <form onSubmit={handleSendMessage} className="p-3 bg-white dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700/50 flex items-center gap-2 shrink-0 relative z-10 w-full">
+              <input
+                type="text"
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+                placeholder="Type a message..."
+                className="flex-1 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-full px-4 py-2.5 text-sm focus:outline-none focus:border-brand-cyan/50 dark:focus:border-brand-cyan/50 text-slate-700 dark:text-slate-200"
+              />
+              <button
+                type="submit"
+                disabled={!inputText.trim()}
+                className="w-10 h-10 rounded-full bg-gradient-to-r from-brand-cyan to-brand-purple flex items-center justify-center text-white shrink-0 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity hover:shadow-md"
+              >
+                <Send size={18} className="ml-0.5" />
+              </button>
+            </form>
           </motion.div>
         )}
       </AnimatePresence>

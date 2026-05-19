@@ -73,3 +73,60 @@ export const getBotReply = (id: string, closeChat?: () => void): React.ReactNode
       return "I'm not sure about that! But Krunal would love to answer that personally.";
   }
 };
+
+export const processUserMessage = (
+  message: string, 
+  closeChat: () => void,
+  onOptionClick: (option: { id: string; text: string }) => void
+): React.ReactNode | string => {
+  const lowerMsg = message.toLowerCase();
+  
+  if (lowerMsg.includes('hello') || lowerMsg.includes('hi ') || lowerMsg === 'hi' || lowerMsg.includes('hey')) {
+    return "Hi there! 👋 How can I help you learn more about Krunal?";
+  }
+  
+  if (lowerMsg.includes('cv') || lowerMsg.includes('resume') || lowerMsg.includes('download')) {
+    return getBotReply('cv', closeChat);
+  }
+  
+  if (lowerMsg.includes('project') || lowerMsg.includes('work') || lowerMsg.includes('portfolio')) {
+    return getBotReply('projects', closeChat);
+  }
+  
+  if (lowerMsg.includes('contact') || lowerMsg.includes('email') || lowerMsg.includes('phone') || lowerMsg.includes('call') || lowerMsg.includes('reach')) {
+    return getBotReply('contact', closeChat);
+  }
+  
+  if (lowerMsg.includes('skill') || lowerMsg.includes('tech') || lowerMsg.includes('stack') || lowerMsg.includes('tool') || lowerMsg.includes('language')) {
+    return getBotReply('skills', closeChat);
+  }
+  
+  if (lowerMsg.includes('github') || lowerMsg.includes('git') || lowerMsg.includes('repo')) {
+    return getBotReply('github', closeChat);
+  }
+  
+  if (lowerMsg.includes('linkedin') || lowerMsg.includes('linkdin') || lowerMsg.includes('profile') || lowerMsg.includes('link') || lowerMsg.includes('social')) {
+    return getBotReply('linkedin', closeChat);
+  }
+
+  // Fallback response for unhandled textual questions
+  return (
+    <div className="flex flex-col gap-2 mt-1 mb-1">
+      <span className="text-sm">I'm not exactly sure what you mean. Are you looking for one of these? 👇</span>
+      <div className="flex flex-wrap gap-2 mt-1">
+        {CHAT_FAQS.map((faq) => (
+          <button
+            key={faq.id}
+            onClick={() => onOptionClick(faq)}
+            className="text-[12px] px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-brand-cyan/30 text-brand-cyan hover:bg-brand-cyan/10 transition-colors font-semibold shadow-sm"
+          >
+             {faq.text}
+          </button>
+        ))}
+      </div>
+      <span className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+        Or <a href="mailto:krunalchaudhari1008@gmail.com" className="text-brand-cyan hover:underline font-semibold underline">Email Krunal</a> directly!
+      </span>
+    </div>
+  );
+};
