@@ -1,3 +1,4 @@
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Send } from 'lucide-react';
 
@@ -22,10 +23,23 @@ const InstagramIcon = ({ size = 20 }: { size?: number }) => (
 export default function Contact() {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Logic to handle form submission goes here.
-    alert("Thanks for reaching out! Since this is a demo, no email was sent, but the UI logic is ready.");
+  const [result, setResult] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const handleIframeLoad = () => {
+    if (isSubmitting) {
+      setIsSubmitting(false);
+      setResult("Message sent successfully! I will get back to you soon.");
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+    }
+  };
+
+  const handleSubmit = () => {
+    setIsSubmitting(true);
+    setResult("");
   };
 
   return (
@@ -33,21 +47,6 @@ export default function Contact() {
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-brand-purple/10 rounded-full blur-[100px] -z-10 -translate-x-1/2 -translate-y-1/2" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
-        >
-          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-800 dark:text-slate-50 mb-4">
-            Get in <span className="text-gradient">Touch</span>
-          </h2>
-          <p className="text-slate-600 dark:text-slate-400 text-lg max-w-2xl mx-auto">
-            Looking for a meticulous QA Automation Engineer to ensure your software is bulletproof? Let's talk test cases!
-          </p>
-        </motion.div>
-
         <div className="grid md:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
           {/* Contact Info */}
           <motion.div
@@ -55,71 +54,95 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col gap-8"
+            className="flex flex-col gap-8 h-full"
           >
-            <div className="glass-card p-8 bg-white/50 dark:bg-transparent">
-              <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-6">Contact Information</h3>
+            <div className="flex flex-col h-full justify-center md:pr-10">
+              <p className="font-bold uppercase tracking-wider text-sm mb-3 text-slate-700 dark:text-slate-300">Contact</p>
+              <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-50 mb-6 leading-tight">
+                Get in <span className="text-gradient">Touch</span><br className="hidden md:block" /> Let’s Build Quality Digital Experiences
+              </h2>
+              <p className="text-slate-500 dark:text-slate-400 text-[15px] mb-10 leading-relaxed max-w-md">
+                Helping businesses deliver reliable, user-friendly, and high-performing web & mobile applications through complete quality assurance and testing solutions.
+              </p>
               <ul className="flex flex-col gap-6">
-                <li className="flex items-center gap-4 text-slate-600 dark:text-slate-400 group">
-                  <div className="w-12 h-12 rounded-full bg-slate-200 dark:bg-slate-800/50 flex items-center justify-center text-brand-cyan group-hover:bg-brand-cyan group-hover:text-dark-bg transition-colors duration-300">
+                <li className="flex items-center gap-4 group">
+                  <div className="text-[#9d00ff]">
                     <Mail size={20} />
                   </div>
-                  <span className="font-medium">krunalchaudhari1008@gmail.com</span>
+                  <a href="mailto:krunalchaudhari1008@gmail.com" className="font-medium text-slate-800 dark:text-slate-200 hover:text-[#9d00ff] dark:hover:text-[#9d00ff] transition-colors">krunalchaudhari1008@gmail.com</a>
                 </li>
-                <li className="flex items-center gap-4 text-slate-600 dark:text-slate-400 group">
-                  <div className="w-12 h-12 rounded-full bg-slate-200 dark:bg-slate-800/50 flex items-center justify-center text-brand-purple group-hover:bg-brand-purple group-hover:text-white transition-colors duration-300">
+                <li className="flex items-center gap-4 group">
+                  <div className="text-[#9d00ff]">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+                  </div>
+                  <a href="tel:+918000456527" className="font-medium text-slate-800 dark:text-slate-200 hover:text-[#9d00ff] dark:hover:text-[#9d00ff] transition-colors">+91 8000456527</a>
+                </li>
+                <li className="flex items-center gap-4 group">
+                  <div className="text-[#9d00ff]">
                     <MapPin size={20} />
                   </div>
-                  <span className="font-medium">Global / Remote</span>
+                  <span className="font-medium text-slate-800 dark:text-slate-200">Ahmedabad, Gujarat</span>
                 </li>
               </ul>
 
-              <div className="flex gap-4 mt-10 border-t border-slate-300 dark:border-slate-700/50 pt-8">
-                <a href="https://github.com/krunalchaudhari" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-[#333] hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors" aria-label="GitHub">
+              <div className="flex gap-4 mt-8 pt-6">
+                <a href="https://github.com/krunalchaudhari" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800/50 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-[#333] hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors" aria-label="GitHub">
                   <GithubIcon size={20} />
                 </a>
-                <a href="https://www.linkedin.com/in/chaudharikrunal?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-[#0A66C2] hover:text-white transition-colors" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/chaudharikrunal?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800/50 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-[#0A66C2] hover:text-white transition-colors" aria-label="LinkedIn">
                   <LinkedinIcon size={20} />
                 </a>
-                <a href="https://www.instagram.com/invites/contact/?utm_source=ig_contact_invite&utm_medium=copy_link&utm_content=yykwwq" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-[#E1306C] hover:text-white transition-colors" aria-label="Instagram">
+                <a href="https://www.instagram.com/invites/contact/?utm_source=ig_contact_invite&utm_medium=copy_link&utm_content=yykwwq" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800/50 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-[#E1306C] hover:text-white transition-colors" aria-label="Instagram">
                   <InstagramIcon size={20} />
                 </a>
               </div>
             </div>
           </motion.div>
 
+          {/* Hidden iframe to prevent redirect on submit */}
+          <iframe name="hidden_iframe" id="hidden_iframe" style={{ display: 'none' }} onLoad={handleIframeLoad}></iframe>
+
           {/* Contact Form */}
           <motion.form
+            ref={formRef}
             initial={{ opacity: 0, y: isMobile ? 30 : 0, x: isMobile ? 0 : 50 }}
             whileInView={{ opacity: 1, x: 0, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            action="https://api.web3forms.com/submit"
+            method="POST"
+            target="hidden_iframe"
             onSubmit={handleSubmit}
-            className="glass-card p-8 flex flex-col gap-6 bg-white/50 dark:bg-transparent"
+            className="glass-card p-8 md:p-10 flex flex-col gap-5 bg-white dark:bg-[#13111C] shadow-2xl rounded-2xl border border-slate-100 dark:border-slate-800/80 h-full"
           >
-            <div className="flex flex-col gap-2">
-              <label htmlFor="name" className="text-sm font-semibold text-slate-700 dark:text-slate-300">Your Name</label>
-              <input type="text" id="name" required className="bg-slate-50 dark:bg-slate-900/50 border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-800 dark:text-slate-200 focus:outline-none focus:border-brand-cyan transition-colors" placeholder="John Doe" />
-            </div>
+            <input type="hidden" name="access_key" value="237edd48-a0d5-4211-8632-e3eec940f674" />
 
-            <div className="flex flex-col gap-2">
-              <label htmlFor="email" className="text-sm font-semibold text-slate-700 dark:text-slate-300">Your Email</label>
-              <input type="email" id="email" required className="bg-slate-50 dark:bg-slate-900/50 border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-800 dark:text-slate-200 focus:outline-none focus:border-brand-cyan transition-colors" placeholder="john@example.com" />
-            </div>
+            <input type="text" name="name" id="name" required className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#9d00ff] focus:ring-1 focus:ring-[#9d00ff] transition-all" placeholder="Your Name" />
 
-            <div className="flex flex-col gap-2">
-              <label htmlFor="message" className="text-sm font-semibold text-slate-700 dark:text-slate-300">Message</label>
-              <textarea id="message" required rows={4} className="bg-slate-50 dark:bg-slate-900/50 border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-800 dark:text-slate-200 focus:outline-none focus:border-brand-cyan transition-colors resize-none" placeholder="How can I help you?"></textarea>
-            </div>
+            <input type="email" name="email" id="email" required className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#9d00ff] focus:ring-1 focus:ring-[#9d00ff] transition-all" placeholder="Your Email" />
+
+            <input type="text" name="subject" id="subject" required className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#9d00ff] focus:ring-1 focus:ring-[#9d00ff] transition-all" placeholder="Subject" />
+
+            <textarea name="message" id="message" required rows={5} className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#9d00ff] focus:ring-1 focus:ring-[#9d00ff] transition-all resize-none" placeholder="Message"></textarea>
 
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               type="submit"
-              className="mt-4 w-full py-4 rounded-lg bg-gradient-to-r from-brand-cyan to-brand-purple text-white font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-lg"
+              disabled={isSubmitting}
+              className="mt-2 w-full py-4 rounded-lg bg-[#9d00ff] text-white font-bold tracking-wide flex items-center justify-center hover:bg-[#8300d6] transition-all shadow-[0_0_20px_rgba(157,0,255,0.4)] disabled:opacity-75 disabled:cursor-not-allowed"
             >
-              Send Message <Send size={18} />
+              {isSubmitting ? "Sending..." : "Submit Message"}
             </motion.button>
+            {result && (
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-center text-[15px] font-medium text-[#9d00ff] mt-2 bg-brand-purple/5 py-3 rounded-lg border border-brand-purple/20"
+              >
+                {result}
+              </motion.p>
+            )}
           </motion.form>
         </div>
       </div>

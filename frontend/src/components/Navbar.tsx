@@ -51,7 +51,17 @@ export default function Navbar() {
           }`}
       >
         <div className="flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-2 group">
+          <Link 
+            to="/" 
+            onClick={(e) => {
+              if (window.location.pathname === '/' || window.location.pathname === '') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.history.pushState('', document.title, window.location.pathname);
+              }
+            }}
+            className="flex items-center gap-2 group"
+          >
             <span className="text-2xl font-black text-[#5c00e6] tracking-tighter group-hover:scale-105 transition-transform duration-300">
               Krunal
             </span>
