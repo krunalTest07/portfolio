@@ -16,15 +16,27 @@ export default function Navbar() {
   }, []);
 
   const toggleTheme = () => {
-    if (isDark) {
-      document.documentElement.classList.remove('dark');
-      localStorage.theme = 'light';
-      setIsDark(false);
-    } else {
-      document.documentElement.classList.add('dark');
-      localStorage.theme = 'dark';
-      setIsDark(true);
+    const toggle = () => {
+      if (isDark) {
+        document.documentElement.classList.remove('dark');
+        localStorage.theme = 'light';
+        setIsDark(false);
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.theme = 'dark';
+        setIsDark(true);
+      }
+    };
+
+    if (!('startViewTransition' in document)) {
+      toggle();
+      return;
     }
+
+    // @ts-ignore - View Transitions API
+    document.startViewTransition(() => {
+      toggle();
+    });
   };
 
   // If we are on a project detail page, hash links need to act differently or we point to generic paths.
@@ -51,8 +63,8 @@ export default function Navbar() {
           }`}
       >
         <div className="flex justify-between items-center">
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             onClick={(e) => {
               if (window.location.pathname === '/' || window.location.pathname === '') {
                 e.preventDefault();

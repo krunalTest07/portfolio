@@ -137,6 +137,12 @@ Note: The variables are still safely named "cyan" and "purple" in the CSS code j
   color-scheme: dark;
 }
 
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 body {
   @apply bg-slate-50 dark:bg-dark-bg text-slate-800 dark:text-slate-300 antialiased selection:bg-brand-cyan selection:text-slate-900 transition-colors duration-300;
   margin: 0;
