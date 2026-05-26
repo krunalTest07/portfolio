@@ -19,25 +19,13 @@ export default function ChatBot() {
     }
     return false;
   }); // Used to hide the red dot badge & popup
-  const [messages, setMessages] = useState<Message[]>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('portfolioChatMessages');
-      if (saved) {
-        try {
-          return JSON.parse(saved);
-        } catch (e) {
-          console.error("Failed to parse saved chat messages", e);
-        }
-      }
-    }
-    return [
-      {
-        id: 'welcome',
-        text: DEFAULT_WELCOME_MESSAGE,
-        sender: 'bot',
-      },
-    ];
-  });
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: 'welcome',
+      text: DEFAULT_WELCOME_MESSAGE,
+      sender: 'bot',
+    },
+  ]);
   const [isTyping, setIsTyping] = useState(false);
   const [inputText, setInputText] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -53,12 +41,12 @@ export default function ChatBot() {
     return () => clearTimeout(timer);
   }, [hasOpened, isOpen]);
 
-  // Save state to localStorage whenever it changes
   useEffect(() => {
+    // Clear previously saved corrupted chat messages from localStorage if any
     if (typeof window !== 'undefined') {
-      localStorage.setItem('portfolioChatMessages', JSON.stringify(messages));
+      localStorage.removeItem('portfolioChatMessages');
     }
-  }, [messages]);
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
