@@ -263,3 +263,43 @@ html {
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
+
+/* --------------------------------------------------------
+   ⚡ 144Hz HIGH-PERFORMANCE GPU ACCELERATION & SMOOTHNESS
+   -------------------------------------------------------- */
+
+/* Force GPU acceleration on transition elements to ensure 144Hz rendering */
+.glass-card,
+.glass-nav,
+button,
+a,
+input,
+textarea,
+img,
+svg,
+.group:hover * {
+  backface-visibility: hidden;
+  perspective: 1000px;
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
+}
+
+/* Specific will-change for heavy animation elements */
+.animate-float,
+.animate-wave,
+.glass-card:hover {
+  will-change: transform, opacity;
+}
+
+/* Fine-tune smooth scrolling for buttery refresh rates */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Refined global scroll physics to feel smoother */
+::-webkit-scrollbar-thumb {
+  transition: background-color 0.2s ease-in-out;
+}

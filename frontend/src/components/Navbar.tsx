@@ -28,13 +28,12 @@ export default function Navbar() {
       }
     };
 
-    if (!('startViewTransition' in document)) {
+    if (!(document as any).startViewTransition) {
       toggle();
       return;
     }
 
-    // @ts-ignore - View Transitions API
-    document.startViewTransition(() => {
+    (document as any).startViewTransition(() => {
       toggle();
     });
   };
@@ -94,11 +93,22 @@ export default function Navbar() {
 
             <div className="flex items-center gap-4 pl-6 ml-2 border-l border-slate-300 dark:border-slate-700">
               <motion.button
-                whileTap={{ scale: 0.9, rotate: 180 }}
+                whileTap={{ scale: 0.9 }}
                 onClick={toggleTheme}
-                className="p-2.5 rounded-full border border-slate-200 dark:border-slate-700/50 bg-white/50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-brand-cyan/50 dark:hover:border-brand-cyan/50 transition-all shadow-sm"
+                className="p-2.5 rounded-full border border-slate-200 dark:border-slate-700/50 bg-white/50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-brand-cyan/50 dark:hover:border-brand-cyan/50 transition-all shadow-sm overflow-hidden"
               >
-                {isDark ? <Sun size={18} /> : <Moon size={18} />}
+                <AnimatePresence mode="popLayout" initial={false}>
+                  <motion.div
+                    key={isDark ? 'sun' : 'moon'}
+                    initial={{ y: 22, opacity: 0, rotate: -45, scale: 0.7 }}
+                    animate={{ y: 0, opacity: 1, rotate: 0, scale: 1 }}
+                    exit={{ y: 22, opacity: 0, rotate: 45, scale: 0.7 }}
+                    transition={{ duration: 0.3, ease: 'backOut' }}
+                    className="flex items-center justify-center"
+                  >
+                    {isDark ? <Sun size={18} /> : <Moon size={18} />}
+                  </motion.div>
+                </AnimatePresence>
               </motion.button>
 
               <a
@@ -113,11 +123,22 @@ export default function Navbar() {
           {/* Mobile Menu Toggle */}
           <div className="md:hidden flex items-center gap-3">
             <motion.button
-              whileTap={{ scale: 0.9, rotate: 180 }}
+              whileTap={{ scale: 0.9 }}
               onClick={toggleTheme}
-              className="p-2 rounded-full border border-slate-200 dark:border-slate-700/50 bg-white/50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all"
+              className="p-2 rounded-full border border-slate-200 dark:border-slate-700/50 bg-white/50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all overflow-hidden"
             >
-              {isDark ? <Sun size={18} /> : <Moon size={18} />}
+              <AnimatePresence mode="popLayout" initial={false}>
+                <motion.div
+                  key={isDark ? 'sun' : 'moon'}
+                  initial={{ y: 22, opacity: 0, rotate: -45, scale: 0.7 }}
+                  animate={{ y: 0, opacity: 1, rotate: 0, scale: 1 }}
+                  exit={{ y: 22, opacity: 0, rotate: 45, scale: 0.7 }}
+                  transition={{ duration: 0.3, ease: 'backOut' }}
+                  className="flex items-center justify-center"
+                >
+                  {isDark ? <Sun size={18} /> : <Moon size={18} />}
+                </motion.div>
+              </AnimatePresence>
             </motion.button>
             <button
               className="text-slate-700 dark:text-slate-200 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-colors"
@@ -146,7 +167,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className={`md:hidden absolute left-0 right-0 glass-nav p-4 flex flex-col gap-2 shadow-2xl ${isScrolled ? 'top-[calc(100%+12px)] rounded-3xl' : 'top-full rounded-2xl mx-4 mt-2'
+              className={`md:hidden absolute left-0 right-0 bg-white/95 dark:bg-zinc-950/95 border border-slate-200/80 dark:border-zinc-800/80 backdrop-blur-2xl p-4 flex flex-col gap-2 shadow-2xl ${isScrolled ? 'top-[calc(100%+12px)] rounded-3xl' : 'top-full rounded-2xl mx-4 mt-2'
                 }`}
             >
               {navLinks.map((link) => (
