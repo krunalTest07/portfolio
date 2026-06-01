@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Send } from 'lucide-react';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 const GithubIcon = ({ size = 20 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -25,12 +26,16 @@ export default function Contact() {
 
   const [result, setResult] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [hasSentMessage, setHasSentMessage] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const sitekey = "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
 
   const handleIframeLoad = () => {
     if (isSubmitting) {
       setIsSubmitting(false);
       setResult("Message sent successfully! I will get back to you soon.");
+      setHasSentMessage(true);
       if (formRef.current) {
         formRef.current.reset();
       }
@@ -103,47 +108,77 @@ export default function Contact() {
           <iframe name="hidden_iframe" id="hidden_iframe" style={{ display: 'none' }} onLoad={handleIframeLoad}></iframe>
 
           {/* Contact Form */}
-          <motion.form
-            ref={formRef}
-            initial={{ opacity: 0, y: isMobile ? 30 : 0, x: isMobile ? 0 : 50 }}
-            whileInView={{ opacity: 1, x: 0, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            action="https://api.web3forms.com/submit"
-            method="POST"
-            target="hidden_iframe"
-            onSubmit={handleSubmit}
-            className="glass-card p-8 md:p-10 flex flex-col gap-5 bg-white dark:bg-[#13111C] shadow-2xl rounded-2xl border border-slate-100 dark:border-slate-800/80 h-full"
-          >
-            <input type="hidden" name="access_key" value="237edd48-a0d5-4211-8632-e3eec940f674" />
-
-            <input type="text" name="name" id="name" required className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#9d00ff] focus:ring-1 focus:ring-[#9d00ff] transition-all" placeholder="Your Name" />
-
-            <input type="email" name="email" id="email" required className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#9d00ff] focus:ring-1 focus:ring-[#9d00ff] transition-all" placeholder="Your Email" />
-
-            <input type="text" name="subject" id="subject" required className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#9d00ff] focus:ring-1 focus:ring-[#9d00ff] transition-all" placeholder="Subject" />
-
-            <textarea name="message" id="message" required rows={5} className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#9d00ff] focus:ring-1 focus:ring-[#9d00ff] transition-all resize-none" placeholder="Message"></textarea>
-
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              type="submit"
-              disabled={isSubmitting}
-              className="mt-2 w-full py-4 rounded-lg bg-[#9d00ff] text-white font-bold tracking-wide flex items-center justify-center hover:bg-[#8300d6] transition-all shadow-[0_0_20px_rgba(157,0,255,0.4)] disabled:opacity-75 disabled:cursor-not-allowed"
+          {hasSentMessage ? (
+            <motion.div
+              initial={{ opacity: 0, y: isMobile ? 30 : 0, x: isMobile ? 0 : 50 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="glass-card p-8 md:p-10 flex flex-col gap-5 bg-white dark:bg-[#13111C] shadow-2xl rounded-2xl border border-slate-100 dark:border-slate-800/80 h-full justify-center items-center text-center"
             >
-              {isSubmitting ? "Sending..." : "Submit Message"}
-            </motion.button>
-            {result && (
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="text-center text-[15px] font-medium text-[#9d00ff] mt-2 bg-brand-purple/5 py-3 rounded-lg border border-brand-purple/20"
+              <div className="w-16 h-16 bg-[#9d00ff]/10 rounded-full flex items-center justify-center text-[#9d00ff] mb-4">
+                <Send size={32} />
+              </div>
+              <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-2">Message Sent!</h3>
+              <p className="text-slate-500 dark:text-slate-400">
+                Thank you for reaching out. I have received your message and will get back to you as soon as possible.
+              </p>
+              <p className="text-sm text-slate-400 dark:text-slate-500 mt-4">
+                Thank you for passing the verification!
+              </p>
+            </motion.div>
+          ) : (
+            <motion.form
+              ref={formRef}
+              initial={{ opacity: 0, y: isMobile ? 30 : 0, x: isMobile ? 0 : 50 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              action="https://api.web3forms.com/submit"
+              method="POST"
+              target="hidden_iframe"
+              onSubmit={handleSubmit}
+              className="glass-card p-8 md:p-10 flex flex-col gap-5 bg-white dark:bg-[#13111C] shadow-2xl rounded-2xl border border-slate-100 dark:border-slate-800/80 h-full"
+            >
+              <input type="hidden" name="access_key" value="237edd48-a0d5-4211-8632-e3eec940f674" />
+              {captchaToken && <input type="hidden" name="h-captcha-response" value={captchaToken} />}
+
+              <input type="text" name="name" id="name" required className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#9d00ff] focus:ring-1 focus:ring-[#9d00ff] transition-all" placeholder="Your Name" />
+
+              <input type="email" name="email" id="email" required className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#9d00ff] focus:ring-1 focus:ring-[#9d00ff] transition-all" placeholder="Your Email" />
+
+              <input type="text" name="subject" id="subject" required className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#9d00ff] focus:ring-1 focus:ring-[#9d00ff] transition-all" placeholder="Subject" />
+
+              <textarea name="message" id="message" required rows={5} className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#9d00ff] focus:ring-1 focus:ring-[#9d00ff] transition-all resize-none" placeholder="Message"></textarea>
+
+              <div className="flex justify-center my-2">
+                <HCaptcha
+                  sitekey={sitekey}
+                  onVerify={(token) => setCaptchaToken(token)}
+                  reCaptchaCompat={false}
+                />
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                disabled={isSubmitting || !captchaToken}
+                className="mt-2 w-full py-4 rounded-lg bg-[#9d00ff] text-white font-bold tracking-wide flex items-center justify-center hover:bg-[#8300d6] transition-all shadow-[0_0_20px_rgba(157,0,255,0.4)] disabled:opacity-75 disabled:cursor-not-allowed"
               >
-                {result}
-              </motion.p>
-            )}
-          </motion.form>
+                {isSubmitting ? "Sending..." : "Submit Message"}
+              </motion.button>
+              {result && (
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-center text-[15px] font-medium text-[#9d00ff] mt-2 bg-[#9d00ff]/5 py-3 rounded-lg border border-[#9d00ff]/20"
+                >
+                  {result}
+                </motion.p>
+              )}
+            </motion.form>
+          )}
         </div>
       </div>
     </section>
