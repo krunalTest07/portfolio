@@ -6,14 +6,14 @@ const educationData = [
     institution: "GLS University",
     duration: "2022 - 2024",
     degree: "Master of Computer Application",
-    description: "Specialized in software development, AI/ML, and cloud computing. Developed real-world projects, including AI-powered applications and full-stack web solutions. Strengthened my expertise in Python, Django, and cloud technologies.",
+    description: "Specialized in Software Development, AI/ML, and Cloud Computing. Worked on real-world projects involving application development, testing, and web solutions. Developed practical skills in Python, frontend development, project deployment, quality assurance, and cloud technologies.",
     location: "Ahmedabad, Gujarat"
   },
   {
     institution: "Gujarat University",
     duration: "2019 - 2022",
     degree: "Bachelor of Computer Application",
-    description: "Laid a strong foundation in programming, databases, and web development. Developed various academic projects, gaining hands-on experience in Python, SQL, and front-end technologies.",
+    description: "Built a strong foundation in programming, databases, OOP concepts, and web development. Gained practical experience through academic projects involving PHP, SQL, and frontend development while strengthening core software development skills.",
     location: "Ahmedabad, Gujarat"
   }
 ];
@@ -38,7 +38,7 @@ export default function Education() {
           </h2>
           <div className="w-24 h-1.5 bg-gradient-to-r from-brand-cyan to-brand-purple mx-auto rounded-full mb-8" />
           <p className="text-slate-600 dark:text-slate-400 text-lg max-w-2xl mx-auto font-medium leading-relaxed">
-            A journey of continuous learning, innovation, and technical excellence. 
+            A journey of continuous learning, innovation, and technical excellence.
             My academic background has equipped me with a strong foundation in computer science and software development.
           </p>
         </motion.div>
@@ -55,12 +55,12 @@ export default function Education() {
             >
               {/* Timeline Point */}
               <div className="absolute w-5 h-5 bg-white dark:bg-slate-900 border-4 border-brand-purple rounded-full -left-[41px] md:-left-[49px] top-1.5 z-10 shadow-lg shadow-brand-purple/20" />
-              
+
               <div className="glass-card p-6 md:p-8 hover:border-brand-purple/50 bg-white/50 dark:bg-transparent transition-colors duration-300 group">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6">
                   <div>
                     <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-1 tracking-tight group-hover:text-brand-purple transition-colors flex items-center gap-2">
-                       <GraduationCap className="text-brand-purple w-5 h-5 inline-block" /> {edu.degree}
+                      <GraduationCap className="text-brand-purple w-5 h-5 inline-block" /> {edu.degree}
                     </h3>
                     <p className="text-brand-cyan font-bold text-lg inline-flex items-center gap-2">
                       {edu.institution}
@@ -74,7 +74,7 @@ export default function Education() {
                     {edu.duration}
                   </span>
                 </div>
-                
+
                 <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed font-medium">
                   {edu.description}
                 </p>

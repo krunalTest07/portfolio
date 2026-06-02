@@ -91,9 +91,9 @@ app.post('/api/seed', async (req: Request, res: Response) => {
         role: "Junior QA Analyst",
         duration: "Dec 2024 - june 2025",
         responsibilities: [
-          "Developed test matrices covering user acceptance scenarios.",
-          "Coordinated directly with the product teams to finalize QA criteria.",
-          "Conducted smoke testing cycles for fast-paced hotfix patches."
+          "Performed end-to-end testing of web applications, ensuring functionality, reliability, and a seamless user experience.",
+          "Created and maintained test cases, reported defects, and verified fixes through continuous collaboration with cross-functional teams.",
+          "Contributed to quality assurance processes, release validation, and test execution to deliver high-quality software products."
         ]
       },
     ]);
