@@ -1,12 +1,22 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 interface SkillItem {
-  _id: string;
+  id: string;
   name: string;
   category: string;
   level: number;
 }
+
+const skillsData: SkillItem[] = [
+  { id: 's1', name: "Manual Testing", category: "Core QA", level: 95 },
+  { id: 's2', name: "API Testing (Postman)", category: "Core QA", level: 90 },
+  { id: 's3', name: "Selenium", category: "Automation", level: 60 },
+  { id: 's4', name: "Playwright", category: "Automation", level: 75 },
+  { id: 's5', name: "JavaScript", category: "Programming", level: 70 },
+  { id: 's6', name: "TypeScript", category: "Programming", level: 65 },
+  { id: 's7', name: "Jira / Agile", category: "Tools & Methods", level: 95 },
+  { id: 's8', name: "Git / CI/CD", category: "Tools & Methods", level: 80 }
+];
 
 const techTools = [
   { name: "JIRA", domain: "atlassian.com", slug: "jira" },
@@ -21,23 +31,7 @@ const techTools = [
 ];
 
 export default function Skills() {
-  const [skills, setSkills] = useState<SkillItem[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch('/api/skills')
-      .then((res) => res.json())
-      .then((data) => {
-        setSkills(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching skills:", error);
-        setLoading(false);
-      });
-  }, []);
-
-  const groupedSkills = skills.reduce((acc, skill) => {
+  const groupedSkills = skillsData.reduce((acc, skill) => {
     if (!acc[skill.category]) {
       acc[skill.category] = [];
     }
@@ -102,64 +96,48 @@ export default function Skills() {
           </p>
         </motion.div>
 
-        <AnimatePresence mode="wait">
-          {loading ? (
-             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                {[1, 2, 3, 4].map((n) => (
-                  <motion.div 
-                    key={n}
-                    animate={{ opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                    className="glass h-48 bg-slate-200 dark:bg-slate-800/40 rounded-2xl p-6"
-                  />
-                ))}
-             </div>
-          ) : (
-            <motion.div 
-              key="content"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
+          {categories.map((category, catIndex) => (
+            <motion.div
+              key={category}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              whileHover={{ scale: 1.02 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.4, delay: catIndex * 0.1 }}
+              className="glass p-6 rounded-2xl bg-white/50 dark:bg-transparent"
             >
-              {categories.map((category, catIndex) => (
-                <motion.div
-                  key={category}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  whileHover={{ scale: 1.02 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.4, delay: catIndex * 0.1 }}
-                  className="glass p-6 rounded-2xl bg-white/50 dark:bg-transparent"
-                >
-                  <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-6 pb-4 border-b border-slate-200 dark:border-slate-700">
-                    {category}
-                  </h3>
-                  <ul className="flex flex-wrap gap-3">
-                    {groupedSkills[category].map((skill, skillIndex) => (
-                      <motion.li
-                        key={skill._id}
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        whileHover={{ scale: 1.1, backgroundColor: "var(--color-brand-cyan)", borderColor: "var(--color-brand-cyan)", color: "#1e293b" }}
-                        transition={{ duration: 0.2, delay: (catIndex * 0.05) + (skillIndex * 0.02) }}
-                        className="px-4 py-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-full text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm relative group overflow-hidden cursor-default transition-colors duration-300"
-                      >
-                        <span className="relative z-10">{skill.name}</span>
-                        {/* Progress bar */}
-                        <div 
-                          className="absolute bottom-0 left-0 h-1 bg-brand-cyan/50 dark:bg-brand-cyan/20 -z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                          style={{ width: `${skill.level}%` }}
-                        ></div>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </motion.div>
-              ))}
+              <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-6 pb-4 border-b border-slate-200 dark:border-slate-700">
+                {category}
+              </h3>
+              <ul className="flex flex-wrap gap-3">
+                {groupedSkills[category].map((skill, skillIndex) => (
+                  <motion.li
+                    key={skill.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.1, backgroundColor: "var(--color-brand-cyan)", borderColor: "var(--color-brand-cyan)", color: "#1e293b" }}
+                    transition={{ duration: 0.2, delay: (catIndex * 0.05) + (skillIndex * 0.02) }}
+                    className="px-4 py-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-full text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm relative group overflow-hidden cursor-default transition-colors duration-300"
+                  >
+                    <span className="relative z-10">{skill.name}</span>
+                    {/* Progress bar */}
+                    <div 
+                      className="absolute bottom-0 left-0 h-1 bg-brand-cyan/50 dark:bg-brand-cyan/20 -z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      style={{ width: `${skill.level}%` }}
+                    ></div>
+                  </motion.li>
+                ))}
+              </ul>
             </motion.div>
-          )}
-        </AnimatePresence>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
