@@ -2,15 +2,33 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
-// Handles logo with clean React-state fallback
-function ProjectLogo({ logoUrl, title, size = 'card' }: { logoUrl?: string; title: string; size?: 'card' | 'modal' }) {
+// Handles logo with clean React-state fallback, supports separate dark/light URLs
+function ProjectLogo({ logoUrl, darkLogoUrl, title, size = 'card' }: { logoUrl?: string; darkLogoUrl?: string; title: string; size?: 'card' | 'modal' }) {
   const [imgError, setImgError] = useState(false);
+  const [isDark, setIsDark] = useState(false);
   const sizeClass = size === 'modal' ? 'w-24 h-24 md:w-32 md:h-32' : 'w-20 h-20';
 
-  if (logoUrl && !imgError) {
+  useEffect(() => {
+    const checkTheme = () => setIsDark(document.documentElement.classList.contains('dark'));
+    checkTheme();
+    // Watch for theme changes via MutationObserver
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
+
+  // Pick the right URL based on current theme
+  const resolvedUrl = isDark && darkLogoUrl ? darkLogoUrl : logoUrl;
+
+  // Reset error state whenever URL changes (e.g. theme switch)
+  useEffect(() => {
+    setImgError(false);
+  }, [resolvedUrl]);
+
+  if (resolvedUrl && !imgError) {
     return (
       <img
-        src={logoUrl}
+        src={resolvedUrl}
         alt={title}
         className={`${sizeClass} object-contain drop-shadow-lg`}
         onError={() => setImgError(true)}
@@ -33,7 +51,8 @@ interface ProjectItem {
   shortDescription: string;
   longDescription: string;
   techStack: string[];
-  logoUrl?: string;
+  logoUrl?: string;       // Used in light mode (or both if darkLogoUrl not set)
+  darkLogoUrl?: string;   // Used only in dark mode
   githubLink?: string;
   demoLink?: string;
 }
@@ -45,7 +64,8 @@ const MOCK_PROJECTS: ProjectItem[] = [
     shortDescription: 'Tested a gamification and loyalty platform featuring challenges, rewards, leaderboards, missions, and user engagement systems across web and mobile applications.',
     longDescription: 'Worked on quality assurance for Captain Up, a gamification and customer engagement platform designed to improve user retention and loyalty through rewards, challenges, tournaments, leaderboards, and personalized missions. Responsibilities included validating user flows, verifying gamification features, performing functional and regression testing, reporting defects, and ensuring a seamless user experience across multiple devices and browsers. Collaborated with developers, designers, and product teams to verify feature requirements, test new releases, and maintain platform stability and quality throughout the development lifecycle.',
     techStack: ['QA Testing', 'Functional Testing', 'Regression Testing', 'Bug Reporting', 'Jira'],
-    logoUrl: 'https://captainup.com/wp-content/uploads/2025/08/Frame.svg',
+    logoUrl: 'https://captainup.com/wp-content/uploads/2025/08/Frame.svg', // light mode logo
+    darkLogoUrl: 'https://captainup.com/wp-content/uploads/2025/08/Frame-4.svg',                          // dark mode logo
     githubLink: '#',
     demoLink: 'https://captainup.com/'
   },
@@ -215,7 +235,7 @@ export default function Projects() {
               <div className="h-48 w-full bg-slate-100 dark:bg-slate-800/80 flex items-center justify-center overflow-hidden relative border-b border-slate-200 dark:border-slate-800/60">
                 <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/10 to-brand-cyan/10 opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="z-10 group-hover:scale-110 transition-transform duration-500">
-                  <ProjectLogo logoUrl={project.logoUrl} title={project.title} size="card" />
+                  <ProjectLogo logoUrl={project.logoUrl} darkLogoUrl={project.darkLogoUrl} title={project.title} size="card" />
                 </div>
                 {/* Hover overlay text */}
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
@@ -285,7 +305,7 @@ export default function Projects() {
                   <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
                   <div className="absolute w-40 h-40 rounded-full bg-brand-cyan/10 blur-2xl z-0" />
                   <div className="relative z-10 bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-2xl border border-white/20 dark:border-slate-700">
-                    <ProjectLogo logoUrl={selectedProject.logoUrl} title={selectedProject.title} size="modal" />
+                    <ProjectLogo logoUrl={selectedProject.logoUrl} darkLogoUrl={selectedProject.darkLogoUrl} title={selectedProject.title} size="modal" />
                   </div>
                   <div className="mt-5 text-center z-10">
                     <div className="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-widest">
