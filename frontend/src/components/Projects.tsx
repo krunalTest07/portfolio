@@ -178,7 +178,7 @@ export default function Projects() {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   return (
-    <section id="projects" className="py-32 lg:py-40 relative">
+    <section id="projects" className="py-32 lg:py-40 relative overflow-hidden">
       <div className="max-w-[90rem] mx-auto px-6 md:px-12 relative">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -215,10 +215,10 @@ export default function Projects() {
           </div>
         </motion.div>
 
-        {/* Carousel Container */}
+        {/* Carousel: full-bleed scroll so no card is ever clipped */}
         <div
           ref={scrollContainerRef}
-          className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-12 hide-scrollbar"
+          className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-12 hide-scrollbar -mx-6 md:-mx-12 px-6 md:px-12 pr-12 md:pr-24"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {MOCK_PROJECTS.map((project, index) => (
