@@ -24,20 +24,20 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={
-           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
-             <Hero />
-             <About />
-             <Resume />
-             <Skills />
-             <Projects />
-             <Services />
-             <Contact />
-           </motion.div>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
+            <Hero />
+            <About />
+            <Resume />
+            <Skills />
+            <Projects />
+            <Services />
+            <Contact />
+          </motion.div>
         } />
         <Route path="/project/:id" element={
-           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.5 }}>
-             <ProjectDetail />
-           </motion.div>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.5 }}>
+            <ProjectDetail />
+          </motion.div>
         } />
       </Routes>
     </AnimatePresence>
@@ -46,7 +46,7 @@ function AnimatedRoutes() {
 
 export default function App() {
   const [initialLoading, setInitialLoading] = useState(true);
-  
+
   // Theme Setup
   useEffect(() => {
     const isDark = localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
@@ -55,7 +55,7 @@ export default function App() {
     } else {
       document.documentElement.classList.remove('dark');
     }
-    
+
     // Simulate initial loading
     const timer = setTimeout(() => setInitialLoading(false), 2000);
     return () => clearTimeout(timer);
@@ -87,7 +87,7 @@ export default function App() {
                 >
                   <Bug size={48} className="md:w-16 md:h-16" />
                 </motion.div>
-                
+
                 {/* Vertical Scanning Laser */}
                 <motion.div
                   animate={{ y: [-30, 30, -30] }}
@@ -96,17 +96,17 @@ export default function App() {
                 ></motion.div>
               </div>
 
-              <motion.div 
-                 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-                 className="mt-4 md:mt-10 flex flex-col items-center gap-3 text-center"
+              <motion.div
+                initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+                className="mt-4 md:mt-10 flex flex-col items-center gap-3 text-center"
               >
                 <p className="text-brand-cyan font-mono font-semibold tracking-[0.2em] uppercase text-xs md:text-sm animate-pulse">
                   Loading...
                 </p>
-                
+
                 {/* Slim Progress Bar */}
                 <div className="w-48 md:w-56 h-[3px] bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
-                  <motion.div 
+                  <motion.div
                     initial={{ width: 0 }} animate={{ width: "100%" }} transition={{ duration: 2, ease: "easeInOut" }}
                     className="h-full bg-gradient-to-r from-brand-cyan to-brand-purple"
                   />
@@ -124,11 +124,11 @@ export default function App() {
               style={{ scaleX }}
             />
             <Navbar />
-            
+
             <main>
               <AnimatedRoutes />
             </main>
-            
+
             <Footer />
 
 

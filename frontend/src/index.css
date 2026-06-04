@@ -302,4 +302,4 @@ html {
 /* Refined global scroll physics to feel smoother */
 ::-webkit-scrollbar-thumb {
   transition: background-color 0.2s ease-in-out;
-}
+}

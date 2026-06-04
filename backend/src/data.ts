@@ -23,19 +23,31 @@ export const projects = [
 ];
 
 export const skills = [
-  { name: "Manual Testing", category: "Core QA", level: 95 },
-  { name: "API Testing (Postman)", category: "Core QA", level: 90 },
-  { name: "Selenium", category: "Automation (Learning)", level: 60 },
-  { name: "Playwright", category: "Automation (Learning)", level: 75 },
-  { name: "JavaScript", category: "Programming", level: 70 },
-  { name: "TypeScript", category: "Programming", level: 65 },
-  { name: "Jira / Agile", category: "Tools & Methods", level: 95 },
-  { name: "Git / CI/CD", category: "Tools & Methods", level: 80 }
+  // Quality Assurance
+  { name: "Test Planning", category: "Quality Assurance", level: 95 },
+  { name: "Test Design", category: "Quality Assurance", level: 90 },
+  { name: "API Testing", category: "Quality Assurance", level: 92 },
+  
+  // Quality Validation
+  { name: "Functional Testing", category: "Quality Validation", level: 95 },
+  { name: "Regression Testing", category: "Quality Validation", level: 90 },
+  { name: "Cross-Browser Testing", category: "Quality Validation", level: 85 },
+  
+  // Product Understanding
+  { name: "Requirement Analysis", category: "Product Understanding", level: 90 },
+  { name: "Defect Tracking", category: "Product Understanding", level: 95 },
+  { name: "Risk Assessment", category: "Product Understanding", level: 80 },
+  
+  // Delivery & Collaboration
+  { name: "Agile", category: "Delivery & Collaboration", level: 95 },
+  { name: "Jira", category: "Delivery & Collaboration", level: 95 },
+  { name: "Git", category: "Delivery & Collaboration", level: 85 },
+  { name: "CI/CD", category: "Delivery & Collaboration", level: 75 }
 ];
 
 export const experiences = [
   {
-    company: "Global Tech Solutions",
+    company: "Rayo Innovations",
     role: "QA Tester",
     duration: "Jan 2023 - Present",
     responsibilities: [

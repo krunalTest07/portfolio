@@ -22,7 +22,7 @@ const experiences: ExperienceItem[] = [
   },
   {
     id: 'e2',
-    company: "Global Tech Solutions",
+    company: "Rayo Innovations",
     role: "QA Tester",
     duration: "Jan 2023 - Dec 2024",
     responsibilities: [
@@ -39,7 +39,7 @@ export default function Experience() {
   return (
     <section id="experience" className="py-32 lg:py-40 relative overflow-hidden">
       <div className="absolute top-1/4 right-0 w-96 h-96 bg-brand-cyan/10 rounded-full blur-[100px] -z-10 translate-x-1/2" />
-      
+
       <div className="max-w-4xl mx-auto px-6 md:px-12">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -68,11 +68,11 @@ export default function Experience() {
               className="mb-12 relative cursor-default"
             >
               {/* Timeline Node */}
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.5 }}
-                className="absolute w-4 h-4 bg-brand-purple rounded-full -left-[41px] top-2 shadow-[0_0_10px_rgba(139,92,246,0.6)] border-2 border-slate-50 dark:border-dark-bg" 
+                className="absolute w-4 h-4 bg-brand-purple rounded-full -left-[41px] top-2 shadow-[0_0_10px_rgba(139,92,246,0.6)] border-2 border-slate-50 dark:border-dark-bg"
               />
-              
+
               <div className="glass-card p-6 md:p-8 hover:border-brand-purple/50 bg-white/50 dark:bg-transparent transition-colors duration-300">
                 <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
                   <div>
@@ -83,7 +83,7 @@ export default function Experience() {
                     {exp.duration}
                   </span>
                 </div>
-                
+
                 <ul className="list-disc list-outside space-y-3 text-slate-600 dark:text-slate-400 pl-4 mt-6">
                   {exp.responsibilities.map((resp, idx) => (
                     <li key={idx} className="leading-relaxed">
