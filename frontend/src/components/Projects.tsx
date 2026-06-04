@@ -6,21 +6,20 @@ import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 function ProjectLogo({ logoUrl, darkLogoUrl, title, size = 'card' }: { logoUrl?: string; darkLogoUrl?: string; title: string; size?: 'card' | 'modal' }) {
   const [imgError, setImgError] = useState(false);
   const [isDark, setIsDark] = useState(false);
-  const sizeClass = size === 'modal' ? 'w-24 h-24 md:w-32 md:h-32' : 'w-20 h-20';
+
+  // Larger, more professional sizing
+  const sizeClass = size === 'modal' ? 'w-48 h-24 md:w-64 md:h-32' : 'w-36 h-16 md:w-44 md:h-20';
 
   useEffect(() => {
     const checkTheme = () => setIsDark(document.documentElement.classList.contains('dark'));
     checkTheme();
-    // Watch for theme changes via MutationObserver
     const observer = new MutationObserver(checkTheme);
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
     return () => observer.disconnect();
   }, []);
 
-  // Pick the right URL based on current theme
   const resolvedUrl = isDark && darkLogoUrl ? darkLogoUrl : logoUrl;
 
-  // Reset error state whenever URL changes (e.g. theme switch)
   useEffect(() => {
     setImgError(false);
   }, [resolvedUrl]);
@@ -30,7 +29,7 @@ function ProjectLogo({ logoUrl, darkLogoUrl, title, size = 'card' }: { logoUrl?:
       <img
         src={resolvedUrl}
         alt={title}
-        className={`${sizeClass} object-contain drop-shadow-lg`}
+        className={`${sizeClass} object-contain transition-all duration-500`}
         onError={() => setImgError(true)}
       />
     );
@@ -64,84 +63,68 @@ const MOCK_PROJECTS: ProjectItem[] = [
     shortDescription: 'Tested a gamification and loyalty platform featuring challenges, rewards, leaderboards, missions, and user engagement systems across web and mobile applications.',
     longDescription: 'Worked on quality assurance for Captain Up, a gamification and customer engagement platform designed to improve user retention and loyalty through rewards, challenges, tournaments, leaderboards, and personalized missions. Responsibilities included validating user flows, verifying gamification features, performing functional and regression testing, reporting defects, and ensuring a seamless user experience across multiple devices and browsers. Collaborated with developers, designers, and product teams to verify feature requirements, test new releases, and maintain platform stability and quality throughout the development lifecycle.',
     techStack: ['QA Testing', 'Functional Testing', 'Regression Testing', 'Bug Reporting', 'Jira'],
-    logoUrl: 'https://captainup.com/wp-content/uploads/2025/08/Frame.svg', // light mode logo
-    darkLogoUrl: 'https://captainup.com/wp-content/uploads/2025/08/Frame-4.svg',                          // dark mode logo
+    logoUrl: '/projects/captainup-light.svg',
+    darkLogoUrl: '/projects/captainup-dark.svg',
     githubLink: '#',
     demoLink: 'https://captainup.com/'
   },
   {
     id: 'p2',
-    title: 'Selenium Data-Driven Framework',
-    shortDescription: 'Robust data-driven testing framework built with Java, Selenium WebDriver, and TestNG.',
-    longDescription: 'Created a highly modular data-driven framework where test data is sourced dynamically from Excel files using Apache POI. Implemented Page Object Model (POM) to separate test logic from UI mapping, drastically reducing maintenance time. Includes a custom listener for automated screenshot capture upon test failures.',
-    techStack: ['Java', 'Selenium WebDriver', 'TestNG', 'Apache POI'],
-    logoUrl: 'https://cdn.simpleicons.org/selenium',
+    title: 'Challenge Entertainment',
+    shortDescription: 'Tested an interactive entertainment and event management platform featuring trivia games, live events, user engagement, and venue-based experiences.',
+    longDescription: 'Challenge Entertainment is a mobile app built for trivia enthusiasts and National Trivia League (NTL) players, offering a seamless way to discover trivia events, track leaderboard rankings, manage game schedules, and connect with teammates. The app enhances the competitive trivia experience by helping players stay informed, organized, and engaged through real-time updates, event notifications, and team collaboration features.',
+    techStack: ['QA Testing', 'Functional Testing', 'Regression Testing', 'Cross-Browser Testing', 'Bug Tracking'],
+    logoUrl: '/projects/challenge-entertainment.png',
     githubLink: '#'
   },
   {
     id: 'p3',
-    title: 'Cypress Component Testing',
-    shortDescription: 'Deep component-level testing and integration testing for a React-based CRM application.',
-    longDescription: 'Migrated legacy frontend unit tests into seamless Cypress component tests. Implemented API mocking with Cypress Intercept to test various edge cases like 500 server errors and slow network delays. The suite runs under 2 minutes and runs on every Vercel preview deployment.',
-    techStack: ['Cypress', 'React', 'Vercel', 'JavaScript'],
-    logoUrl: 'https://cdn.simpleicons.org/cypress',
+    title: 'Selloctave',
+    shortDescription: 'Tested a cloud-based in-store music management platform featuring playlist scheduling, announcements, timezone support, and retail audio automation.',
+    longDescription: 'Selloctave is a music management platform designed for public spaces such as supermarkets, malls, retail stores, and commercial environments. It helps businesses create the perfect atmosphere with advanced music scheduling, playlist management, voice announcements, break-time silence control, and global timezone support. The platform ensures uninterrupted music playback while allowing seamless customization for promotions, events, and brand-focused customer experiences.',
+    techStack: ['QA Testing', 'Functional Testing', 'Regression Testing', 'Cross-Browser Testing', 'Bug Tracking'],
+    logoUrl: '/projects/selloctave.png',
     githubLink: '#',
     demoLink: '#'
   },
   {
     id: 'p4',
-    title: 'API Test Suite with RestAssured',
-    shortDescription: 'Backend validation framework verifying 100+ endpoints using RestAssured and Java.',
-    longDescription: 'Engineered an API testing framework validating complex JSON structures, HTTP security headers, and authentication token rotations. Handled dynamic payloads using POJO serialization and deserialization. Implemented parameterized testing for boundary value analysis on critical payment endpoints.',
-    techStack: ['Java', 'RestAssured', 'JUnit 5', 'Jackson'],
-    logoUrl: 'https://cdn.simpleicons.org/java',
+    title: 'Client Notes',
+    shortDescription: 'Tested an AI-powered client management platform designed for hairstylists to manage client history, appointments, reminders, and business growth.',
+    longDescription: 'Worked on quality assurance for Client Notes, an AI-driven platform that helps hairstylists organize client information, treatment history, voice notes, photo records, rebooking reminders, and personalized recommendations. Performed functional, UI, regression, and cross-browser testing across client management, AI-generated summaries, appointment tracking, reminder systems, and user workflows. Validated feature requirements, reported defects, verified fixes, and collaborated with development teams to ensure a reliable and user-friendly experience.',
+    techStack: ['QA Testing', 'Functional Testing', 'Regression Testing', 'Cross-Browser Testing', 'Bug Tracking'],
+    logoUrl: '/projects/clientnotes-light.png',
+    darkLogoUrl: '/projects/clientnotes-dark.png',
     githubLink: '#'
   },
   {
     id: 'p5',
-    title: 'Mobile Automations via Appium',
-    shortDescription: 'Cross-platform mobile automation for iOS and Android hybrid applications.',
-    longDescription: 'Setup local simulators and integrated BrowserStack to run cross-device automation suites. Overcame challenges with hybrid React Native webviews by correctly switching context layers. Managed specific gesture controls such as pull-to-refresh and multi-touch zooming.',
-    techStack: ['Appium', 'Python', 'Pytest', 'BrowserStack'],
-    logoUrl: 'https://cdn.simpleicons.org/appium',
+    title: 'DateCheck',
+    shortDescription: 'Tested an AI-powered dating profile verification platform designed to help users identify fake profiles, verify identities, and improve online dating safety.',
+    longDescription: 'Worked on quality assurance for DateCheck, a platform that uses AI to analyze dating profiles and help users detect potential catfishing, fake accounts, and identity mismatches. Performed functional, UI, regression, and cross-browser testing across profile analysis, identity verification, social profile matching, reporting, and user account workflows. Validated feature requirements, reported defects, verified fixes, and collaborated with development teams to ensure a secure, accurate, and user-friendly experience.',
+    techStack: ['QA Testing', 'Functional Testing', 'Regression Testing', 'Cross-Browser Testing', 'Bug Tracking'],
+    logoUrl: '/projects/DateCheck.png',
     githubLink: '#'
   },
   {
     id: 'p6',
-    title: 'Gatling Load Testing',
-    shortDescription: 'Performance evaluation determining server breaking points during high concurrent loads.',
-    longDescription: 'Developed Scala scripts using Gatling to simulate black friday traffic levels. Tested peak loads of up to 10,000 requests per second. Identified severe memory leaks in the Node.js backend by correlating Gatling latency reports with DataDog application metrics.',
-    techStack: ['Scala', 'Gatling', 'Performance Testing', 'CI/CD'],
-    logoUrl: 'https://cdn.simpleicons.org/gatling',
+    title: 'Gitarth Ganga',
+    shortDescription: 'Tested a digital research and knowledge management platform focused on scriptural content, subject dictionaries, digital archives, and educational resources.',
+    longDescription: 'Worked on quality assurance for Gitarth Ganga, a research institute and digital knowledge platform dedicated to organizing and preserving scriptural and educational content. Performed functional, UI, regression, and cross-browser testing across content management, research resources, digital archives, subject dictionaries, book catalogs, search functionality, and user workflows. Validated feature requirements, reported defects, verified fixes, and collaborated with development teams to ensure a reliable, accessible, and user-friendly experience across web platforms.',
+    techStack: ['QA Testing', 'Functional Testing', 'Regression Testing', 'Cross-Browser Testing', 'Bug Tracking'],
+    logoUrl: '/projects/gg_logo.png',
   },
   {
     id: 'p7',
-    title: 'Postman Collection CI/CD',
-    shortDescription: 'Automated Postman collections executed via Newman inside Jenkins pipelines.',
-    longDescription: 'Created extensive behavioral API workflows inside Postman utilizing pre-request scripts and teardown routines. Exported to Newman to run in a headless dockerized Jenkins agent. Built a Slack integration to immediately alert developers of API contract breaks.',
-    techStack: ['Postman', 'Newman', 'JavaScript', 'Jenkins'],
-    logoUrl: 'https://cdn.simpleicons.org/postman',
+    title: 'AutoAviso',
+    shortDescription: 'ested a multilingual automotive marketplace platform enabling users to buy, sell, compare, and finance vehicles through web and mobile applications.',
+    longDescription: 'Worked on quality assurance for AutoAviso, a cloud-hosted automotive marketplace designed for English and Spanish-speaking users in the United States. Performed functional, UI, regression, and cross-browser testing across vehicle search, comparison tools, dealer listings, private vehicle postings, user account management, and auto loan calculation features. Validated multilingual content, user workflows, and mobile responsiveness while identifying and tracking defects. Collaborated with development teams to ensure a reliable, user-friendly, and high-quality experience across web and mobile platforms.',
+    techStack: ['QA Testing', 'Functional Testing', 'Regression Testing', 'Cross-Browser Testing', 'Bug Tracking'],
+    logoUrl: '/projects/auto-aviso.png',
     githubLink: '#',
     demoLink: '#'
-  },
-  {
-    id: 'p8',
-    title: 'Puppeteer Web Scraper Tests',
-    shortDescription: 'Automated functional checks for heavy Canvas-based interactive elements.',
-    longDescription: 'Used Puppeteer to automate clicking and verifying highly visual and interactive dashboard charts. Wrote pixel-perfect matching algorithms using Pixelmatch to ensure visual regressions did not creep into the frontend builds.',
-    techStack: ['Puppeteer', 'Node.js', 'Pixelmatch', 'Jest'],
-    logoUrl: 'https://cdn.simpleicons.org/puppeteer',
-    githubLink: '#'
-  },
-  {
-    id: 'p9',
-    title: 'K6 Chaos Engineering',
-    shortDescription: 'Injecting synthetic failures and load spikes to test system resilience.',
-    longDescription: 'Implemented K6 inside a Kubernetes cluster to simulate node failures while simultaneously applying high transactional loads to check graceful degradation of the application gracefully. Integrated results natively into Grafana dashboards.',
-    techStack: ['K6', 'Go', 'Kubernetes', 'Grafana'],
-    logoUrl: 'https://cdn.simpleicons.org/k6',
-    githubLink: '#'
   }
+
 ];
 
 export default function Projects() {
@@ -159,10 +142,34 @@ export default function Projects() {
     };
   }, [selectedProject]);
 
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScroll = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setCanScrollLeft(scrollLeft > 10);
+      setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 10);
+    }
+  };
+
+  useEffect(() => {
+    checkScroll();
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', checkScroll);
+      window.addEventListener('resize', checkScroll);
+    }
+    return () => {
+      if (container) {
+        container.removeEventListener('scroll', checkScroll);
+        window.removeEventListener('resize', checkScroll);
+      }
+    };
+  }, []);
+
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
-      // scroll by approximately one card width (card + gap)
-      // card is w-80 or w-96 roughly, we'll scroll a fixed pixel amount or offsetWidth
       const scrollAmount = window.innerWidth < 768 ? window.innerWidth : 400;
       scrollContainerRef.current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     }
@@ -200,14 +207,24 @@ export default function Projects() {
           <div className="flex gap-4">
             <button
               onClick={scrollLeft}
-              className="p-3 rounded-full border border-slate-300 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 hover:bg-brand-cyan hover:text-white hover:border-brand-cyan dark:hover:bg-brand-cyan transition-all backdrop-blur-sm z-10 shadow-sm"
+              disabled={!canScrollLeft}
+              className={`p-3 rounded-full border transition-all backdrop-blur-sm z-10 shadow-sm ${
+                canScrollLeft 
+                ? "border-slate-300 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 hover:bg-brand-cyan hover:text-white hover:border-brand-cyan dark:hover:bg-brand-cyan cursor-pointer" 
+                : "border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-900/30 text-slate-300 dark:text-slate-700 cursor-not-allowed opacity-50"
+              }`}
               aria-label="Scroll left"
             >
               <ChevronLeft size={24} />
             </button>
             <button
               onClick={scrollRight}
-              className="p-3 rounded-full border border-slate-300 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 hover:bg-brand-cyan hover:text-white hover:border-brand-cyan dark:hover:bg-brand-cyan transition-all backdrop-blur-sm z-10 shadow-sm"
+              disabled={!canScrollRight}
+              className={`p-3 rounded-full border transition-all backdrop-blur-sm z-10 shadow-sm ${
+                canScrollRight 
+                ? "border-slate-300 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 hover:bg-brand-cyan hover:text-white hover:border-brand-cyan dark:hover:bg-brand-cyan cursor-pointer" 
+                : "border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-900/30 text-slate-300 dark:text-slate-700 cursor-not-allowed opacity-50"
+              }`}
               aria-label="Scroll right"
             >
               <ChevronRight size={24} />

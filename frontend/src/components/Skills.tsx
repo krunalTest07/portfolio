@@ -12,17 +12,17 @@ const skillsData: SkillItem[] = [
   { id: 's1', name: "Test Planning", category: "Quality Assurance", level: 95 },
   { id: 's2', name: "Test Design", category: "Quality Assurance", level: 90 },
   { id: 's3', name: "API Testing", category: "Quality Assurance", level: 92 },
-  
+
   // Quality Validation
   { id: 's4', name: "Functional Testing", category: "Quality Validation", level: 95 },
   { id: 's5', name: "Regression Testing", category: "Quality Validation", level: 90 },
   { id: 's6', name: "Cross-Browser Testing", category: "Quality Validation", level: 85 },
-  
+
   // Product Understanding
   { id: 's7', name: "Requirement Analysis", category: "Product Understanding", level: 90 },
   { id: 's8', name: "Defect Tracking", category: "Product Understanding", level: 95 },
   { id: 's9', name: "Risk Assessment", category: "Product Understanding", level: 80 },
-  
+
   // Delivery & Collaboration
   { id: 's10', name: "Agile", category: "Delivery & Collaboration", level: 95 },
   { id: 's11', name: "Jira", category: "Delivery & Collaboration", level: 95 },
@@ -31,15 +31,17 @@ const skillsData: SkillItem[] = [
 ];
 
 const techTools = [
-  { name: "JIRA", domain: "atlassian.com", slug: "jira" },
-  { name: "FIGMA", domain: "figma.com", slug: "figma" },
-  { name: "GOOGLE SHEETS", domain: "google.com", slug: "googlesheets" },
-  { name: "TRELLO", domain: "trello.com", slug: "trello" },
-  { name: "POSTMAN", domain: "postman.com", slug: "postman" },
-  { name: "JMETER", domain: "apache.org", slug: "apachejmeter" },
-  { name: "CLICKUP", domain: "clickup.com", slug: "clickup" },
-  { name: "SENTRY", domain: "sentry.io", slug: "sentry" },
-  { name: "BITBUCKET", domain: "bitbucket.org", slug: "bitbucket" },
+  { name: "BROWSERSTACK", icon: "/tech/browserstack.svg" },
+  { name: "KATALON", icon: "/tech/katalon.svg" },
+  { name: "JIRA", icon: "/tech/jira.svg" },
+  { name: "FIGMA", icon: "/tech/figma.svg" },
+  { name: "GOOGLE SHEETS", icon: "/tech/googlesheets.svg" },
+  { name: "TRELLO", icon: "/tech/trello.svg" },
+  { name: "POSTMAN", icon: "/tech/postman.svg" },
+  { name: "JMETER", icon: "/tech/jmeter.svg" },
+  { name: "CLICKUP", icon: "/tech/clickup.svg" },
+  { name: "SENTRY", icon: "/tech/sentry.svg" },
+  { name: "BITBUCKET", icon: "/tech/bitbucket.svg" },
 ];
 
 export default function Skills() {
@@ -89,10 +91,9 @@ export default function Skills() {
                 <div key={index} className="flex flex-col items-center gap-4 px-2 group">
                   <div className="w-12 h-12 flex items-center justify-center transition-all duration-500 group-hover:scale-110">
                     <img
-                      src={`https://logo.clearbit.com/${tool.domain}?size=128`}
+                      src={tool.icon}
                       alt={tool.name}
                       className="w-full h-full object-contain"
-                      onError={(e) => { e.currentTarget.src = `https://cdn.simpleicons.org/${tool.slug}` }}
                     />
                   </div>
                   <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 tracking-[0.2em] uppercase transition-all duration-300 group-hover:text-brand-cyan">
@@ -138,10 +139,10 @@ export default function Skills() {
                   {category}
                 </h3>
               </div>
-              
+
               <div className="flex-grow">
                 <ul className="flex flex-wrap gap-2.5">
-                  {groupedSkills[category].map((skill, skillIndex) => (
+                  {groupedSkills[category].map((skill) => (
                     <motion.li
                       key={skill.id}
                       initial={{ opacity: 0 }}
