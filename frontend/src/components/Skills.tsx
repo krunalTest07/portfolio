@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 interface SkillItem {
@@ -30,9 +31,15 @@ const skillsData: SkillItem[] = [
   { id: 's13', name: "CI/CD", category: "Delivery & Collaboration", level: 75 }
 ];
 
-const techTools = [
-  { name: "BROWSERSTACK", icon: "/tech/browserstack.svg" },
-  { name: "KATALON", icon: "/tech/katalon.svg" },
+interface TechTool {
+  name: string;
+  icon: string;
+  darkIcon?: string;
+}
+
+const techTools: TechTool[] = [
+  { name: "BROWSERSTACK", icon: "/tech/browserstack-light.svg", darkIcon: "/tech/browserstack-dark.svg" },
+  { name: "KATALON", icon: "/tech/katalon-light.svg", darkIcon: "/tech/katalon-dark.svg" },
   { name: "JIRA", icon: "/tech/jira.svg" },
   { name: "FIGMA", icon: "/tech/figma.svg" },
   { name: "GOOGLE SHEETS", icon: "/tech/googlesheets.svg" },
@@ -45,6 +52,16 @@ const techTools = [
 ];
 
 export default function Skills() {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const checkTheme = () => setIsDark(document.documentElement.classList.contains('dark'));
+    checkTheme();
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
+
   const groupedSkills = skillsData.reduce((acc, skill) => {
     if (!acc[skill.category]) {
       acc[skill.category] = [];
@@ -91,7 +108,7 @@ export default function Skills() {
                 <div key={index} className="flex flex-col items-center gap-4 px-2 group">
                   <div className="w-12 h-12 flex items-center justify-center transition-all duration-500 group-hover:scale-110">
                     <img
-                      src={tool.icon}
+                      src={isDark && tool.darkIcon ? tool.darkIcon : tool.icon}
                       alt={tool.name}
                       className="w-full h-full object-contain"
                     />

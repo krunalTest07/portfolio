@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GraduationCap, Briefcase, Calendar, MapPin, ChevronRight } from 'lucide-react';
+import { GraduationCap, Briefcase, MapPin, ChevronRight } from 'lucide-react';
 
 interface ExperienceItem {
   _id: string;
