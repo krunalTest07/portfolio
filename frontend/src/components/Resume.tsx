@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { GraduationCap, Briefcase, MapPin, ChevronRight } from 'lucide-react';
 
 interface ExperienceItem {
-  _id: string;
+  _id?: string;
   company: string;
   role: string;
   duration: string;
@@ -19,11 +19,37 @@ const educationData = [
     location: "Ahmedabad, Gujarat"
   },
   {
-    institution: "Gujarat University",
+    institution: "SomLalit Institute of Computer Application, Gujarat University",
     duration: "2019 - 2022",
     degree: "Bachelor of Computer Application",
     description: "Laid a strong foundation in programming, databases, and web development. Gained hands-on experience in Python, SQL, and front-end technologies.",
     location: "Ahmedabad, Gujarat"
+  }
+];
+
+const defaultExperiences: ExperienceItem[] = [
+  {
+    _id: "exp-1",
+    company: "Rayo Innovations",
+    role: "QA Tester",
+    duration: "Jan 2023 - Present",
+    responsibilities: [
+      "Execute rigorous manual tests for cross-browser web interfaces.",
+      "Perform API sanity checks via Postman prior to frontend integrations.",
+      "Identify, document, and track high-severity regressions within Jira.",
+      "Actively transitioning into writing automated UI scripts using Playwright."
+    ]
+  },
+  {
+    _id: "exp-2",
+    company: "Polyxer Systems Pvt Ltd",
+    role: "Junior QA Analyst",
+    duration: "Dec 2024 - june 2025",
+    responsibilities: [
+      "Developed test matrices covering user acceptance scenarios.",
+      "Coordinated directly with the product teams to finalize QA criteria.",
+      "Conducted smoke testing cycles for fast-paced hotfix patches."
+    ]
   }
 ];
 
@@ -33,13 +59,23 @@ export default function Resume() {
 
   useEffect(() => {
     fetch('/api/experience')
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data) => {
-        setExperiences(data || []);
+        if (Array.isArray(data) && data.length > 0) {
+          setExperiences(data);
+        } else {
+          setExperiences(defaultExperiences);
+        }
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching experience data:", error);
+        console.error("Error fetching experience data, using local fallback:", error);
+        setExperiences(defaultExperiences);
         setLoading(false);
       });
   }, []);
@@ -91,10 +127,9 @@ export default function Resume() {
                 ) : (
                   experiences.map((exp, idx) => (
                     <motion.div
-                      key={exp._id}
+                      key={exp._id || `exp-${idx}`}
                       initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
+                      animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.5, delay: idx * 0.1 }}
                       className="relative"
                     >
@@ -154,8 +189,7 @@ export default function Resume() {
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
+                  animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                   className="relative"
                 >

@@ -10,7 +10,7 @@ const educationData = [
     location: "Ahmedabad, Gujarat"
   },
   {
-    institution: "Gujarat University",
+    institution: "SomLalit Institute of Computer Application, Gujarat University",
     duration: "2019 - 2022",
     degree: "Bachelor of Computer Application",
     description: "Built a strong foundation in programming, databases, OOP concepts, and web development. Gained practical experience through academic projects involving PHP, SQL, and frontend development while strengthening core software development skills.",

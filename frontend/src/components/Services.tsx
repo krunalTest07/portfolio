@@ -19,8 +19,8 @@ const services = [
     hoverBg: "group-hover:bg-blue-500/10"
   },
   {
-    title: "Test Case Design",
-    description: "Creating clear, comprehensive, and reusable test cases and test scenarios based on requirements.",
+    title: "Requirement Analysis",
+    description: "Reviewing and understanding requirements to define test coverage, identify risks, and ensure accurate validation of functionality.",
     icon: <FileEdit className="w-8 h-8 transition-transform duration-500 group-hover:-translate-y-1" />,
     color: "from-emerald-500/20 to-teal-500/20",
     accent: "text-emerald-500",

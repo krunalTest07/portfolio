@@ -47,6 +47,7 @@ export const skills = [
 
 export const experiences = [
   {
+    _id: "exp-1",
     company: "Rayo Innovations",
     role: "QA Tester",
     duration: "Jan 2023 - Present",
@@ -58,6 +59,7 @@ export const experiences = [
     ]
   },
   {
+    _id: "exp-2",
     company: "Polyxer Systems Pvt Ltd",
     role: "Junior QA Analyst",
     duration: "Dec 2024 - june 2025",
@@ -68,3 +70,4 @@ export const experiences = [
     ]
   },
 ];
+
