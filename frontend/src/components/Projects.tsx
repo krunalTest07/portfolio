@@ -8,7 +8,7 @@ function ProjectLogo({ logoUrl, darkLogoUrl, title, size = 'card' }: { logoUrl?:
   const [isDark, setIsDark] = useState(false);
 
   // Larger, more professional sizing
-  const sizeClass = size === 'modal' ? 'w-48 h-24 md:w-64 md:h-32' : 'w-36 h-16 md:w-44 md:h-20';
+  const sizeClass = size === 'modal' ? 'w-36 h-18 md:w-48 md:h-24' : 'w-36 h-16 md:w-44 md:h-20';
 
   useEffect(() => {
     const checkTheme = () => setIsDark(document.documentElement.classList.contains('dark'));
@@ -170,14 +170,14 @@ export default function Projects() {
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
-      const scrollAmount = window.innerWidth < 768 ? window.innerWidth : 400;
+      const scrollAmount = scrollContainerRef.current.clientWidth;
       scrollContainerRef.current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     }
   };
 
   const scrollRight = () => {
     if (scrollContainerRef.current) {
-      const scrollAmount = window.innerWidth < 768 ? window.innerWidth : 400;
+      const scrollAmount = scrollContainerRef.current.clientWidth;
       scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
@@ -245,7 +245,7 @@ export default function Projects() {
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="snap-start shrink-0 w-[85vw] md:w-[24rem] lg:w-[28rem] glass-card flex flex-col overflow-hidden shadow-lg cursor-pointer bg-white dark:bg-slate-900/40 relative group border border-slate-200 dark:border-slate-800 hover:border-brand-cyan/50 dark:hover:border-brand-cyan/50 transition-all duration-300 h-[28rem]"
+              className="snap-center shrink-0 w-[85vw] md:w-[24rem] lg:w-[28rem] glass-card flex flex-col overflow-hidden shadow-lg cursor-pointer bg-white dark:bg-slate-900/40 relative group border border-slate-200 dark:border-slate-800 hover:border-brand-cyan/50 dark:hover:border-brand-cyan/50 transition-all duration-300 h-[28rem]"
               onClick={() => setSelectedProject(project)}
             >
               {/* Card visual header */}
