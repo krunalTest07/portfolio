@@ -1,7 +1,6 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Send } from 'lucide-react';
-import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 const GithubIcon = ({ size = 20 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -27,24 +26,37 @@ export default function Contact() {
   const [result, setResult] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasSentMessage, setHasSentMessage] = useState(false);
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
-  const sitekey = "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
 
-  const handleIframeLoad = () => {
-    if (isSubmitting) {
-      setIsSubmitting(false);
-      setResult("Message sent successfully! I will get back to you soon.");
-      setHasSentMessage(true);
-      if (formRef.current) {
-        formRef.current.reset();
-      }
-    }
-  };
-
-  const handleSubmit = () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     setIsSubmitting(true);
     setResult("");
+
+    const formData = new FormData(formRef.current!);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult("Message sent successfully! I will get back to you soon.");
+        setHasSentMessage(true);
+        formRef.current?.reset();
+      } else {
+        console.error("Web3Forms submission error:", data);
+        setResult(data.message || "Failed to submit. Please check your verification or try again.");
+      }
+    } catch (error) {
+      console.error("Network error during form submission:", error);
+      setResult("A network error occurred. Please check your internet connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -104,9 +116,6 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* Hidden iframe to prevent redirect on submit */}
-          <iframe name="hidden_iframe" id="hidden_iframe" style={{ display: 'none' }} onLoad={handleIframeLoad}></iframe>
-
           {/* Contact Form */}
           {hasSentMessage ? (
             <motion.div
@@ -134,14 +143,12 @@ export default function Contact() {
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              action="https://api.web3forms.com/submit"
-              method="POST"
-              target="hidden_iframe"
               onSubmit={handleSubmit}
               className="glass-card p-8 md:p-10 flex flex-col gap-5 bg-white dark:bg-[#13111C] shadow-2xl rounded-2xl border border-slate-100 dark:border-slate-800/80 h-full"
             >
               <input type="hidden" name="access_key" value="237edd48-a0d5-4211-8632-e3eec940f674" />
-              {captchaToken && <input type="hidden" name="h-captcha-response" value={captchaToken} />}
+              {/* Invisible Honeypot Spam Protection */}
+              <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
 
               <input type="text" name="name" id="name" required className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#9d00ff] focus:ring-1 focus:ring-[#9d00ff] transition-all" placeholder="Your Name" />
 
@@ -151,19 +158,11 @@ export default function Contact() {
 
               <textarea name="message" id="message" required rows={5} className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#9d00ff] focus:ring-1 focus:ring-[#9d00ff] transition-all resize-none" placeholder="Message"></textarea>
 
-              <div className="flex justify-center my-2">
-                <HCaptcha
-                  sitekey={sitekey}
-                  onVerify={(token) => setCaptchaToken(token)}
-                  reCaptchaCompat={false}
-                />
-              </div>
-
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                disabled={isSubmitting || !captchaToken}
+                disabled={isSubmitting}
                 className="mt-2 w-full py-4 rounded-lg bg-[#9d00ff] text-white font-bold tracking-wide flex items-center justify-center hover:bg-[#8300d6] transition-all shadow-[0_0_20px_rgba(157,0,255,0.4)] disabled:opacity-75 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? "Sending..." : "Submit Message"}
