@@ -13,12 +13,7 @@ export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [showWelcomePopup, setShowWelcomePopup] = useState(false);
-  const [hasOpened, setHasOpened] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('portfolioChatHasOpened') === 'true';
-    }
-    return false;
-  }); // Used to hide the red dot badge & popup
+  const [hasOpened, setHasOpened] = useState(false); // Resets on reload to always prompt user
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 'welcome',
@@ -32,12 +27,12 @@ export default function ChatBot() {
   const lastScrollY = useRef(0);
 
   useEffect(() => {
-    // Show welcome popup after 3 seconds if not interacted
+    // Show welcome popup after 500ms if not interacted
     const timer = setTimeout(() => {
       if (!hasOpened && !isOpen) {
         setShowWelcomePopup(true);
       }
-    }, 3000);
+    }, 500);
     return () => clearTimeout(timer);
   }, [hasOpened, isOpen]);
 
@@ -48,11 +43,7 @@ export default function ChatBot() {
     }
   }, []);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('portfolioChatHasOpened', hasOpened.toString());
-    }
-  }, [hasOpened]);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -278,9 +269,11 @@ export default function ChatBot() {
             )}
           </AnimatePresence>
 
-          {/* Unread dot notification */}
+          {/* Unread dot notification (Red bubble with "1") */}
           {!isOpen && !hasOpened && !isMinimized && (
-            <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-white dark:border-slate-900 animate-pulse"></span>
+            <span className="absolute -top-1 -left-1 w-5 h-5 bg-red-500 text-white text-[10px] font-black rounded-full border-2 border-white dark:border-slate-900 flex items-center justify-center animate-pulse z-10 shadow-md">
+              1
+            </span>
           )}
         </motion.button>
       </motion.div>
