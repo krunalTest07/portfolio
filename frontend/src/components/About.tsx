@@ -74,7 +74,7 @@ export default function About() {
           >
             <div className="relative z-10 rounded-2xl overflow-hidden shadow-lg transition-transform hover:scale-[1.01] duration-500 bg-white p-1.5">
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"
+                src="./My_image.png"
                 alt="Krunal"
                 className="w-full aspect-[4/5] object-cover grayscale hover:grayscale-0 transition-all duration-700 rounded-xl"
               />
