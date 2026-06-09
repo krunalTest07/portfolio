@@ -64,9 +64,9 @@ Note: The variables are still safely named "cyan" and "purple" in the CSS code j
    ======================================================== */
 
 :root {
-  --brand-cyan: #06b6d4;
-  --brand-purple: #8b5cf6;
-  --dark-bg: #09090b;
+  --brand-cyan: #3B82F6;
+  --brand-purple: #60A5FA;
+  --dark-bg: #0B1120;
 }
 
 @theme {

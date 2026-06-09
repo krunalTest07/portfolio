@@ -165,6 +165,46 @@ export default function ThemeCustomizer() {
     applyColors(newCyan, newPurple, newBg);
   };
 
+  const handleHexInputChange = (type: 'cyan' | 'purple' | 'bg', value: string) => {
+    const cleanVal = value.trim();
+    
+    if (type === 'cyan') {
+      setCyanColor(cleanVal);
+    } else if (type === 'purple') {
+      setPurpleColor(cleanVal);
+    } else if (type === 'bg') {
+      setBgColor(cleanVal);
+    }
+
+    const hexRegex = /^#?([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$/;
+    if (hexRegex.test(cleanVal)) {
+      let formattedVal = cleanVal;
+      if (!formattedVal.startsWith('#')) {
+        formattedVal = '#' + formattedVal;
+      }
+      
+      setThemeId('custom');
+      localStorage.setItem('portfolio-theme-id', 'custom');
+
+      let newCyan = cyanColor;
+      let newPurple = purpleColor;
+      let newBg = bgColor;
+
+      if (type === 'cyan') {
+        newCyan = formattedVal;
+        localStorage.setItem('portfolio-brand-cyan', formattedVal);
+      } else if (type === 'purple') {
+        newPurple = formattedVal;
+        localStorage.setItem('portfolio-brand-purple', formattedVal);
+      } else if (type === 'bg') {
+        newBg = formattedVal;
+        localStorage.setItem('portfolio-dark-bg', formattedVal);
+      }
+
+      applyColors(newCyan, newPurple, newBg);
+    }
+  };
+
   const resetToDefault = () => {
     const defaultPreset = PRESETS[0];
     selectPreset(defaultPreset);
@@ -251,51 +291,69 @@ export default function ThemeCustomizer() {
                 </div>
                 <div className="flex flex-col gap-3.5">
                   {/* Primary Color Picker */}
-                  <div className="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/5">
-                    <div className="flex flex-col">
+                  <div className="flex flex-col gap-2 bg-white/5 p-3 rounded-xl border border-white/5">
+                    <div className="flex justify-between items-center">
                       <span className="text-xs font-bold text-slate-200">Primary Color</span>
-                      <span className="text-[10px] text-slate-500 font-mono mt-0.5">{cyanColor.toUpperCase()}</span>
+                      <div className="relative w-8 h-8 rounded-full border border-white/20 overflow-hidden cursor-pointer">
+                        <input
+                          type="color"
+                          value={cyanColor.startsWith('#') && (cyanColor.length === 4 || cyanColor.length === 7) ? cyanColor : '#06b6d4'}
+                          onChange={(e) => handleCustomColorChange('cyan', e.target.value)}
+                          className="absolute inset-[-4px] w-[calc(100%+8px)] h-[calc(100%+8px)] bg-transparent border-0 cursor-pointer p-0"
+                        />
+                      </div>
                     </div>
-                    <div className="relative w-8 h-8 rounded-full border border-white/20 overflow-hidden cursor-pointer">
-                      <input
-                        type="color"
-                        value={cyanColor}
-                        onChange={(e) => handleCustomColorChange('cyan', e.target.value)}
-                        className="absolute inset-[-4px] w-[calc(100%+8px)] h-[calc(100%+8px)] bg-transparent border-0 cursor-pointer p-0"
-                      />
-                    </div>
+                    <input
+                      type="text"
+                      value={cyanColor}
+                      onChange={(e) => handleHexInputChange('cyan', e.target.value)}
+                      placeholder="#06b6d4"
+                      className="w-full bg-black/35 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs font-mono text-slate-200 focus:outline-none focus:border-brand-cyan/50"
+                    />
                   </div>
 
                   {/* Secondary Color Picker */}
-                  <div className="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/5">
-                    <div className="flex flex-col">
+                  <div className="flex flex-col gap-2 bg-white/5 p-3 rounded-xl border border-white/5">
+                    <div className="flex justify-between items-center">
                       <span className="text-xs font-bold text-slate-200">Secondary Color</span>
-                      <span className="text-[10px] text-slate-500 font-mono mt-0.5">{purpleColor.toUpperCase()}</span>
+                      <div className="relative w-8 h-8 rounded-full border border-white/20 overflow-hidden cursor-pointer">
+                        <input
+                          type="color"
+                          value={purpleColor.startsWith('#') && (purpleColor.length === 4 || purpleColor.length === 7) ? purpleColor : '#8b5cf6'}
+                          onChange={(e) => handleCustomColorChange('purple', e.target.value)}
+                          className="absolute inset-[-4px] w-[calc(100%+8px)] h-[calc(100%+8px)] bg-transparent border-0 cursor-pointer p-0"
+                        />
+                      </div>
                     </div>
-                    <div className="relative w-8 h-8 rounded-full border border-white/20 overflow-hidden cursor-pointer">
-                      <input
-                        type="color"
-                        value={purpleColor}
-                        onChange={(e) => handleCustomColorChange('purple', e.target.value)}
-                        className="absolute inset-[-4px] w-[calc(100%+8px)] h-[calc(100%+8px)] bg-transparent border-0 cursor-pointer p-0"
-                      />
-                    </div>
+                    <input
+                      type="text"
+                      value={purpleColor}
+                      onChange={(e) => handleHexInputChange('purple', e.target.value)}
+                      placeholder="#8b5cf6"
+                      className="w-full bg-black/35 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs font-mono text-slate-200 focus:outline-none focus:border-brand-purple/50"
+                    />
                   </div>
 
                   {/* Background Color Picker */}
-                  <div className="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/5">
-                    <div className="flex flex-col">
+                  <div className="flex flex-col gap-2 bg-white/5 p-3 rounded-xl border border-white/5">
+                    <div className="flex justify-between items-center">
                       <span className="text-xs font-bold text-slate-200">Background Color</span>
-                      <span className="text-[10px] text-slate-500 font-mono mt-0.5">{bgColor.toUpperCase()}</span>
+                      <div className="relative w-8 h-8 rounded-full border border-white/20 overflow-hidden cursor-pointer">
+                        <input
+                          type="color"
+                          value={bgColor.startsWith('#') && (bgColor.length === 4 || bgColor.length === 7) ? bgColor : '#09090b'}
+                          onChange={(e) => handleCustomColorChange('bg', e.target.value)}
+                          className="absolute inset-[-4px] w-[calc(100%+8px)] h-[calc(100%+8px)] bg-transparent border-0 cursor-pointer p-0"
+                        />
+                      </div>
                     </div>
-                    <div className="relative w-8 h-8 rounded-full border border-white/20 overflow-hidden cursor-pointer">
-                      <input
-                        type="color"
-                        value={bgColor}
-                        onChange={(e) => handleCustomColorChange('bg', e.target.value)}
-                        className="absolute inset-[-4px] w-[calc(100%+8px)] h-[calc(100%+8px)] bg-transparent border-0 cursor-pointer p-0"
-                      />
-                    </div>
+                    <input
+                      type="text"
+                      value={bgColor}
+                      onChange={(e) => handleHexInputChange('bg', e.target.value)}
+                      placeholder="#09090b"
+                      className="w-full bg-black/35 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs font-mono text-slate-200 focus:outline-none focus:border-brand-cyan/50"
+                    />
                   </div>
                 </div>
               </div>
