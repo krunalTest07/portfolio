@@ -57,7 +57,7 @@ export default function Hero() {
           <h1 className="text-4xl md:text-6xl font-bold text-slate-800 dark:text-slate-50 leading-tight mb-2 tracking-tight">
             Precision in <span className="text-brand-purple">Quality</span>
           </h1>
-          <h2 className="text-lg md:text-xl font-bold text-[#5c00e6]/70 mb-8 uppercase tracking-[0.2em]">
+          <h2 className="text-lg md:text-xl font-bold text-brand-purple/70 mb-8 uppercase tracking-[0.2em]">
             Excellence in Engineering
           </h2>
 
@@ -72,7 +72,7 @@ export default function Hero() {
               href="https://www.google.com/?zx=1778657335079"
               target="_blank"
               rel="noopener noreferrer"
-              className="group px-8 py-4 rounded-xl bg-gradient-to-r from-[#5c00e6] to-[#7c22ff] text-white font-bold transition-all flex items-center gap-3 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40"
+              className="group px-8 py-4 rounded-xl bg-gradient-to-r from-brand-purple to-brand-cyan text-white font-bold transition-all flex items-center gap-3 shadow-lg shadow-brand-purple/20 hover:shadow-brand-purple/40"
             >
               <span className="relative z-10">Download CV</span>
               <svg

@@ -83,19 +83,19 @@ export default function Contact() {
               </p>
               <ul className="flex flex-col gap-6">
                 <li className="flex items-center gap-4 group">
-                  <div className="text-[#9d00ff]">
+                  <div className="text-brand-purple">
                     <Mail size={20} />
                   </div>
-                  <a href="mailto:krunalchaudhari1008@gmail.com" className="font-medium text-slate-800 dark:text-slate-200 hover:text-[#9d00ff] dark:hover:text-[#9d00ff] transition-colors">krunalchaudhari1008@gmail.com</a>
+                  <a href="mailto:krunalchaudhari1008@gmail.com" className="font-medium text-slate-800 dark:text-slate-200 hover:text-brand-purple dark:hover:text-brand-purple transition-colors">krunalchaudhari1008@gmail.com</a>
                 </li>
                 <li className="flex items-center gap-4 group">
-                  <div className="text-[#9d00ff]">
+                  <div className="text-brand-purple">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
                   </div>
-                  <a href="tel:+918000456527" className="font-medium text-slate-800 dark:text-slate-200 hover:text-[#9d00ff] dark:hover:text-[#9d00ff] transition-colors">+91 8000456527</a>
+                  <a href="tel:+918000456527" className="font-medium text-slate-800 dark:text-slate-200 hover:text-brand-purple dark:hover:text-brand-purple transition-colors">+91 8000456527</a>
                 </li>
                 <li className="flex items-center gap-4 group">
-                  <div className="text-[#9d00ff]">
+                  <div className="text-brand-purple">
                     <MapPin size={20} />
                   </div>
                   <span className="font-medium text-slate-800 dark:text-slate-200">Ahmedabad, Gujarat</span>
@@ -125,7 +125,7 @@ export default function Contact() {
               transition={{ duration: 0.6 }}
               className="glass-card p-8 md:p-10 flex flex-col gap-5 bg-white dark:bg-[#13111C] shadow-2xl rounded-2xl border border-slate-100 dark:border-slate-800/80 h-full justify-center items-center text-center"
             >
-              <div className="w-16 h-16 bg-[#9d00ff]/10 rounded-full flex items-center justify-center text-[#9d00ff] mb-4">
+              <div className="w-16 h-16 bg-brand-purple/10 rounded-full flex items-center justify-center text-brand-purple mb-4">
                 <Send size={32} />
               </div>
               <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-2">Message Sent!</h3>
@@ -150,20 +150,20 @@ export default function Contact() {
               {/* Invisible Honeypot Spam Protection */}
               <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
 
-              <input type="text" name="name" id="name" required className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#9d00ff] focus:ring-1 focus:ring-[#9d00ff] transition-all" placeholder="Your Name" />
+              <input type="text" name="name" id="name" required className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-brand-purple focus:ring-1 focus:ring-brand-purple transition-all" placeholder="Your Name" />
 
-              <input type="email" name="email" id="email" required className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#9d00ff] focus:ring-1 focus:ring-[#9d00ff] transition-all" placeholder="Your Email" />
+              <input type="email" name="email" id="email" required className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-brand-purple focus:ring-1 focus:ring-brand-purple transition-all" placeholder="Your Email" />
 
-              <input type="text" name="subject" id="subject" required className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#9d00ff] focus:ring-1 focus:ring-[#9d00ff] transition-all" placeholder="Subject" />
+              <input type="text" name="subject" id="subject" required className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-brand-purple focus:ring-1 focus:ring-brand-purple transition-all" placeholder="Subject" />
 
-              <textarea name="message" id="message" required rows={5} className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-[#9d00ff] focus:ring-1 focus:ring-[#9d00ff] transition-all resize-none" placeholder="Message"></textarea>
+              <textarea name="message" id="message" required rows={5} className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-brand-purple focus:ring-1 focus:ring-brand-purple transition-all resize-none" placeholder="Message"></textarea>
 
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={isSubmitting}
-                className="mt-2 w-full py-4 rounded-lg bg-[#9d00ff] text-white font-bold tracking-wide flex items-center justify-center hover:bg-[#8300d6] transition-all shadow-[0_0_20px_rgba(157,0,255,0.4)] disabled:opacity-75 disabled:cursor-not-allowed"
+                className="mt-2 w-full py-4 rounded-lg bg-brand-purple text-white font-bold tracking-wide flex items-center justify-center hover:opacity-90 transition-all shadow-lg shadow-brand-purple/30 hover:shadow-brand-purple/50 disabled:opacity-75 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? "Sending..." : "Submit Message"}
               </motion.button>
@@ -171,7 +171,7 @@ export default function Contact() {
                 <motion.p
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-center text-[15px] font-medium text-[#9d00ff] mt-2 bg-[#9d00ff]/5 py-3 rounded-lg border border-[#9d00ff]/20"
+                  className="text-center text-[15px] font-medium text-brand-purple mt-2 bg-brand-purple/5 py-3 rounded-lg border border-brand-purple/20"
                 >
                   {result}
                 </motion.p>

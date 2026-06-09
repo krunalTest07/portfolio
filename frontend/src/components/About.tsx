@@ -133,7 +133,7 @@ export default function About() {
 
             <motion.div variants={itemVariants} className="mt-8 flex items-center gap-6">
               <div>
-                <span className="text-xl font-black text-[#5c00e6] uppercase tracking-tighter">Your Vision, My Expertise</span>
+                <span className="text-xl font-black text-brand-purple uppercase tracking-tighter">Your Vision, My Expertise</span>
                 <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Ensuring Quality from Concept to Perfection</div>
               </div>
             </motion.div>

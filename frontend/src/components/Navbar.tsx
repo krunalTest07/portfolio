@@ -73,7 +73,7 @@ export default function Navbar() {
             }}
             className="flex items-center gap-2 group"
           >
-            <span className="text-2xl font-black text-[#5c00e6] tracking-tighter group-hover:scale-105 transition-transform duration-300">
+            <span className="text-2xl font-black text-brand-purple tracking-tighter group-hover:scale-105 transition-transform duration-300">
               Krunal
             </span>
           </Link>

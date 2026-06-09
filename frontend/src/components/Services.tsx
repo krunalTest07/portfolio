@@ -64,10 +64,10 @@ export default function Services() {
           className="text-center mb-20"
         >
           <h2 className="text-4xl md:text-5xl font-black text-slate-800 dark:text-slate-100 uppercase tracking-tight">
-            My <span className="text-[#5c00e6]">Services</span>
+            My <span className="text-brand-purple">Services</span>
           </h2>
           <div className="flex justify-center my-6">
-            <svg width="100" height="10" viewBox="0 0 100 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-[#5c00e6]/40">
+            <svg width="100" height="10" viewBox="0 0 100 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-brand-purple/40">
               <path d="M0 5C20 0 30 10 50 5C70 0 80 10 100 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </div>
