@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Calendar } from 'lucide-react';
 
 interface ExperienceItem {
   id: string;
@@ -56,7 +57,7 @@ export default function Experience() {
           </p>
         </motion.div>
 
-        <div className="relative border-l-2 border-slate-300 dark:border-slate-700/50 pl-8 ml-4 md:ml-0">
+        <div className="relative border-l-0 md:border-l-2 border-slate-300 dark:border-slate-700/50 pl-0 md:pl-8 ml-0 md:ml-0">
           {experiences.map((exp, index) => (
             <motion.div
               key={exp.id}
@@ -70,21 +71,22 @@ export default function Experience() {
               {/* Timeline Node */}
               <motion.div
                 whileHover={{ scale: 1.5 }}
-                className="absolute w-4 h-4 bg-brand-purple rounded-full -left-[41px] top-2 shadow-[0_0_10px_rgba(139,92,246,0.6)] border-2 border-slate-50 dark:border-dark-bg"
+                className="hidden md:block absolute w-4 h-4 bg-brand-purple rounded-full md:-left-[41px] top-2 shadow-[0_0_10px_rgba(139,92,246,0.6)] border-2 border-slate-50 dark:border-dark-bg"
               />
 
-              <div className="glass-card p-6 md:p-8 hover:border-brand-purple/50 bg-white/50 dark:bg-transparent transition-colors duration-300">
-                <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
+              <div className="relative glass-card p-5 md:p-8 hover:border-brand-purple/50 bg-white/50 dark:bg-transparent transition-colors duration-300 overflow-hidden">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                   <div>
-                    <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100">{exp.role}</h3>
-                    <p className="text-brand-cyan font-bold text-lg">{exp.company}</p>
+                    <h3 className="text-xl md:text-2xl font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">{exp.role}</h3>
+                    <p className="text-brand-cyan font-bold text-base md:text-lg">{exp.company}</p>
                   </div>
-                  <span className="inline-block mt-2 md:mt-0 px-4 py-1.5 bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-full text-sm font-semibold text-slate-700 dark:text-slate-300">
+                  <span className="flex items-center gap-1.5 self-start md:self-auto px-4 py-1.5 bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-full text-xs md:text-sm font-semibold text-slate-700 dark:text-slate-300 whitespace-nowrap">
+                    <Calendar size={14} className="text-brand-purple/70" />
                     {exp.duration}
                   </span>
                 </div>
 
-                <ul className="list-disc list-outside space-y-3 text-slate-600 dark:text-slate-400 pl-4 mt-6">
+                <ul className="list-disc list-outside space-y-3 text-sm md:text-base text-slate-600 dark:text-slate-400 pl-4 mt-6">
                   {exp.responsibilities.map((resp, idx) => (
                     <li key={idx} className="leading-relaxed">
                       {resp}

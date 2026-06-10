@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GraduationCap, Briefcase, MapPin, ChevronRight } from 'lucide-react';
+import { GraduationCap, Briefcase, MapPin, ChevronRight, Calendar } from 'lucide-react';
 
 interface ExperienceItem {
   _id?: string;
@@ -118,7 +118,7 @@ export default function Resume() {
               </div>
             </div>
 
-            <div className="relative border-l-2 border-slate-200 dark:border-slate-800/50 ml-6 pl-8 md:pl-10 space-y-12">
+            <div className="relative border-l-0 md:border-l-2 border-slate-200 dark:border-slate-800/50 ml-0 md:ml-6 pl-0 md:pl-10 space-y-8 md:space-y-12">
               <AnimatePresence mode="wait">
                 {loading ? (
                   [1, 2].map(n => (
@@ -133,23 +133,24 @@ export default function Resume() {
                       transition={{ duration: 0.5, delay: idx * 0.1 }}
                       className="relative"
                     >
-                      <div className="absolute w-5 h-5 bg-white dark:bg-slate-900 border-4 border-brand-purple rounded-full -left-[42.5px] md:-left-[52.5px] top-1.5 z-10 shadow-lg shadow-brand-purple/20" />
+                      <div className="hidden md:block absolute w-5 h-5 bg-white dark:bg-slate-900 border-4 border-brand-purple rounded-full md:-left-[52.5px] top-1.5 z-10 shadow-lg shadow-brand-purple/20" />
 
-                      <div className="glass-card p-8 hover:border-brand-purple/30 transition-all duration-500 group">
+                      <div className="relative glass-card p-5 md:p-8 hover:border-brand-purple/30 transition-all duration-500 group overflow-hidden">
                         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                           <div>
-                            <h4 className="text-2xl font-black text-slate-800 dark:text-white group-hover:text-brand-purple transition-colors">
+                            <h4 className="text-xl md:text-2xl font-black text-slate-800 dark:text-white group-hover:text-brand-purple transition-colors">
                               {exp.role}
                             </h4>
-                            <p className="text-brand-cyan font-bold text-lg mt-1">{exp.company}</p>
+                            <p className="text-brand-cyan font-bold text-base md:text-lg mt-1">{exp.company}</p>
                           </div>
-                          <span className="self-start md:self-center text-sm font-bold px-5 py-2 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                          <span className="flex items-center gap-1.5 self-start md:self-center text-xs md:text-sm font-bold px-4 md:px-5 py-1.5 md:py-2 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm whitespace-nowrap">
+                            <Calendar size={14} className="text-brand-purple/70" />
                             {exp.duration}
                           </span>
                         </div>
-                        <ul className="space-y-4">
+                        <ul className="space-y-3 md:space-y-4">
                           {exp.responsibilities.map((resp, i) => (
-                            <li key={i} className="text-base text-slate-600 dark:text-slate-400 flex gap-3 leading-relaxed">
+                            <li key={i} className="text-sm md:text-base text-slate-600 dark:text-slate-400 flex gap-3 leading-relaxed">
                               <ChevronRight size={18} className="mt-1 shrink-0 text-brand-purple opacity-70" />
                               {resp}
                             </li>
@@ -184,7 +185,7 @@ export default function Resume() {
               </div>
             </div>
 
-            <div className="relative border-l-2 border-slate-200 dark:border-slate-800/50 ml-6 pl-8 md:pl-10 space-y-12">
+            <div className="relative border-l-0 md:border-l-2 border-slate-200 dark:border-slate-800/50 ml-0 md:ml-6 pl-0 md:pl-10 space-y-8 md:space-y-12">
               {educationData.map((edu, idx) => (
                 <motion.div
                   key={idx}
@@ -193,24 +194,25 @@ export default function Resume() {
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                   className="relative"
                 >
-                  <div className="absolute w-5 h-5 bg-white dark:bg-slate-900 border-4 border-brand-cyan rounded-full -left-[42.5px] md:-left-[52.5px] top-1.5 z-10 shadow-lg shadow-brand-cyan/20" />
+                  <div className="hidden md:block absolute w-5 h-5 bg-white dark:bg-slate-900 border-4 border-brand-cyan rounded-full md:-left-[52.5px] top-1.5 z-10 shadow-lg shadow-brand-cyan/20" />
 
-                  <div className="glass-card p-8 hover:border-brand-cyan/30 transition-all duration-500 group">
+                  <div className="relative glass-card p-5 md:p-8 hover:border-brand-cyan/30 transition-all duration-500 group overflow-hidden">
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                       <div>
-                        <h4 className="text-2xl font-black text-slate-800 dark:text-white group-hover:text-brand-cyan transition-colors">
+                        <h4 className="text-xl md:text-2xl font-black text-slate-800 dark:text-white group-hover:text-brand-cyan transition-colors">
                           {edu.degree}
                         </h4>
-                        <p className="text-brand-purple font-bold text-lg mt-1">{edu.institution}</p>
+                        <p className="text-brand-purple font-bold text-base md:text-lg mt-1">{edu.institution}</p>
                       </div>
-                      <span className="self-start md:self-center text-sm font-bold px-5 py-2 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                      <span className="flex items-center gap-1.5 self-start md:self-center text-xs md:text-sm font-bold px-4 md:px-5 py-1.5 md:py-2 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm whitespace-nowrap">
+                        <Calendar size={14} className="text-brand-cyan/70" />
                         {edu.duration}
                       </span>
                     </div>
-                    <p className="text-base text-slate-600 dark:text-slate-400 leading-relaxed font-medium mb-6">
+                    <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed font-medium mb-4 md:mb-6">
                       {edu.description}
                     </p>
-                    <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs uppercase tracking-widest font-bold">
+                    <div className="flex items-center gap-2 text-[10px] md:text-xs text-slate-500 dark:text-slate-400 uppercase tracking-widest font-bold">
                       <MapPin size={14} className="text-brand-cyan" /> {edu.location}
                     </div>
                   </div>

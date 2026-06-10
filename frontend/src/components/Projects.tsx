@@ -130,6 +130,14 @@ const MOCK_PROJECTS: ProjectItem[] = [
 export default function Projects() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
+  const [isMobileDevice, setIsMobileDevice] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobileDevice(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     if (selectedProject) {
@@ -141,6 +149,59 @@ export default function Projects() {
       document.body.style.overflow = 'unset';
     };
   }, [selectedProject]);
+
+  const modalVariants: any = isMobileDevice
+    ? {
+      hidden: {
+        opacity: 0,
+        scale: 0.95,
+        y: 15
+      },
+      visible: {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        transition: {
+          duration: 0.25,
+          ease: "easeOut"
+        }
+      },
+      exit: {
+        opacity: 0,
+        scale: 0.95,
+        y: 15,
+        transition: {
+          duration: 0.2,
+          ease: "easeIn"
+        }
+      }
+    }
+    : {
+      hidden: {
+        opacity: 0,
+        scale: 0.95,
+        y: -50
+      },
+      visible: {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        transition: {
+          type: "spring",
+          damping: 25,
+          stiffness: 300
+        }
+      },
+      exit: {
+        opacity: 0,
+        scale: 0.95,
+        y: 50,
+        transition: {
+          duration: 0.25,
+          ease: "easeInOut"
+        }
+      }
+    };
 
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -208,11 +269,10 @@ export default function Projects() {
             <button
               onClick={scrollLeft}
               disabled={!canScrollLeft}
-              className={`p-3 rounded-full border transition-all backdrop-blur-sm z-10 shadow-sm ${
-                canScrollLeft 
-                ? "border-slate-300 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 hover:bg-brand-cyan hover:text-white hover:border-brand-cyan dark:hover:bg-brand-cyan cursor-pointer" 
+              className={`p-3 rounded-full border transition-all backdrop-blur-sm z-10 shadow-sm ${canScrollLeft
+                ? "border-slate-300 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 hover:bg-brand-cyan hover:text-white hover:border-brand-cyan dark:hover:bg-brand-cyan cursor-pointer"
                 : "border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-900/30 text-slate-300 dark:text-slate-700 cursor-not-allowed opacity-50"
-              }`}
+                }`}
               aria-label="Scroll left"
             >
               <ChevronLeft size={24} />
@@ -220,11 +280,10 @@ export default function Projects() {
             <button
               onClick={scrollRight}
               disabled={!canScrollRight}
-              className={`p-3 rounded-full border transition-all backdrop-blur-sm z-10 shadow-sm ${
-                canScrollRight 
-                ? "border-slate-300 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 hover:bg-brand-cyan hover:text-white hover:border-brand-cyan dark:hover:bg-brand-cyan cursor-pointer" 
+              className={`p-3 rounded-full border transition-all backdrop-blur-sm z-10 shadow-sm ${canScrollRight
+                ? "border-slate-300 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 hover:bg-brand-cyan hover:text-white hover:border-brand-cyan dark:hover:bg-brand-cyan cursor-pointer"
                 : "border-slate-200 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-900/30 text-slate-300 dark:text-slate-700 cursor-not-allowed opacity-50"
-              }`}
+                }`}
               aria-label="Scroll right"
             >
               <ChevronRight size={24} />
@@ -297,17 +356,18 @@ export default function Projects() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
               onClick={() => setSelectedProject(null)}
-              className="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-[100] grid place-items-center p-4 md:p-12 overflow-y-auto"
+              className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm md:backdrop-blur-md z-[100] grid place-items-center p-3 md:p-12 overflow-y-auto"
             >
               {/* Modal Card */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: -50 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 50 }}
-                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                variants={modalVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden relative my-auto flex flex-col md:flex-row max-h-[90vh]"
+                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 w-full max-w-4xl rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden relative my-auto flex flex-col md:flex-row max-h-[90vh]"
               >
                 {/* Close Button */}
                 <button
@@ -318,35 +378,35 @@ export default function Projects() {
                 </button>
 
                 {/* Left side: Visuals */}
-                <div className="w-full md:w-[40%] bg-gradient-to-br from-brand-purple/20 to-brand-cyan/20 flex flex-col items-center justify-center p-8 md:p-12 relative overflow-hidden h-56 md:h-auto shrink-0">
+                <div className="w-full md:w-[40%] bg-gradient-to-br from-brand-purple/20 to-brand-cyan/20 flex flex-col items-center justify-center p-5 md:p-12 relative overflow-hidden h-44 md:h-auto shrink-0">
                   <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
                   <div className="absolute w-40 h-40 rounded-full bg-brand-cyan/10 blur-2xl z-0" />
-                  <div className="relative z-10 bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-2xl border border-white/20 dark:border-slate-700">
-                    <ProjectLogo logoUrl={selectedProject.logoUrl} darkLogoUrl={selectedProject.darkLogoUrl} title={selectedProject.title} size="modal" />
+                  <div className="relative z-10 bg-white dark:bg-slate-800 rounded-xl md:rounded-2xl p-3 md:p-5 shadow-2xl border border-white/20 dark:border-slate-700">
+                    <ProjectLogo logoUrl={selectedProject.logoUrl} darkLogoUrl={selectedProject.darkLogoUrl} title={selectedProject.title} size={isMobileDevice ? 'card' : 'modal'} />
                   </div>
-                  <div className="mt-5 text-center z-10">
-                    <div className="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-widest">
+                  <div className="mt-4 text-center z-10">
+                    <div className="text-xs md:text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-widest">
                       {selectedProject.title}
                     </div>
                   </div>
                 </div>
 
                 {/* Right side: Information */}
-                <div className="w-full md:w-[60%] p-8 md:p-12 overflow-y-auto hide-scrollbar flex flex-col">
-                  <h2 className="text-3xl md:text-4xl font-bold text-slate-800 dark:text-white mb-4 pr-10">
+                <div className="w-full md:w-[60%] p-5 md:p-12 overflow-y-auto hide-scrollbar flex flex-col">
+                  <h2 className="text-2xl md:text-4xl font-bold text-slate-800 dark:text-white mb-4 pr-10">
                     {selectedProject.title}
                   </h2>
 
-                  <div className="flex flex-wrap gap-2 mb-8">
+                  <div className="flex flex-wrap gap-2 mb-6 md:mb-8">
                     {selectedProject.techStack.map((tech) => (
-                      <span key={tech} className="text-sm font-semibold text-brand-cyan bg-brand-cyan/10 border border-brand-cyan/20 px-3 py-1 rounded-md">
+                      <span key={tech} className="text-xs md:text-sm font-semibold text-brand-cyan bg-brand-cyan/10 border border-brand-cyan/20 px-2.5 md:px-3 py-1 rounded-md">
                         {tech}
                       </span>
                     ))}
                   </div>
 
-                  <h4 className="text-lg font-bold text-slate-800 dark:text-slate-200 mb-2">Project Overview</h4>
-                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+                  <h4 className="text-base md:text-lg font-bold text-slate-800 dark:text-slate-200 mb-2">Project Overview</h4>
+                  <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed mb-5 md:mb-6">
                     {selectedProject.longDescription}
                   </p>
                 </div>
