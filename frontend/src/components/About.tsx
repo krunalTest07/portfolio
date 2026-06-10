@@ -1,6 +1,56 @@
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 export default function About() {
+  const [isColor, setIsColor] = useState(false);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const wasInMiddleRef = useRef(false);
+
+  useEffect(() => {
+    const checkPosition = () => {
+      if (!imageRef.current) return;
+      const rect = imageRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      // Calculate how close the center of the element is to the center of the viewport
+      const elementCenter = rect.top + rect.height / 2;
+      const viewportCenter = viewportHeight / 2;
+
+      // Active in the middle 50% of the screen
+      const distance = Math.abs(elementCenter - viewportCenter);
+      const threshold = viewportHeight * 0.25;
+      const nowInMiddle = distance < threshold;
+
+      const wasInMiddle = wasInMiddleRef.current;
+      if (nowInMiddle !== wasInMiddle) {
+        setIsColor(nowInMiddle);
+        wasInMiddleRef.current = nowInMiddle;
+      }
+    };
+
+    window.addEventListener('scroll', checkPosition, { passive: true });
+    window.addEventListener('resize', checkPosition);
+
+    // Initial check
+    const rect = imageRef.current?.getBoundingClientRect();
+    if (rect) {
+      const viewportHeight = window.innerHeight;
+      const elementCenter = rect.top + rect.height / 2;
+      const viewportCenter = viewportHeight / 2;
+      const distance = Math.abs(elementCenter - viewportCenter);
+      const threshold = viewportHeight * 0.25;
+      const initialInMiddle = distance < threshold;
+
+      setIsColor(initialInMiddle);
+      wasInMiddleRef.current = initialInMiddle;
+    }
+
+    return () => {
+      window.removeEventListener('scroll', checkPosition);
+      window.removeEventListener('resize', checkPosition);
+    };
+  }, []);
+
   const personalInfo = [
     { label: "Name", value: "Krunal" },
     { label: "Phone", value: "+91 8000456527" },
@@ -53,9 +103,9 @@ export default function About() {
           <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-black text-slate-800 dark:text-slate-50 uppercase tracking-tighter">
             About
           </motion.h2>
-          <motion.div variants={itemVariants} className="title-shape">
-            <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
-              <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor" strokeWidth="2"></path>
+          <motion.div variants={itemVariants} className="flex justify-center my-4 text-brand-purple/40">
+            <svg width="100" height="10" viewBox="0 0 100 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 5C20 0 30 10 50 5C70 0 80 10 100 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </motion.div>
           <motion.p variants={itemVariants} className="mt-4 text-slate-600 dark:text-slate-400 text-base max-w-2xl mx-auto font-medium">
@@ -66,6 +116,7 @@ export default function About() {
         <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-14 items-center">
           {/* Left Column: Image */}
           <motion.div
+            ref={imageRef}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
@@ -76,7 +127,9 @@ export default function About() {
               <img
                 src="./My_image.png"
                 alt="Krunal"
-                className="w-full aspect-[4/5] object-cover grayscale hover:grayscale-0 transition-all duration-700 rounded-xl"
+                onClick={() => setIsColor(prev => !prev)}
+                className={`w-full aspect-[4/5] object-cover transition-all duration-700 rounded-xl cursor-pointer ${isColor ? 'grayscale-0' : 'grayscale hover:grayscale-0'
+                  }`}
               />
             </div>
             {/* Decorative background for image */}
@@ -112,7 +165,7 @@ export default function About() {
             {/* Personal Info Grid Card - Refined Staggered Entrance */}
             <motion.div
               variants={itemVariants}
-              className="bg-white dark:bg-zinc-900 rounded-2xl p-5 shadow-lg shadow-slate-200/30 dark:shadow-none border border-slate-100 dark:border-slate-800 max-w-xl"
+              className="glass-card bg-white/50 dark:bg-transparent p-5 shadow-lg dark:shadow-none max-w-xl"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
                 {personalInfo.map((info, idx) => (
@@ -124,7 +177,7 @@ export default function About() {
                     }}
                     className="flex flex-col gap-0 min-w-0"
                   >
-                    <span className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest leading-none mb-1">{info.label}</span>
+                    <span className="text-[9px] font-black text-slate-400 dark:text-slate-400/70 uppercase tracking-widest leading-none mb-1">{info.label}</span>
                     <span className="text-sm font-bold text-slate-800 dark:text-white break-words">{info.value}</span>
                   </motion.div>
                 ))}
