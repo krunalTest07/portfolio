@@ -138,6 +138,22 @@ export default function Projects() {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+  useEffect(() => {
+    const handleOpenProject = (e: Event) => {
+      const customEvent = e as CustomEvent<{ projectId: string }>;
+      const projId = customEvent.detail?.projectId;
+      const project = MOCK_PROJECTS.find(p => p.id === projId);
+      if (project) {
+        setSelectedProject(project);
+        const element = document.getElementById('projects');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    };
+    window.addEventListener('open-project-details', handleOpenProject);
+    return () => window.removeEventListener('open-project-details', handleOpenProject);
+  }, []);
 
   useEffect(() => {
     if (selectedProject) {
