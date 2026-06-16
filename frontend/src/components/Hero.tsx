@@ -2,26 +2,19 @@ import { motion } from 'framer-motion';
 import { Bug } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
+import { useMotionValue, useTransform, animate } from 'framer-motion';
+
 const StatCounter = ({ end, label, delay = 0, suffix = "+" }: { end: number; label: string; delay?: number, suffix?: string }) => {
-  const [count, setCount] = useState(0);
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
 
   useEffect(() => {
-    let start = 0;
-    const duration = 2000;
-    const increment = end / (duration / 16);
-
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= end) {
-        setCount(end);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(start));
-      }
-    }, 16);
-
-    return () => clearInterval(timer);
-  }, [end]);
+    // Wait until the page finishes fading in (1 second) + our custom delay
+    const timer = setTimeout(() => {
+      animate(count, end, { duration: 2, ease: "easeOut" });
+    }, 1000 + (delay * 1000));
+    return () => clearTimeout(timer);
+  }, [count, end, delay]);
 
   return (
     <motion.div
@@ -31,8 +24,8 @@ const StatCounter = ({ end, label, delay = 0, suffix = "+" }: { end: number; lab
       transition={{ duration: 0.5, delay }}
       className="relative pl-6 before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-8 before:bg-brand-purple/30 before:rounded-full"
     >
-      <div className="text-3xl md:text-4xl font-black text-slate-800 dark:text-slate-50 tracking-tight">
-        {count}{suffix}
+      <div className="text-3xl md:text-4xl font-black text-slate-800 dark:text-slate-50 tracking-tight flex items-center">
+        <motion.span>{rounded}</motion.span>{suffix}
       </div>
       <div className="text-[10px] md:text-xs font-bold text-slate-500 dark:text-slate-400 mt-1 uppercase tracking-[0.2em] leading-tight">
         {label}
@@ -44,9 +37,8 @@ const StatCounter = ({ end, label, delay = 0, suffix = "+" }: { end: number; lab
 export default function Hero() {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center pt-32 overflow-hidden">
-      {/* Abstract Background Elements */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-cyan/20 rounded-full blur-[120px] -z-10" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-purple/20 rounded-full blur-[120px] -z-10" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blob-cyan rounded-full -z-10" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blob-purple rounded-full -z-10" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
         <motion.div
@@ -72,7 +64,7 @@ export default function Hero() {
               href="https://www.google.com/?zx=1778657335079"
               target="_blank"
               rel="noopener noreferrer"
-              className="group px-8 py-4 rounded-xl bg-gradient-to-r from-brand-purple to-brand-cyan text-white font-bold transition-all flex items-center gap-3 shadow-lg shadow-brand-purple/20 hover:shadow-brand-purple/40"
+              className="group px-8 py-4 rounded-xl bg-gradient-to-r from-brand-purple to-brand-cyan text-white font-bold transition-colors flex items-center gap-3 shadow-lg shadow-brand-purple/20 hover:shadow-brand-purple/40"
             >
               <span className="relative z-10">Download CV</span>
               <svg
@@ -87,7 +79,7 @@ export default function Hero() {
               whileHover={{ scale: 1.02, translateY: -2 }}
               whileTap={{ scale: 0.98 }}
               href="/#projects"
-              className="px-8 py-4 rounded-xl glass-nav border border-slate-200 dark:border-white/10 text-slate-800 dark:text-white font-bold shadow-sm hover:shadow-md transition-all flex items-center gap-2"
+              className="px-8 py-4 rounded-xl glass-nav border border-slate-200 dark:border-white/10 text-slate-800 dark:text-white font-bold shadow-sm hover:shadow-md transition-colors flex items-center gap-2"
             >
               View Projects
             </motion.a>
@@ -113,7 +105,7 @@ export default function Hero() {
             className="w-full aspect-square flex items-center justify-center relative"
           >
             <div className="relative w-full h-full flex items-center justify-center">
-              <div className="absolute inset-0 bg-gradient-to-tr from-brand-cyan/10 to-brand-purple/10 rounded-full blur-3xl" />
+              <div className="absolute inset-0 bg-blob-cyan rounded-full" />
               <Bug className="text-brand-purple/40 relative z-10 animate-float" size={300} />
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-20">
                 <h2 className="text-3xl font-black text-slate-800/80 dark:text-slate-100/80 tracking-widest uppercase">Quality<br />Assurance</h2>

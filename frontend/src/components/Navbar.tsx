@@ -52,12 +52,9 @@ export default function Navbar() {
   return (
     <div className={`fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-500 pointer-events-none ${isScrolled ? 'pt-4 px-4 sm:px-6' : 'pt-0 px-0'
       }`}>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
+      <nav
         className={`relative w-full transition-all duration-500 pointer-events-auto ${isScrolled
-          ? 'max-w-5xl glass-nav py-3 px-6 sm:px-8 shadow-2xl rounded-full translate-y-2'
+          ? 'max-w-5xl glass-nav py-3 px-6 sm:px-8 shadow-2xl rounded-full'
           : 'max-w-7xl bg-transparent py-6 px-6 sm:px-12 border border-transparent rounded-none'
           }`}
       >
@@ -192,7 +189,7 @@ export default function Navbar() {
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.nav>
+      </nav>
     </div>
   );
 }

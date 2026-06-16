@@ -59,9 +59,19 @@ export default function Contact() {
     }
   };
 
+  // Ensure input stays visible when keyboard opens on mobile
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement> | React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    if (window.innerWidth < 768) {
+      setTimeout(() => {
+        const target = e.target as HTMLElement;
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300); // Delay allows the software keyboard to fully open
+    }
+  };
+
   return (
     <section id="contact" className="pt-8 pb-16 md:py-32 lg:py-40 relative overflow-hidden">
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-brand-purple/10 rounded-full blur-[100px] -z-10 -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-blob-purple rounded-full -z-10 -translate-x-1/2 -translate-y-1/2" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid md:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
@@ -150,13 +160,13 @@ export default function Contact() {
               {/* Invisible Honeypot Spam Protection */}
               <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
 
-              <input type="text" name="name" id="name" required className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-brand-purple focus:ring-1 focus:ring-brand-purple transition-all" placeholder="Your Name" />
+              <input type="text" name="name" id="name" required onFocus={handleFocus} onInvalid={handleFocus} className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-brand-purple focus:ring-1 focus:ring-brand-purple transition-all" placeholder="Your Name" />
 
-              <input type="email" name="email" id="email" required className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-brand-purple focus:ring-1 focus:ring-brand-purple transition-all" placeholder="Your Email" />
+              <input type="email" name="email" id="email" required onFocus={handleFocus} onInvalid={handleFocus} className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-brand-purple focus:ring-1 focus:ring-brand-purple transition-all" placeholder="Your Email" />
 
-              <input type="text" name="subject" id="subject" required className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-brand-purple focus:ring-1 focus:ring-brand-purple transition-all" placeholder="Subject" />
+              <input type="text" name="subject" id="subject" required onFocus={handleFocus} onInvalid={handleFocus} className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-brand-purple focus:ring-1 focus:ring-brand-purple transition-all" placeholder="Subject" />
 
-              <textarea name="message" id="message" required rows={5} className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-brand-purple focus:ring-1 focus:ring-brand-purple transition-all resize-none" placeholder="Message"></textarea>
+              <textarea name="message" id="message" required onFocus={handleFocus} onInvalid={handleFocus} rows={5} className="w-full bg-slate-50 dark:bg-[#0B0914] border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-3.5 text-[15px] text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-brand-purple focus:ring-1 focus:ring-brand-purple transition-all resize-none" placeholder="Message"></textarea>
 
               <motion.button
                 whileHover={{ scale: 1.02 }}

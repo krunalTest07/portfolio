@@ -39,7 +39,7 @@ export default function Experience() {
 
   return (
     <section id="experience" className="py-32 lg:py-40 relative overflow-hidden">
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-brand-cyan/10 rounded-full blur-[100px] -z-10 translate-x-1/2" />
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-blob-cyan rounded-full -z-10 translate-x-1/2" />
 
       <div className="max-w-4xl mx-auto px-6 md:px-12">
         <motion.div

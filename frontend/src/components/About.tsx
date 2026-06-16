@@ -133,8 +133,8 @@ export default function About() {
               />
             </div>
             {/* Decorative background for image */}
-            <div className="absolute -top-4 -left-4 w-28 h-28 bg-brand-cyan/20 rounded-full blur-3xl -z-10 animate-pulse" />
-            <div className="absolute -bottom-4 -right-4 w-36 h-36 bg-brand-purple/20 rounded-full blur-3xl -z-10" />
+            <div className="absolute -top-4 -left-4 w-28 h-28 bg-blob-cyan rounded-full -z-10 animate-pulse" />
+            <div className="absolute -bottom-4 -right-4 w-36 h-36 bg-blob-purple rounded-full -z-10" />
           </motion.div>
 
           {/* Right Column: Content */}

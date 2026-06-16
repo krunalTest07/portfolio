@@ -80,6 +80,7 @@ Note: The variables are still safely named "cyan" and "purple" in the CSS code j
 @layer utilities {
   .glass {
     @apply bg-white/70 dark:bg-zinc-900/40 backdrop-blur-xl border border-black/5 dark:border-white/5;
+    -webkit-backdrop-filter: blur(24px);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
   }
 
@@ -89,6 +90,7 @@ Note: The variables are still safely named "cyan" and "purple" in the CSS code j
 
   .glass-nav {
     @apply bg-white/60 dark:bg-zinc-900/60 backdrop-blur-xl border border-white/30 dark:border-white/10;
+    -webkit-backdrop-filter: blur(24px);
     box-shadow: 0 4px 32px rgba(0, 0, 0, 0.1);
   }
 
@@ -105,7 +107,8 @@ Note: The variables are still safely named "cyan" and "purple" in the CSS code j
   }
 
   .glass-card {
-    @apply bg-white/70 dark:bg-zinc-900/40 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-3xl transition-all duration-500 hover:border-brand-cyan/30;
+    @apply bg-white/70 dark:bg-zinc-900/40 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-3xl transition-colors duration-500 hover:border-brand-cyan/30;
+    -webkit-backdrop-filter: blur(24px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
   }
 
@@ -119,6 +122,14 @@ Note: The variables are still safely named "cyan" and "purple" in the CSS code j
 
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-cyan to-brand-purple;
+  }
+
+  /* Ultra-fast radial gradients for Safari to replace expensive blur() */
+  .bg-blob-cyan {
+    background: radial-gradient(50% 50% at 50% 50%, rgba(6, 182, 212, 0.15) 0%, rgba(6, 182, 212, 0) 100%);
+  }
+  .bg-blob-purple {
+    background: radial-gradient(50% 50% at 50% 50%, rgba(168, 85, 247, 0.15) 0%, rgba(168, 85, 247, 0) 100%);
   }
 
   .section-title {
@@ -277,28 +288,7 @@ html {
    ⚡ 144Hz HIGH-PERFORMANCE GPU ACCELERATION & SMOOTHNESS
    -------------------------------------------------------- */
 
-/* Force GPU acceleration on transition elements to ensure 144Hz rendering */
-.glass-card,
-.glass-nav,
-button,
-a,
-input,
-textarea,
-img,
-svg,
-.group:hover * {
-  backface-visibility: hidden;
-  perspective: 1000px;
-  transform: translate3d(0, 0, 0);
-  will-change: transform, opacity;
-}
 
-/* Specific will-change for heavy animation elements */
-.animate-float,
-.animate-wave,
-.glass-card:hover {
-  will-change: transform, opacity;
-}
 
 /* Fine-tune smooth scrolling for buttery refresh rates */
 html {

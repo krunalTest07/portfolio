@@ -396,7 +396,7 @@ export default function Projects() {
                 {/* Left side: Visuals */}
                 <div className="w-full md:w-[40%] bg-gradient-to-br from-brand-purple/20 to-brand-cyan/20 flex flex-col items-center justify-center p-5 md:p-12 relative overflow-hidden h-44 md:h-auto shrink-0">
                   <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-                  <div className="absolute w-40 h-40 rounded-full bg-brand-cyan/10 blur-2xl z-0" />
+                  <div className="absolute w-40 h-40 rounded-full bg-blob-cyan z-0" />
                   <div className="relative z-10 bg-white dark:bg-slate-800 rounded-xl md:rounded-2xl p-3 md:p-5 shadow-2xl border border-white/20 dark:border-slate-700">
                     <ProjectLogo logoUrl={selectedProject.logoUrl} darkLogoUrl={selectedProject.darkLogoUrl} title={selectedProject.title} size={isMobileDevice ? 'card' : 'modal'} />
                   </div>

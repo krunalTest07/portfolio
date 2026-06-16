@@ -22,8 +22,8 @@ export default function Education() {
   return (
     <section id="education" className="py-24 lg:py-32 relative overflow-hidden bg-slate-50/50 dark:bg-transparent">
       {/* Background blobs */}
-      <div className="absolute top-1/3 left-0 w-72 h-72 bg-brand-purple/5 rounded-full blur-[100px] -z-10 -translate-x-1/2" />
-      <div className="absolute bottom-1/3 right-0 w-72 h-72 bg-brand-cyan/5 rounded-full blur-[100px] -z-10 translate-x-1/2" />
+      <div className="absolute top-1/3 left-0 w-72 h-72 bg-blob-purple rounded-full -z-10 -translate-x-1/2" />
+      <div className="absolute bottom-1/3 right-0 w-72 h-72 bg-blob-cyan rounded-full -z-10 translate-x-1/2" />
 
       <div className="max-w-5xl mx-auto px-6 md:px-12">
         <motion.div

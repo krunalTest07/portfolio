@@ -66,8 +66,8 @@ export default function Footer() {
   return (
     <footer className="relative bg-slate-900 dark:bg-[#060612] border-t border-slate-800 overflow-hidden">
       {/* Background glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-brand-purple/10 blur-[120px] pointer-events-none" />
-      <div className="absolute top-0 right-0 w-[300px] h-[200px] bg-brand-cyan/5 blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-blob-purple pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[300px] h-[200px] bg-blob-cyan pointer-events-none" />
 
       {/* Gradient top border */}
       <div className="h-px w-full bg-gradient-to-r from-transparent via-brand-purple/50 to-transparent" />

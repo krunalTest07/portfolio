@@ -499,15 +499,13 @@ export default function ChatBot() {
         {!isOpen && !isMinimized && (
           <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-brand-cyan to-brand-purple opacity-40 blur-md animate-pulse z-[-1]" />
         )}
-        <motion.button
+        <button
           onClick={toggleChat}
-          whileHover={{ scale: isMinimized && !isOpen ? 1 : 1.04 }}
-          whileTap={{ scale: 0.96 }}
           className={`flex items-center justify-center text-white shadow-xl shadow-brand-cyan/20 transition-all duration-300 relative cursor-pointer ${isMinimized && !isOpen
               ? 'h-10 sm:h-14 w-8 sm:w-10 rounded-l-xl bg-gradient-to-r from-brand-cyan to-brand-purple hover:brightness-110 border border-r-0 border-white/20'
               : isOpen
-                ? 'h-12 sm:h-14 w-12 sm:w-14 rounded-full bg-gradient-to-r from-brand-cyan to-brand-purple hover:brightness-105'
-                : 'h-12 sm:h-14 px-4 sm:px-5 rounded-full bg-gradient-to-r from-brand-cyan to-brand-purple hover:shadow-brand-cyan/40 hover:brightness-105'
+                ? 'h-12 sm:h-14 w-12 sm:w-14 rounded-full bg-gradient-to-r from-brand-cyan to-brand-purple hover:brightness-105 hover:scale-105 active:scale-95'
+                : 'h-12 sm:h-14 px-4 sm:px-5 rounded-full bg-gradient-to-r from-brand-cyan to-brand-purple hover:shadow-brand-cyan/40 hover:brightness-105 hover:scale-[1.04] active:scale-95'
             }`}
           aria-label="Toggle chat"
         >
@@ -546,7 +544,7 @@ export default function ChatBot() {
               1
             </span>
           )}
-        </motion.button>
+        </button>
       </motion.div>
     </div>
   );

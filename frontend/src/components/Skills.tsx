@@ -74,7 +74,7 @@ export default function Skills() {
 
   return (
     <section id="skills" className="py-32 lg:py-40 relative overflow-hidden">
-      <div className="absolute top-1/2 right-0 w-96 h-96 bg-brand-cyan/10 rounded-full blur-[100px] -z-10 translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute top-1/2 right-0 w-96 h-96 bg-blob-cyan rounded-full -z-10 translate-x-1/2 -translate-y-1/2" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <motion.div
@@ -135,7 +135,7 @@ export default function Skills() {
               whileHover={{ y: -5 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.4, delay: catIndex * 0.1 }}
-              className="glass p-5 md:p-7 rounded-[1.5rem] md:rounded-[2rem] flex flex-col h-full border border-slate-200/50 dark:border-white/5 shadow-sm hover:shadow-xl transition-all duration-500"
+              className="glass p-5 md:p-7 rounded-[1.5rem] md:rounded-[2rem] flex flex-col h-full border border-slate-200/50 dark:border-white/5 shadow-sm hover:shadow-xl transition-colors duration-500"
             >
               <div className="mb-4 md:mb-6">
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-brand-cyan/10 dark:bg-brand-cyan/5 flex items-center justify-center mb-4 md:mb-5 text-brand-cyan group-hover:scale-110 transition-transform duration-500">
@@ -168,7 +168,7 @@ export default function Skills() {
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       whileHover={{ scale: 1.05 }}
-                      className="px-3 md:px-4 py-1.5 md:py-2 bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-lg md:rounded-xl text-[10px] sm:text-xs md:text-sm font-medium text-slate-600 dark:text-slate-300 transition-all duration-300 hover:bg-brand-cyan hover:text-slate-900 hover:border-brand-cyan hover:shadow-md hover:shadow-brand-cyan/10 cursor-default"
+                      className="px-3 md:px-4 py-1.5 md:py-2 bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 rounded-lg md:rounded-xl text-[10px] sm:text-xs md:text-sm font-medium text-slate-600 dark:text-slate-300 transition-colors duration-300 hover:bg-brand-cyan hover:text-slate-900 hover:border-brand-cyan hover:shadow-md hover:shadow-brand-cyan/10 cursor-default"
                     >
                       {skill.name}
                     </motion.li>
