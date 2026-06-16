@@ -190,6 +190,8 @@ body::before {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 #root {
@@ -197,6 +199,8 @@ html {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 /* Custom Global Scrollbar */
