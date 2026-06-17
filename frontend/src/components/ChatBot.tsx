@@ -501,50 +501,52 @@ export default function ChatBot() {
         )}
         <button
           onClick={toggleChat}
-          className={`flex items-center justify-center text-white shadow-xl shadow-brand-cyan/20 transition-all duration-300 relative cursor-pointer ${isMinimized && !isOpen
+          className={`flex items-center justify-center text-white shadow-xl shadow-brand-cyan/20 transition-all duration-300 relative cursor-pointer overflow-hidden ${isMinimized && !isOpen
               ? 'h-10 sm:h-14 w-8 sm:w-10 rounded-l-xl bg-gradient-to-r from-brand-cyan to-brand-purple hover:brightness-110 border border-r-0 border-white/20'
               : isOpen
                 ? 'h-12 sm:h-14 w-12 sm:w-14 rounded-full bg-gradient-to-r from-brand-cyan to-brand-purple hover:brightness-105 hover:scale-105 active:scale-95'
-                : 'h-12 sm:h-14 px-4 sm:px-5 rounded-full bg-gradient-to-r from-brand-cyan to-brand-purple hover:shadow-brand-cyan/40 hover:brightness-105 hover:scale-[1.04] active:scale-95'
+                : 'h-12 sm:h-14 w-12 sm:w-[130px] rounded-full bg-gradient-to-r from-brand-cyan to-brand-purple hover:shadow-brand-cyan/40 hover:brightness-105 hover:scale-[1.04] active:scale-95'
             }`}
           aria-label="Toggle chat"
         >
-          <AnimatePresence mode="wait">
+          <AnimatePresence initial={false}>
             {isMinimized && !isOpen ? (
-              <motion.div key="minimized" className="flex items-center justify-center w-full h-full" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <motion.div key="minimized" className="absolute inset-0 flex items-center justify-center" initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.5 }}>
                 <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
               </motion.div>
             ) : isOpen ? (
               <motion.div
                 key="close"
-                className="flex items-center justify-center w-full h-full"
-                initial={{ opacity: 0, rotate: -90 }}
-                animate={{ opacity: 1, rotate: 0 }}
-                exit={{ opacity: 0, rotate: 90 }}
+                className="absolute inset-0 flex items-center justify-center"
+                initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                transition={{ duration: 0.2 }}
               >
                 <X className="w-5 h-5 sm:w-[26px] sm:h-[26px]" />
               </motion.div>
             ) : (
               <motion.div
                 key="chat"
-                className="flex items-center justify-center gap-1.5 w-full h-full"
-                initial={{ opacity: 0, scale: 0.8 }}
+                className="absolute inset-0 flex items-center justify-center gap-1.5"
+                initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
+                exit={{ opacity: 0, scale: 0.5 }}
+                transition={{ duration: 0.2 }}
               >
-                <Bot className="w-5 h-5 sm:w-6 sm:h-6" />
-                <span className="text-xs font-black tracking-wider uppercase hidden sm:inline-block">Ask AI</span>
+                <Bot className="w-5 h-5 sm:w-6 sm:h-6 shrink-0" />
+                <span className="text-xs font-black tracking-wider uppercase hidden sm:inline-block whitespace-nowrap">Ask AI</span>
               </motion.div>
             )}
           </AnimatePresence>
-
-          {/* Unread dot notification (Red bubble with "1") */}
-          {!isOpen && !hasOpened && !isMinimized && (
-            <span className="absolute -top-1 -left-1 w-5 h-5 bg-red-500 text-white text-[10px] font-black rounded-full border-2 border-white dark:border-slate-900 flex items-center justify-center animate-pulse z-10 shadow-md">
-              1
-            </span>
-          )}
         </button>
+
+        {/* Unread dot notification (Red bubble with "1") */}
+        {!isOpen && !hasOpened && !isMinimized && (
+          <span className="absolute -top-1 -left-1 w-5 h-5 bg-red-500 text-white text-[10px] font-black rounded-full border-2 border-white dark:border-slate-900 flex items-center justify-center animate-pulse z-10 shadow-md">
+            1
+          </span>
+        )}
       </motion.div>
     </div>
   );

@@ -247,15 +247,23 @@ export default function Projects() {
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
-      const scrollAmount = scrollContainerRef.current.clientWidth;
-      scrollContainerRef.current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      const container = scrollContainerRef.current;
+      const child = container.firstElementChild as HTMLElement;
+      if (child) {
+        const scrollAmount = child.offsetWidth + 24; // gap-6 is 24px
+        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      }
     }
   };
 
   const scrollRight = () => {
     if (scrollContainerRef.current) {
-      const scrollAmount = scrollContainerRef.current.clientWidth;
-      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      const container = scrollContainerRef.current;
+      const child = container.firstElementChild as HTMLElement;
+      if (child) {
+        const scrollAmount = child.offsetWidth + 24;
+        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
     }
   };
 
@@ -307,10 +315,9 @@ export default function Projects() {
           </div>
         </motion.div>
 
-        {/* Carousel: full-bleed scroll so no card is ever clipped */}
         <div
           ref={scrollContainerRef}
-          className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-12 hide-scrollbar -mx-6 md:-mx-12 px-6 md:px-12 pr-12 md:pr-24"
+          className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-12 hide-scrollbar -mx-6 md:-mx-12 px-6 md:px-12"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {MOCK_PROJECTS.map((project, index) => (
