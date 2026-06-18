@@ -19,11 +19,11 @@ export default function Navbar() {
     const toggle = () => {
       if (isDark) {
         document.documentElement.classList.remove('dark');
-        localStorage.theme = 'light';
+        sessionStorage.theme = 'light';
         setIsDark(false);
       } else {
         document.documentElement.classList.add('dark');
-        localStorage.theme = 'dark';
+        sessionStorage.theme = 'dark';
         setIsDark(true);
       }
     };

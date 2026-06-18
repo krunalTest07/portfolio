@@ -61,7 +61,7 @@ export default function Hero() {
             <motion.a
               whileHover={{ scale: 1.02, translateY: -2 }}
               whileTap={{ scale: 0.98 }}
-              href="https://www.google.com/?zx=1778657335079"
+              href="/Krunal_Chaudhari_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="group px-8 py-4 rounded-xl bg-gradient-to-r from-brand-purple to-brand-cyan text-white font-bold transition-colors flex items-center gap-3 shadow-lg shadow-brand-purple/20 hover:shadow-brand-purple/40"

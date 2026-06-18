@@ -352,7 +352,6 @@ export const getBotReply = (
             <a
               href="/Krunal_Chaudhari_CV.pdf"
               target="_blank"
-              download
               className="w-8 h-8 rounded-lg bg-gradient-to-r from-brand-cyan to-brand-purple hover:brightness-110 text-white flex items-center justify-center shadow-sm transition-all shrink-0 cursor-pointer"
               aria-label="Download CV"
             >

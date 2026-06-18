@@ -49,7 +49,11 @@ export default function App() {
 
   // Theme Setup
   useEffect(() => {
-    const isDark = localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    // Default to light theme on first visit (resets after tab close)
+    if (!('theme' in sessionStorage)) {
+      sessionStorage.theme = 'light';
+    }
+    const isDark = sessionStorage.theme === 'dark';
     if (isDark) {
       document.documentElement.classList.add('dark');
     } else {
