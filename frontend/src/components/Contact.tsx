@@ -74,7 +74,7 @@ export default function Contact() {
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-blob-purple rounded-full -z-10 -translate-x-1/2 -translate-y-1/2" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="grid md:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
           {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, y: isMobile ? 30 : 0, x: isMobile ? 0 : -50 }}
@@ -83,10 +83,10 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="flex flex-col gap-8 h-full"
           >
-            <div className="flex flex-col h-full justify-center md:pr-10">
+            <div className="flex flex-col h-full justify-center lg:pr-10">
               <p className="font-bold uppercase tracking-wider text-sm mb-3 text-slate-700 dark:text-slate-300">Contact</p>
               <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-50 mb-6 leading-tight">
-                Get in <span className="text-gradient">Touch</span><br className="hidden md:block" /> Let’s Build Quality Digital Experiences
+                Get in <span className="text-gradient">Touch</span><br className="hidden lg:block" /> Let’s Build Quality Digital Experiences
               </h2>
               <p className="text-slate-500 dark:text-slate-400 text-[15px] mb-10 leading-relaxed max-w-md">
                 Helping businesses deliver reliable, user-friendly, and high-performing web & mobile applications through complete quality assurance and testing solutions.

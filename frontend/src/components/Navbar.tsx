@@ -76,7 +76,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex gap-8 items-center bg-white/0 px-2 rounded-full">
+          <div className="hidden lg:flex gap-8 items-center bg-white/0 px-2 rounded-full">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -118,7 +118,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <div className="md:hidden flex items-center gap-3">
+          <div className="lg:hidden flex items-center gap-3">
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={toggleTheme}
@@ -164,7 +164,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className={`md:hidden absolute left-0 right-0 bg-white/95 dark:bg-zinc-950/95 border border-slate-200/80 dark:border-zinc-800/80 backdrop-blur-2xl p-4 flex flex-col gap-2 shadow-2xl ${isScrolled ? 'top-[calc(100%+12px)] rounded-3xl' : 'top-full rounded-2xl mx-4 mt-2'
+              className={`lg:hidden absolute left-0 right-0 bg-white/95 dark:bg-zinc-950/95 border border-slate-200/80 dark:border-zinc-800/80 backdrop-blur-2xl p-4 flex flex-col gap-2 shadow-2xl ${isScrolled ? 'top-[calc(100%+12px)] rounded-3xl' : 'top-full rounded-2xl mx-4 mt-2'
                 }`}
             >
               {navLinks.map((link) => (
