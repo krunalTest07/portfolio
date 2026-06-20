@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Bug } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { useMotionValue, useTransform, animate } from 'framer-motion';
 
