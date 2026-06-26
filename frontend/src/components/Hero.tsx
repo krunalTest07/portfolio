@@ -47,14 +47,14 @@ export default function Hero() {
           transition={{ duration: 0.8 }}
         >
           <h1 className="text-4xl md:text-6xl font-bold text-slate-800 dark:text-slate-50 leading-tight mb-2 tracking-tight">
-            Precision in <span className="text-brand-purple">Quality</span>
+            Krunal <span className="text-brand-purple">Chaudhari</span>
           </h1>
           <h2 className="text-lg md:text-xl font-bold text-brand-purple/70 mb-8 uppercase tracking-[0.2em]">
-            Excellence in Engineering
+            QA Engineer Specialist
           </h2>
 
           <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-lg leading-relaxed">
-            Focused on delivering reliable software quality through detailed testing, smooth user experiences, and precision-driven validation across modern applications.
+            Precision in Quality & Excellence in Engineering. Focused on delivering reliable software quality through detailed testing, smooth user experiences, and precision-driven validation across modern applications.
           </p>
 
           <div className="flex flex-wrap gap-5 mt-10">

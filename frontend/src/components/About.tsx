@@ -125,11 +125,12 @@ export default function About() {
           >
             <div className="relative z-10 rounded-2xl overflow-hidden shadow-lg transition-transform hover:scale-[1.01] duration-500 bg-white p-1.5">
               <img
-                src="./My_image.png"
-                alt="Krunal Chaudhari - QA Analyst & Quality Engineer"
+                src="./My_image.jpg"
+                alt="Krunal Chaudhari - QA Engineer Specialist"
                 onClick={() => setIsColor(prev => !prev)}
                 className={`w-full aspect-[4/5] object-cover transition-all duration-700 rounded-xl cursor-pointer ${isColor ? 'grayscale-0' : 'grayscale hover:grayscale-0'
                   }`}
+                loading="lazy"
               />
             </div>
             {/* Decorative background for image */}

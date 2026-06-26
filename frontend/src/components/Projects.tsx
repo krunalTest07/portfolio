@@ -31,6 +31,7 @@ function ProjectLogo({ logoUrl, darkLogoUrl, title, size = 'card' }: { logoUrl?:
         alt={title}
         className={`${sizeClass} object-contain transition-all duration-500`}
         onError={() => setImgError(true)}
+        loading="lazy"
       />
     );
   }
