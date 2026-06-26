@@ -126,7 +126,7 @@ export default function About() {
             <div className="relative z-10 rounded-2xl overflow-hidden shadow-lg transition-transform hover:scale-[1.01] duration-500 bg-white p-1.5">
               <img
                 src="./My_image.png"
-                alt="Krunal"
+                alt="Krunal Chaudhari - QA Analyst & Quality Engineer"
                 onClick={() => setIsColor(prev => !prev)}
                 className={`w-full aspect-[4/5] object-cover transition-all duration-700 rounded-xl cursor-pointer ${isColor ? 'grayscale-0' : 'grayscale hover:grayscale-0'
                   }`}
@@ -146,7 +146,7 @@ export default function About() {
           >
             <motion.span variants={itemVariants} className="text-brand-purple font-bold text-xs uppercase tracking-[0.2em] block mb-2">Professional Profile</motion.span>
             <motion.h3 variants={itemVariants} className="text-2xl md:text-3xl font-black text-slate-800 dark:text-white mb-5 tracking-tighter leading-tight">
-              QA Automation <span className="text-brand-cyan"> Specialist</span>
+              QA Engineer <span className="text-brand-cyan"> Specialist</span>
             </motion.h3>
 
             <motion.p variants={itemVariants} className="text-slate-600 dark:text-slate-400 leading-relaxed mb-5 text-base font-medium">
@@ -157,7 +157,7 @@ export default function About() {
               I am a dedicated <span className="text-slate-800 dark:text-slate-200">QA Automation Professional</span> with a deep passion for building high-integrity testing architectures. By integrating modern solutions like <span className="text-brand-cyan">Playwright</span> and <span className="text-brand-purple">Selenium</span>, I provide the technical depth required to deliver flawless digital experiences.
             </motion.p> */}
             <motion.p variants={itemVariants} className="text-slate-600 dark:text-slate-400 leading-relaxed mb-8 text-sm opacity-80">
-              My mission is to transform complex quality requirements into scalable automation strategies that power modern development lifecycles with precision and reliability.
+              My mission is to transform complex quality requirements into scalable strategies that power modern development lifecycles with precision and reliability.
             </motion.p>
 
 

@@ -49,6 +49,8 @@ const techTools: TechTool[] = [
   { name: "CLICKUP", icon: "/tech/clickup.svg" },
   { name: "SENTRY", icon: "/tech/sentry.svg" },
   { name: "BITBUCKET", icon: "/tech/bitbucket.svg" },
+  { name: "ANDROID STUDIO", icon: "/tech/androidstudio.svg" },
+  { name: "ECLIPSE", icon: "/tech/eclipse.svg" },
 ];
 
 export default function Skills() {

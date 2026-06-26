@@ -27,17 +27,17 @@ export const skills = [
   { name: "Test Planning", category: "Quality Assurance", level: 95 },
   { name: "Test Design", category: "Quality Assurance", level: 90 },
   { name: "API Testing", category: "Quality Assurance", level: 92 },
-  
+
   // Quality Validation
   { name: "Functional Testing", category: "Quality Validation", level: 95 },
   { name: "Regression Testing", category: "Quality Validation", level: 90 },
   { name: "Cross-Browser Testing", category: "Quality Validation", level: 85 },
-  
+
   // Product Understanding
   { name: "Requirement Analysis", category: "Product Understanding", level: 90 },
   { name: "Defect Tracking", category: "Product Understanding", level: 95 },
   { name: "Risk Assessment", category: "Product Understanding", level: 80 },
-  
+
   // Delivery & Collaboration
   { name: "Agile", category: "Delivery & Collaboration", level: 95 },
   { name: "Jira", category: "Delivery & Collaboration", level: 95 },

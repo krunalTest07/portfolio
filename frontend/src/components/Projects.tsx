@@ -75,7 +75,8 @@ const MOCK_PROJECTS: ProjectItem[] = [
     longDescription: 'Challenge Entertainment is a mobile app built for trivia enthusiasts and National Trivia League (NTL) players, offering a seamless way to discover trivia events, track leaderboard rankings, manage game schedules, and connect with teammates. The app enhances the competitive trivia experience by helping players stay informed, organized, and engaged through real-time updates, event notifications, and team collaboration features.',
     techStack: ['QA Testing', 'Functional Testing', 'Regression Testing', 'Cross-Browser Testing', 'Bug Tracking'],
     logoUrl: '/projects/challenge-entertainment.png',
-    githubLink: '#'
+    githubLink: '#',
+    demoLink: 'https://challengeentertainment.com/'
   },
   {
     id: 'p3',
@@ -85,7 +86,7 @@ const MOCK_PROJECTS: ProjectItem[] = [
     techStack: ['QA Testing', 'Functional Testing', 'Regression Testing', 'Cross-Browser Testing', 'Bug Tracking'],
     logoUrl: '/projects/selloctave.png',
     githubLink: '#',
-    demoLink: '#'
+    demoLink: 'https://selloctave.com/'
   },
   {
     id: 'p4',
@@ -104,7 +105,8 @@ const MOCK_PROJECTS: ProjectItem[] = [
     longDescription: 'Worked on quality assurance for DateCheck, a platform that uses AI to analyze dating profiles and help users detect potential catfishing, fake accounts, and identity mismatches. Performed functional, UI, regression, and cross-browser testing across profile analysis, identity verification, social profile matching, reporting, and user account workflows. Validated feature requirements, reported defects, verified fixes, and collaborated with development teams to ensure a secure, accurate, and user-friendly experience.',
     techStack: ['QA Testing', 'Functional Testing', 'Regression Testing', 'Cross-Browser Testing', 'Bug Tracking'],
     logoUrl: '/projects/DateCheck.png',
-    githubLink: '#'
+    githubLink: '#',
+    demoLink: 'https://datecheck.io/'
   },
   {
     id: 'p6',
@@ -113,6 +115,7 @@ const MOCK_PROJECTS: ProjectItem[] = [
     longDescription: 'Worked on quality assurance for Gitarth Ganga, a research institute and digital knowledge platform dedicated to organizing and preserving scriptural and educational content. Performed functional, UI, regression, and cross-browser testing across content management, research resources, digital archives, subject dictionaries, book catalogs, search functionality, and user workflows. Validated feature requirements, reported defects, verified fixes, and collaborated with development teams to ensure a reliable, accessible, and user-friendly experience across web platforms.',
     techStack: ['QA Testing', 'Functional Testing', 'Regression Testing', 'Cross-Browser Testing', 'Bug Tracking'],
     logoUrl: '/projects/gg_logo.png',
+    demoLink: 'https://gitarthganga.com/'
   },
   {
     id: 'p7',
@@ -420,7 +423,27 @@ export default function Projects() {
                 {/* Right side: Information */}
                 <div className="w-full md:w-[60%] p-5 md:p-12 overflow-y-auto hide-scrollbar flex flex-col">
                   <h2 className="text-2xl md:text-4xl font-bold text-slate-800 dark:text-white mb-4 pr-10">
-                    {selectedProject.title}
+                    {selectedProject.demoLink && selectedProject.demoLink !== '#' ? (
+                      <a
+                        href={selectedProject.demoLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-brand-cyan hover:underline transition-all duration-300 inline-flex items-center gap-2 group/title"
+                      >
+                        {selectedProject.title}
+                      </a>
+                    ) : selectedProject.githubLink && selectedProject.githubLink !== '#' ? (
+                      <a
+                        href={selectedProject.githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-brand-cyan hover:underline transition-all duration-300 inline-flex items-center gap-2 group/title"
+                      >
+                        {selectedProject.title}
+                      </a>
+                    ) : (
+                      selectedProject.title
+                    )}
                   </h2>
 
                   <div className="flex flex-wrap gap-2 mb-6 md:mb-8">
@@ -432,9 +455,10 @@ export default function Projects() {
                   </div>
 
                   <h4 className="text-base md:text-lg font-bold text-slate-800 dark:text-slate-200 mb-2">Project Overview</h4>
-                  <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed mb-5 md:mb-6">
+                  <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
                     {selectedProject.longDescription}
                   </p>
+
                 </div>
               </motion.div>
             </motion.div>
