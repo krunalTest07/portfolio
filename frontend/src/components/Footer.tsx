@@ -43,7 +43,7 @@ const socialLinks = [
   },
   {
     icon: InstagramIcon,
-    href: 'https://www.instagram.com/invites/contact/?utm_source=ig_contact_invite&utm_medium=copy_link&utm_content=yykwwq',
+    href: 'https://www.instagram.com/krunal8746?igsh=cDgzMDAzcGV5dGI=',
     label: 'Instagram',
     color: 'hover:text-[#E1306C]',
   },

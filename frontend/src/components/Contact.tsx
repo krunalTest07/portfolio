@@ -119,7 +119,7 @@ export default function Contact() {
                 <a href="https://www.linkedin.com/in/chaudharikrunal?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800/50 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-[#0A66C2] hover:text-white transition-colors" aria-label="LinkedIn">
                   <LinkedinIcon size={20} />
                 </a>
-                <a href="https://www.instagram.com/invites/contact/?utm_source=ig_contact_invite&utm_medium=copy_link&utm_content=yykwwq" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800/50 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-[#E1306C] hover:text-white transition-colors" aria-label="Instagram">
+                <a href="https://www.instagram.com/krunal8746?igsh=cDgzMDAzcGV5dGI=" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800/50 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-[#E1306C] hover:text-white transition-colors" aria-label="Instagram">
                   <InstagramIcon size={20} />
                 </a>
               </div>

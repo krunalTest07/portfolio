@@ -319,7 +319,7 @@ export const getBotReply = (
               </div>
             </a>
             <a
-              href="https://www.instagram.com/invites/contact/?utm_source=ig_contact_invite&utm_medium=copy_link&utm_content=yykwwq"
+              href="https://www.instagram.com/krunal8746?igsh=cDgzMDAzcGV5dGI="
               target="_blank"
               rel="noreferrer"
               className="flex items-center gap-2.5 p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 hover:border-brand-cyan/40 dark:hover:border-brand-cyan/30 hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-all"
